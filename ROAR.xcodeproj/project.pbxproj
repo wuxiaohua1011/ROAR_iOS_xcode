@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,17 @@
 		E83E6CAD26ED57C4006B1E39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E83E6CAB26ED57C4006B1E39 /* LaunchScreen.storyboard */; };
 		E83E6CB826ED57C4006B1E39 /* ROARTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CB726ED57C4006B1E39 /* ROARTests.swift */; };
 		E83E6CC326ED57C4006B1E39 /* ROARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CC226ED57C4006B1E39 /* ROARUITests.swift */; };
+		E83E6CD126ED5A84006B1E39 /* ViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */; };
+		E83E6CD326ED5ADF006B1E39 /* utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CD226ED5ADF006B1E39 /* utility.swift */; };
+		E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CD426ED5AEF006B1E39 /* AppStruct.swift */; };
+		E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CD726ED5B9E006B1E39 /* Vapor */; };
+		E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */; };
+		E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */; };
+		E83E6CDF26ED623E006B1E39 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */; };
+		E83E6CE126ED631E006B1E39 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CE026ED631E006B1E39 /* Server.swift */; };
+		E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE326ED6981006B1E39 /* Loaf */; };
+		E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */; };
+		E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE826ED7147006B1E39 /* JGProgressHUD */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +60,13 @@
 		E83E6CBE26ED57C4006B1E39 /* ROARUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ROARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83E6CC226ED57C4006B1E39 /* ROARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROARUITests.swift; sourceTree = "<group>"; };
 		E83E6CC426ED57C4006B1E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BLE.swift"; sourceTree = "<group>"; };
+		E83E6CD226ED5ADF006B1E39 /* utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utility.swift; sourceTree = "<group>"; };
+		E83E6CD426ED5AEF006B1E39 /* AppStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStruct.swift; sourceTree = "<group>"; };
+		E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AR.swift"; sourceTree = "<group>"; };
+		E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
+		E83E6CE026ED631E006B1E39 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBluetoothViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */,
+				E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */,
+				E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */,
+				E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,10 +124,17 @@
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,
 				E83E6CA426ED57BF006B1E39 /* ViewController.swift */,
+				E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */,
+				E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */,
+				E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */,
 				E83E6CA626ED57BF006B1E39 /* Main.storyboard */,
 				E83E6CA926ED57C4006B1E39 /* Assets.xcassets */,
 				E83E6CAB26ED57C4006B1E39 /* LaunchScreen.storyboard */,
 				E83E6CAE26ED57C4006B1E39 /* Info.plist */,
+				E83E6CD226ED5ADF006B1E39 /* utility.swift */,
+				E83E6CD426ED5AEF006B1E39 /* AppStruct.swift */,
+				E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */,
+				E83E6CE026ED631E006B1E39 /* Server.swift */,
 			);
 			path = ROAR;
 			sourceTree = "<group>";
@@ -144,6 +173,12 @@
 			dependencies = (
 			);
 			name = ROAR;
+			packageProductDependencies = (
+				E83E6CD726ED5B9E006B1E39 /* Vapor */,
+				E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */,
+				E83E6CE326ED6981006B1E39 /* Loaf */,
+				E83E6CE826ED7147006B1E39 /* JGProgressHUD */,
+			);
 			productName = ROAR;
 			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +250,12 @@
 				Base,
 			);
 			mainGroup = E83E6C9426ED57BF006B1E39;
+			packageReferences = (
+				E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */,
+				E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */,
+				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+			);
 			productRefGroup = E83E6C9E26ED57BF006B1E39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -258,8 +299,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E83E6CDF26ED623E006B1E39 /* ControlCenter.swift in Sources */,
+				E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */,
+				E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */,
+				E83E6CD126ED5A84006B1E39 /* ViewController+BLE.swift in Sources */,
+				E83E6CD326ED5ADF006B1E39 /* utility.swift in Sources */,
 				E83E6CA526ED57BF006B1E39 /* ViewController.swift in Sources */,
 				E83E6CA126ED57BF006B1E39 /* AppDelegate.swift in Sources */,
+				E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */,
+				E83E6CE126ED631E006B1E39 /* Server.swift in Sources */,
 				E83E6CA326ED57BF006B1E39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,6 +641,64 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/vapor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.48.5;
+			};
+		};
+		E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.5;
+			};
+		};
+		E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/schmidyy/Loaf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
+		E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E83E6CD726ED5B9E006B1E39 /* Vapor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */;
+			productName = Vapor;
+		};
+		E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			productName = SwiftyBeaver;
+		};
+		E83E6CE326ED6981006B1E39 /* Loaf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */;
+			productName = Loaf;
+		};
+		E83E6CE826ED7147006B1E39 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E83E6C9526ED57BF006B1E39 /* Project object */;
 }

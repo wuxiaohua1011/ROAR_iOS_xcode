@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>For connecting to Bluetooth</string>
+	<key>NSCameraUsageDescription</key>
+	<string>For AR Localization</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>For connecting to Bluetooth</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
