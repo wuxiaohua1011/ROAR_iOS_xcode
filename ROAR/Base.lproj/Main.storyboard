@@ -26,7 +26,6 @@
                                 <rect key="frame" x="106" y="73" width="174" height="30"/>
                                 <state key="normal" title="BLE Status"/>
                                 <connections>
-                                    <action selector="onBLEClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yLV-lG-7Gb"/>
                                     <segue destination="EgK-n2-qcj" kind="popoverPresentation" popoverAnchorView="qJ9-Ql-yvG" id="zl6-I4-nJc">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>

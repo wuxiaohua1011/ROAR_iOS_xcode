@@ -87,16 +87,14 @@ extension SelectBluetoothViewController: CBCentralManagerDelegate, CBPeripheralD
         if RSSI.intValue < -15 && RSSI.intValue > -35 {
             // Reject any where the value is above reasonable range
             // Reject if the signal strength is too low to be close enough (Close is around -22dB)
-            self.logger.info("Device \(peripheral.name ?? "") not at correct range")
             return
         }
         
-        
-        if peripheral.name != nil {
-            detectedDevices[peripheral.name!] = peripheral.identifier
+        if advertisementData["kCBAdvDataLocalName"] != nil {
+            self.logger.info("Detected device \(advertisementData["kCBAdvDataLocalName"] as! String)")
+            detectedDevices[advertisementData["kCBAdvDataLocalName"] as! String] = peripheral.identifier
             bluetoothTableView.reloadData()
         }
     }
-    
     
 }

@@ -44,10 +44,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.onBLEDisconnected()
         self.startARSession(worldMap: nil, worldOriginTransform: nil)
-        self.ipAddressLabel.text = findIPAddr()
+        self.ipAddressLabel.text = "Please Caliberate"
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.controlCenter.start(shouldStartServer: true)
-        
+        self.startWritingToBLE()
         self.updateThrottleSteeringUI()
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
@@ -89,6 +89,7 @@ class ViewController: UIViewController {
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
         self.restartArSession()
+        self.ipAddressLabel.text = "Please Caliberate"
 
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {

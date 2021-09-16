@@ -90,6 +90,7 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
                     session.setWorldOrigin(relativeTransform: imageAnchor.transform)
                     AppInfo.sessionData.isCaliberated = true
                     AppInfo.sessionData.shouldCaliberate = false
+                    self.ipAddressLabel.text = findIPAddr()
                 }
             }
         }

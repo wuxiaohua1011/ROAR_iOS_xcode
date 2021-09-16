@@ -10,7 +10,11 @@ import CoreBluetooth
 import UIKit
 extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        self.logger.info("Discovered Service: \(peripheral.services)")
+        if let services = peripheral.services {
+            for service in services {
+                peripheral.discoverCharacteristics(nil, for: service)
+            }
+        }
     }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
@@ -90,18 +94,29 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
         
         
         let message: String = "(" + String(Int(currThrottleRPM)) + "," + String(Int(currSteeringRPM)) + ")"
-        if self.bluetoothPeripheral != nil && self.bluetoothPeripheral.services != nil {
-            if self.bluetoothPeripheral != nil {
-                sendMessage(peripheral: self.bluetoothPeripheral, message: message)
-            }
+        print(self.bluetoothPeripheral)
+        if self.bluetoothPeripheral != nil {
+            sendMessage(peripheral: self.bluetoothPeripheral, message: message)
         }
     }
     
     func sendMessage(peripheral: CBPeripheral, message: String) {
         if bleControlCharacteristic != nil {
+            print(message)
             peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: .withoutResponse)
 //            peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: CBCharacteristicWriteType.withResponse)
         }
         
     }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        if let characteristics = service.characteristics {
+            for char in characteristics {
+                if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1214" {
+                    bleControlCharacteristic = char
+                }
+            }
+        }
+    }
+    
 }
