@@ -35,10 +35,10 @@ class Server {
         self.ipAddr = ipAddr ?? findIPAddr()
         self.port = port
         self.controlCenter = controlCenter
-        self.worldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam(sender:)), userInfo: nil, repeats: true)
-        self.controlTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(receiveControl(sender:)), userInfo: nil, repeats: true)
-        self.transformTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendTransform(sender:)), userInfo: nil, repeats: true)
-        self.depthCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepth(sender:)), userInfo: nil, repeats: true)
+        self.worldCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendWorldCam(sender:)), userInfo: nil, repeats: true)
+        self.controlTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(receiveControl(sender:)), userInfo: nil, repeats: true)
+        self.transformTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendTransform(sender:)), userInfo: nil, repeats: true)
+        self.depthCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendDepth(sender:)), userInfo: nil, repeats: true)
     }
 
 
@@ -156,7 +156,8 @@ class Server {
         if (AppInfo.sessionData.shouldCaliberate == false && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)){
             if self.transformWS != nil && self.transformWS?.isClosed == false {
                 let ws = self.transformWS!
-                let data = self.controlCenter.transform.toData()
+                let data = self.controlCenter.vehicleState.toData()
+                print(self.controlCenter.vehicleState.velocity)
                 ws.send(raw: data, opcode: .binary)
             }
 

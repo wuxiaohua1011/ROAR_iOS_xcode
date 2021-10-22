@@ -11,7 +11,7 @@ import ARKit
 import Loaf
 import CoreBluetooth
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: IBOutlet
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var bleButton: UIButton!
@@ -51,9 +51,18 @@ class ViewController: UIViewController {
         self.updateThrottleSteeringUI()
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+        
+        // configure left edge pan gesture
+        let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
+        screenEdgePanGestureLeft.edges = .left
+        screenEdgePanGestureLeft.delegate = self
+        self.view.addGestureRecognizer(screenEdgePanGestureLeft)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.BLEautoReconnectTimer.invalidate()
         self.disconnectBluetooth()
         self.controlCenter.stop()
         super.viewWillDisappear(animated)
@@ -61,6 +70,17 @@ class ViewController: UIViewController {
     
     
     // MARK: objc functions
+    
+    @objc func didPanningScreenLeft(_ recognizer: UIScreenEdgePanGestureRecognizer)  {
+        if recognizer.state == .ended {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+    }
     
     @objc func updateThrottleSteeringUI() {
         self.throttleLabel.text = String(format: "Throttle: %.2f", self.controlCenter.control.throttle)
@@ -86,9 +106,11 @@ class ViewController: UIViewController {
         self.present(alert, animated: true)
     }
     @IBAction func onReCaliberateClicked(_ sender: UIButton) {
+        print("Recal tapped")
+        self.restartArSession()
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
-        self.restartArSession()
+        
         self.ipAddressLabel.text = "Please Caliberate"
 
     }

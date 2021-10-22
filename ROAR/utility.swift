@@ -69,6 +69,26 @@ struct CustomControl {
         return self.description.data(using: .utf8)!
     }
 }
+
+class VehicleState {
+    var transform: CustomTransform = CustomTransform()
+    var velocity: SCNVector3 = SCNVector3(0,0,0)
+    
+    init() {
+        
+    }
+    
+    func toData() -> Data {
+        let string = "\(transform.position.x), \(transform.position.y), \(transform.position.z), \(transform.eulerAngle.x), \(transform.eulerAngle.y), \(transform.eulerAngle.z), \(velocity.x),\(velocity.y),\(velocity.z)"
+        return string.data(using: String.Encoding.utf8)!
+    }
+    
+    func update(transform: CustomTransform, velocity: SCNVector3) {
+        self.transform = transform
+        self.velocity = velocity
+    }
+}
+
 class CustomTransform {
     var position: SCNVector3 = SCNVector3(0, 0, 0)
     var eulerAngle: SCNVector3 = SCNVector3(0,0,0)

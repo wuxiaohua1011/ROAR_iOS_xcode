@@ -13,17 +13,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="System Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOA-pf-btL">
-                                <rect key="frame" x="15.666666666666671" y="44" width="110" height="21"/>
+                                <rect key="frame" x="15.666666666666671" y="0.0" width="110" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJ9-Ql-yvG">
-                                <rect key="frame" x="106" y="73" width="174" height="30"/>
+                                <rect key="frame" x="106" y="29" width="174" height="30"/>
                                 <state key="normal" title="BLE Status"/>
                                 <connections>
                                     <segue destination="EgK-n2-qcj" kind="popoverPresentation" popoverAnchorView="qJ9-Ql-yvG" id="zl6-I4-nJc">
@@ -32,24 +32,24 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMZ-Mo-0U5">
-                                <rect key="frame" x="20" y="120" width="78" height="30"/>
+                                <rect key="frame" x="20" y="76" width="78" height="30"/>
                                 <state key="normal" title="Save World"/>
                                 <connections>
                                     <action selector="onSaveWorldClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KxA-iO-s11"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cbl-gY-tzm">
-                                <rect key="frame" x="288" y="120" width="86" height="30"/>
+                                <rect key="frame" x="288" y="76" width="86" height="30"/>
                                 <state key="normal" title="Recaliberate"/>
                                 <connections>
                                     <action selector="onReCaliberateClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wYK-8M-frE"/>
                                 </connections>
                             </button>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KNz-uL-o6X">
-                                <rect key="frame" x="22" y="158" width="352" height="652"/>
+                                <rect key="frame" x="22" y="114" width="352" height="642"/>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Throttle: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzE-Iv-tRU">
-                                <rect key="frame" x="106" y="109" width="174" height="21"/>
+                                <rect key="frame" x="106" y="65" width="174" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="0hl-rX-Xy3"/>
                                 </constraints>
@@ -58,7 +58,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steering: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDu-A4-1Vm">
-                                <rect key="frame" x="106" y="129" width="174" height="21"/>
+                                <rect key="frame" x="106" y="85" width="174" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="uOD-cz-6T8"/>
                                 </constraints>
@@ -67,13 +67,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP Address" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glW-EW-i3L">
-                                <rect key="frame" x="244" y="44" width="130" height="21"/>
+                                <rect key="frame" x="244" y="0.0" width="130" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlW-FX-uEn">
-                                <rect key="frame" x="20" y="72" width="84" height="30"/>
+                                <rect key="frame" x="20" y="28" width="84" height="30"/>
                                 <state key="normal" title="Reset World"/>
                                 <connections>
                                     <action selector="onResetWorldClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Kh-fc-Lry"/>
@@ -107,6 +107,7 @@
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="baseline" secondItem="Cbl-gY-tzm" secondAttribute="baseline" id="xEM-Yl-FTh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="p8j-nQ-PtD"/>
                     <connections>
                         <outlet property="arSceneView" destination="KNz-uL-o6X" id="16Z-cZ-1zv"/>
                         <outlet property="bleButton" destination="qJ9-Ql-yvG" id="feR-Xp-BPh"/>
@@ -162,8 +163,148 @@
             </objects>
             <point key="canvasLocation" x="883.07692307692309" y="88.862559241706151"/>
         </scene>
+        <!--MainUI View Controller-->
+        <scene sceneID="RU1-Ak-j3F">
+            <objects>
+                <viewController storyboardIdentifier="MainUIViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nC9-0x-Tbn" customClass="MainUIViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GxH-EF-ePc">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ROAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6G-5g-pw4">
+                                <rect key="frame" x="174" y="226" width="45" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGw-78-UFx">
+                                <rect key="frame" x="177" y="360" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Drive"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="Tat-Lw-2oP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBl-n7-i6v">
+                                <rect key="frame" x="175" y="564" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Photo"/>
+                                <connections>
+                                    <segue destination="VgG-XG-S7V" kind="show" id="pJB-yA-NIA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fBj-oW-CcA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ocs-gs-eGp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1075" y="-157"/>
+        </scene>
+        <!--Photo2 View Controller-->
+        <scene sceneID="VMv-iy-Gwi">
+            <objects>
+                <viewController storyboardIdentifier="ARPhoto2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VgG-XG-S7V" customClass="ARPhoto2ViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hMZ-MO-jVP">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OxH-Dn-bhy">
+                                <rect key="frame" x="0.0" y="-44" width="390" height="834"/>
+                            </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to place objects!" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fO-P4-3Av">
+                                <rect key="frame" x="110" y="0.0" width="171" height="22"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5x-St-FJE">
+                                <rect key="frame" x="354" y="0.0" width="20" height="22"/>
+                                <state key="normal" image="sparkle" catalog="system"/>
+                                <connections>
+                                    <action selector="onRestartTapped:" destination="VgG-XG-S7V" eventType="touchUpInside" id="hKS-fV-vGF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ty5-IF-Mei">
+                                <rect key="frame" x="175.66666666666666" y="693" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="7ZV-nS-QJR"/>
+                                    <constraint firstAttribute="height" constant="40" id="TE4-g7-r43"/>
+                                </constraints>
+                                <state key="normal" image="record.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="onRecordButtonPressed:" destination="VgG-XG-S7V" eventType="touchUpInside" id="GcL-SB-GfL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eh0-w1-jPI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5fO-P4-3Av" firstAttribute="top" secondItem="OxH-Dn-bhy" secondAttribute="top" constant="44" id="0hM-JF-XvB"/>
+                            <constraint firstItem="OxH-Dn-bhy" firstAttribute="bottom" secondItem="eh0-w1-jPI" secondAttribute="bottom" constant="34" id="3ql-bH-yfl"/>
+                            <constraint firstItem="r5x-St-FJE" firstAttribute="top" secondItem="5fO-P4-3Av" secondAttribute="top" id="5pg-Rf-Pgn"/>
+                            <constraint firstItem="ty5-IF-Mei" firstAttribute="centerX" secondItem="5fO-P4-3Av" secondAttribute="centerX" id="7Yn-Ua-Sv9"/>
+                            <constraint firstItem="OxH-Dn-bhy" firstAttribute="centerX" secondItem="hMZ-MO-jVP" secondAttribute="centerX" id="B33-Tr-h68"/>
+                            <constraint firstItem="5fO-P4-3Av" firstAttribute="leading" secondItem="eh0-w1-jPI" secondAttribute="leading" constant="110" id="FFy-5N-tig"/>
+                            <constraint firstItem="eh0-w1-jPI" firstAttribute="bottom" secondItem="ty5-IF-Mei" secondAttribute="bottom" constant="23" id="Gnd-Gn-Bw3"/>
+                            <constraint firstItem="r5x-St-FJE" firstAttribute="trailing" secondItem="hMZ-MO-jVP" secondAttribute="trailingMargin" id="RID-VP-93K"/>
+                            <constraint firstItem="5fO-P4-3Av" firstAttribute="leading" secondItem="OxH-Dn-bhy" secondAttribute="leading" constant="110" id="Ubz-5i-a2K"/>
+                            <constraint firstItem="r5x-St-FJE" firstAttribute="centerY" secondItem="5fO-P4-3Av" secondAttribute="centerY" id="iDX-p1-4cj"/>
+                            <constraint firstItem="5fO-P4-3Av" firstAttribute="top" secondItem="eh0-w1-jPI" secondAttribute="top" id="oZE-fp-Ele"/>
+                            <constraint firstItem="eh0-w1-jPI" firstAttribute="trailing" secondItem="5fO-P4-3Av" secondAttribute="trailing" constant="109" id="tom-7E-gba"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kaa-ev-N7i"/>
+                    <connections>
+                        <outlet property="arSceneView" destination="OxH-Dn-bhy" id="z2p-qG-Qg6"/>
+                        <outlet property="instructionLabel" destination="5fO-P4-3Av" id="vhc-cw-mvO"/>
+                        <outlet property="recordButton" destination="ty5-IF-Mei" id="WbH-78-n7u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8WD-DS-87o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18" y="-567"/>
+        </scene>
+        <!--Photo2 Popup View Controller-->
+        <scene sceneID="lP4-BC-nly">
+            <objects>
+                <viewController storyboardIdentifier="ARPhoto2PopupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uwS-ld-41f" customClass="ARPhoto2PopupViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qk6-ZY-j4P">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dCC-8d-ZCH">
+                                <rect key="frame" x="49" y="174" width="293" height="497"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TAO-Dp-Z8R"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dCC-8d-ZCH" firstAttribute="centerY" secondItem="qk6-ZY-j4P" secondAttribute="centerY" id="Dph-k5-xmL"/>
+                            <constraint firstItem="dCC-8d-ZCH" firstAttribute="leading" secondItem="TAO-Dp-Z8R" secondAttribute="leading" constant="49" id="bkA-wK-LK9"/>
+                            <constraint firstItem="dCC-8d-ZCH" firstAttribute="centerX" secondItem="qk6-ZY-j4P" secondAttribute="centerX" id="eq2-Lk-mB7"/>
+                            <constraint firstItem="dCC-8d-ZCH" firstAttribute="top" secondItem="TAO-Dp-Z8R" secondAttribute="top" constant="130" id="kj4-Si-bGE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="uiTableView" destination="dCC-8d-ZCH" id="Ufp-0l-5t3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU2-Ql-KqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="883" y="-567"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="record.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="sparkle" catalog="system" width="128" height="121"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

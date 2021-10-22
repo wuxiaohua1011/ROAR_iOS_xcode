@@ -83,7 +83,7 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         }
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        if AppInfo.sessionData.shouldCaliberate {
+        if AppInfo.sessionData.shouldCaliberate || AppInfo.sessionData.isCaliberated == false{
             for anchor in anchors {
                 guard let imageAnchor = anchor as? ARImageAnchor else { continue }
                 if imageAnchor.name == "BerkeleyLogo" {

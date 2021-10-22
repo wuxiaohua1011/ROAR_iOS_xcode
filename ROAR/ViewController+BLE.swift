@@ -94,7 +94,6 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
         
         
         let message: String = "(" + String(Int(currThrottleRPM)) + "," + String(Int(currSteeringRPM)) + ")"
-        print(self.bluetoothPeripheral)
         if self.bluetoothPeripheral != nil {
             sendMessage(peripheral: self.bluetoothPeripheral, message: message)
         }
@@ -102,7 +101,6 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func sendMessage(peripheral: CBPeripheral, message: String) {
         if bleControlCharacteristic != nil {
-            print(message)
             peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: .withoutResponse)
 //            peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: CBCharacteristicWriteType.withResponse)
         }

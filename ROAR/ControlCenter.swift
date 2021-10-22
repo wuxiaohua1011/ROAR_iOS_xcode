@@ -11,6 +11,7 @@ import os
 import Network
 
 class ControlCenter {
+    public var vehicleState: VehicleState = VehicleState()
     public var transform: CustomTransform = CustomTransform()
     public var vel_x: Float = 0; // m/sec
     public var vel_y: Float = 0; // m/sec
@@ -79,6 +80,10 @@ class ControlCenter {
             
             // yaw, roll, pitch DO NOT CHANGE THIS!
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
+            
+            
+            self.vehicleState.update(transform: self.transform, velocity: SCNVector3(vel_x, vel_y, vel_z))
+            
         }
     }
 }
