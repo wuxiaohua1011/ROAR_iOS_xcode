@@ -182,7 +182,7 @@ class Server {
         if (self.controlCenter.worldCamDepth.depth_data != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)) {
             if self.depthCamWS != nil && self.depthCamWS?.isClosed == false {
                 let ws = self.depthCamWS!
-                ws.send(raw: self.controlCenter.worldCamDepth.depth_data, opcode: .binary)
+//                ws.send(raw: self.controlCenter.worldCamDepth.depth_data, opcode: .binary)
                 let d = self.controlCenter.worldCamDepth
                 
                 let data = "\(String(describing: d?.fxD ?? -1)),\(String(describing: d?.fyD ?? -1)),\(String(describing: d?.cxD ?? -1)),\(String(describing: d?.cyD ?? -1))"
@@ -199,7 +199,7 @@ class Server {
     @objc private func sendWorldCam(sender:Timer) {
         if self.controlCenter.backCamImage.outputData != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated) {
             if self.worldCamWS != nil && self.worldCamWS?.isClosed == false {
-                self.worldCamWS!.send(raw: self.controlCenter.backCamImage.outputData ?? Data.init(count: 0), opcode: .binary)
+//                self.worldCamWS!.send(raw: self.controlCenter.backCamImage.outputData ?? Data.init(count: 0), opcode: .binary)
                 let k = self.controlCenter.backCamImage.intrinsics
                 if k == nil {
                     let data = "\(-1),\(-1),\(-1),\(-1)"
