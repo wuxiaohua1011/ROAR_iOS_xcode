@@ -622,3 +622,8 @@ func validateIpAddress(ipToValidate: String) -> Bool {
 
     return false;
 }
+
+
+protocol ScanQRCodeProtocol {
+    func onQRCodeScanFinished() 
+}

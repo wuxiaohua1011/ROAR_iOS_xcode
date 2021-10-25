@@ -11,7 +11,8 @@ import ARKit
 import Loaf
 import CoreBluetooth
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
+    
     // MARK: IBOutlet
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var bleButton: UIButton!
@@ -46,27 +47,34 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         AppInfo.load()
         super.viewDidLoad()
         self.controlCenter = ControlCenter(vc: self)
-        self.onBLEDisconnected()
         self.startARSession(worldMap: nil, worldOriginTransform: nil)
-        self.ipAddressBtn.isEnabled = false
-        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.controlCenter.start(shouldStartServer: true)
-        self.startWritingToBLE()
+        setupUI()
+        setupTimers()
+        setupGestures()
+    }
+    
+    func setupUI() {
+        self.onBLEDisconnected()
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
         self.updateThrottleSteeringUI()
+    }
+    func setupTimers() {
+        self.startWritingToBLE()
 //        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
         self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
         self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
-
+    }
+    func setupGestures() {
         // configure left edge pan gesture
         let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
         screenEdgePanGestureLeft.edges = .left
         screenEdgePanGestureLeft.delegate = self
         self.view.addGestureRecognizer(screenEdgePanGestureLeft)
-
-
     }
 
     @objc func sendWorldCam() {
@@ -163,9 +171,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func onIPAddressBtnClicked(_ sender: UIButton) {
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-
         let secondViewController = storyBoard.instantiateViewController(withIdentifier: "ScanQRCode") as! ScannerViewController
+        secondViewController.delegate = self
         self.present(secondViewController, animated:true, completion:nil)
+    }
+    
+    func onQRCodeScanFinished() {
+        controlCenter.restartUDP()
     }
 }
 

@@ -7,7 +7,7 @@ import Loaf
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-
+    var delegate: ScanQRCodeProtocol? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,7 +81,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             if found(code: stringValue) {
-                dismiss(animated: true, completion: nil)
+                AppInfo.pc_address = stringValue
+                dismiss(animated: true, completion: {
+                            self.delegate?.onQRCodeScanFinished()
+                    
+                })
             } else {
                 Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
                     self.captureSession.startRunning()

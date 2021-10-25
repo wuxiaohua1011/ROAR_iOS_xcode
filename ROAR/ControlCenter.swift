@@ -53,6 +53,11 @@ class ControlCenter {
         self.server.stop()
     }
     
+    
+    func restartUDP() {
+        self.udpbackCamClient.restart(address: AppInfo.pc_address, port: 8001)
+        self.udpDepthClient.restart(address: AppInfo.pc_address, port: 8002)
+    }
     public func updateBackCam(frame:ARFrame) {
         if self.backCamImage.updating == false {
             self.backCamImage.updateImage(cvPixelBuffer: frame.capturedImage)
