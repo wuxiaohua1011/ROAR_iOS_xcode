@@ -22,7 +22,7 @@ class ControlCenter {
     var udpbackCamClient: UDPImageClient!
 
     public var worldCamDepth: CustomDepthData!
-//    var udpDepthClient: UDPDepthClient!
+    var udpDepthClient: UDPDepthClient!
     
     public var vc: UIViewController!
     
@@ -38,6 +38,9 @@ class ControlCenter {
         self.backCamImage = CustomImage(compressionQuality: 0.005, ratio: .no_cut)//AppInfo.imageRatio)
         self.worldCamDepth = CustomDepthData()
         self.server = Server(controlCenter: self)
+        
+        self.udpbackCamClient = UDPImageClient(address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
+        self.udpDepthClient = UDPDepthClient(address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
 
     }
     
@@ -66,7 +69,12 @@ class ControlCenter {
             self.worldCamDepth.update(frame: frame)
         }
     }
-    
+    public func sendWorldCamImage() -> Bool {
+        return self.udpbackCamClient.sendImage(uiImage: self.backCamImage.uiImage!)
+    }
+    public func sendDepthImage() -> Bool {
+        return self.udpDepthClient.sendDepth(customDepth: self.worldCamDepth)
+    }
     
     public func updateTransform(pointOfView: SCNNode) {
         let node = pointOfView

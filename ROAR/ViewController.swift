@@ -37,8 +37,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var bleControlCharacteristic: CBCharacteristic!
     var updateThrottleSteeringUITimer: Timer!
     
-    var debugTimer: Timer!
+    var sendWorldCamTimer: Timer!
+    var sendWorldDepthTimer: Timer!
     var udpbackCamClient: UDPImageClient!
+    
     // MARK: overrides
     override func viewDidLoad() {
         AppInfo.load()
@@ -46,31 +48,35 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.controlCenter = ControlCenter(vc: self)
         self.onBLEDisconnected()
         self.startARSession(worldMap: nil, worldOriginTransform: nil)
-//        self.ipAddressBtn.isEnabled = false
-//        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
-//        self.centralManager = CBCentralManager(delegate: self, queue: nil)
-//        self.controlCenter.start(shouldStartServer: true)
-//        self.startWritingToBLE()
-//        self.updateThrottleSteeringUI()
-////        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-//        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
-//
-//        self.udpbackCamClient = UDPImageClient(address: "192.168.1.10", port: 8001)
-//        self.debugTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendImage), userInfo: nil, repeats: true)
-//
-//
-//        // configure left edge pan gesture
-//        let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
-//        screenEdgePanGestureLeft.edges = .left
-//        screenEdgePanGestureLeft.delegate = self
-//        self.view.addGestureRecognizer(screenEdgePanGestureLeft)
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
+        self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        self.controlCenter.start(shouldStartServer: true)
+        self.startWritingToBLE()
+        self.updateThrottleSteeringUI()
+//        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+
+        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
+        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
+
+        // configure left edge pan gesture
+        let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
+        screenEdgePanGestureLeft.edges = .left
+        screenEdgePanGestureLeft.delegate = self
+        self.view.addGestureRecognizer(screenEdgePanGestureLeft)
 
 
     }
 
-    @objc func sendImage() {
-        if self.controlCenter.backCamImage.uiImage != nil {
-            self.udpbackCamClient.sendImage(uiImage: self.controlCenter.backCamImage.uiImage!)
+    @objc func sendWorldCam() {
+        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+            self.controlCenter.sendWorldCamImage()
+        }
+    }
+    @objc func sendDepthImage() {
+        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+            self.controlCenter.sendDepthImage()
         }
     }
 

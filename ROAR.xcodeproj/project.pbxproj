@@ -141,7 +141,6 @@
 		E83E6C9426ED57BF006B1E39 = {
 			isa = PBXGroup;
 			children = (
-				E821AECA27274AF1009F49D2 /* ScanQRCodeViewController.swift */,
 				E88C3795270557F800289DC1 /* models.scnassets */,
 				E83E6C9F26ED57BF006B1E39 /* ROAR */,
 				E83E6CB626ED57C4006B1E39 /* ROARTests */,
@@ -165,6 +164,7 @@
 		E83E6C9F26ED57BF006B1E39 /* ROAR */ = {
 			isa = PBXGroup;
 			children = (
+				E821AECA27274AF1009F49D2 /* ScanQRCodeViewController.swift */,
 				E88C3797270558A600289DC1 /* ARPhoto */,
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,

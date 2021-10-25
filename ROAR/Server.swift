@@ -22,6 +22,10 @@ class CustomUDPClient {
     init(address: String = "192.168.1.10", port:Int32=8001) {
         client = UDPClient(address: address, port: port)
     }
+    func restart(address: String, port: Int32){
+        self.stop()
+        client = UDPClient(address: address, port: port)
+    }
     
     func sendData(data: Data) -> Bool {
         if (data.count > MAX_DGRAM) {

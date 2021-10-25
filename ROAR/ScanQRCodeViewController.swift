@@ -1,5 +1,8 @@
 import AVFoundation
 import UIKit
+import SwiftSocket
+import Loaf
+
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
@@ -77,14 +80,25 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
-        }
+            if found(code: stringValue) {
+                dismiss(animated: true, completion: nil)
+            } else {
+                Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
+                    self.captureSession.startRunning()
+                })
+                
+            }
 
-        dismiss(animated: true)
+        }
     }
 
-    func found(code: String) {
-        print(code)
+    func found(code: String) -> Bool {
+        if validateIpAddress(ipToValidate: code) {
+            if perform_handshake(code: code) {
+                return true
+            }
+        }
+        return false
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -93,5 +107,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    
+    func perform_handshake(code:String) -> Bool{
+        let client = TCPClient(address: code, port: 8008)
+        let r = client.connect(timeout: 1)
+        return r.isSuccess
     }
 }
