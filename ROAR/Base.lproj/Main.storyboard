@@ -66,12 +66,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP Address" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glW-EW-i3L">
-                                <rect key="frame" x="244" y="0.0" width="130" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlW-FX-uEn">
                                 <rect key="frame" x="20" y="28" width="84" height="30"/>
                                 <state key="normal" title="Reset World"/>
@@ -79,14 +73,19 @@
                                     <action selector="onResetWorldClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Kh-fc-Lry"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmS-Ug-1hK">
+                                <rect key="frame" x="294" y="0.0" width="74" height="30"/>
+                                <state key="normal" title="IP Address"/>
+                                <connections>
+                                    <action selector="onIPAddressBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="88D-8Z-5aC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="leading" secondItem="Cbl-gY-tzm" secondAttribute="leading" constant="-44" id="2b7-P2-sgk"/>
                             <constraint firstItem="rlW-FX-uEn" firstAttribute="top" secondItem="EOA-pf-btL" secondAttribute="bottom" constant="7" id="Bem-np-6II"/>
                             <constraint firstItem="Cbl-gY-tzm" firstAttribute="leading" secondItem="XDu-A4-1Vm" secondAttribute="trailing" constant="8" id="Gj5-Iz-3oE"/>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="trailing" secondItem="Cbl-gY-tzm" secondAttribute="trailing" id="KJR-3c-YZG"/>
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LFa-9d-kj3"/>
                             <constraint firstItem="tzE-Iv-tRU" firstAttribute="top" secondItem="qJ9-Ql-yvG" secondAttribute="bottom" constant="6" id="MPJ-xC-spy"/>
                             <constraint firstItem="XDu-A4-1Vm" firstAttribute="bottom" secondItem="PMZ-Mo-0U5" secondAttribute="bottom" id="Mja-qy-Syx"/>
@@ -97,12 +96,13 @@
                             <constraint firstItem="KNz-uL-o6X" firstAttribute="top" secondItem="PMZ-Mo-0U5" secondAttribute="bottom" constant="8" id="aMk-vN-bRl"/>
                             <constraint firstItem="Cbl-gY-tzm" firstAttribute="trailing" secondItem="KNz-uL-o6X" secondAttribute="trailing" id="aVC-wT-RQz"/>
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="76" id="d6E-nA-W8U"/>
+                            <constraint firstItem="JmS-Ug-1hK" firstAttribute="top" secondItem="EOA-pf-btL" secondAttribute="top" id="dcr-pa-9WX"/>
+                            <constraint firstItem="JmS-Ug-1hK" firstAttribute="centerX" secondItem="Cbl-gY-tzm" secondAttribute="centerX" id="es3-rw-Wrm"/>
                             <constraint firstItem="rlW-FX-uEn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="foE-GB-28y"/>
                             <constraint firstItem="qJ9-Ql-yvG" firstAttribute="centerX" secondItem="KNz-uL-o6X" secondAttribute="centerX" constant="-5" id="iWE-vu-Qsl"/>
                             <constraint firstItem="qJ9-Ql-yvG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="jgA-qK-g36"/>
                             <constraint firstItem="qJ9-Ql-yvG" firstAttribute="top" secondItem="EOA-pf-btL" secondAttribute="bottom" constant="8" id="pdw-8g-D3d"/>
                             <constraint firstItem="KNz-uL-o6X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="u60-XI-dXl"/>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="baseline" secondItem="EOA-pf-btL" secondAttribute="baseline" id="uxp-Bz-y4i"/>
                             <constraint firstItem="Cbl-gY-tzm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="vV2-iZ-eW4"/>
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="baseline" secondItem="Cbl-gY-tzm" secondAttribute="baseline" id="xEM-Yl-FTh"/>
                         </constraints>
@@ -111,7 +111,7 @@
                     <connections>
                         <outlet property="arSceneView" destination="KNz-uL-o6X" id="16Z-cZ-1zv"/>
                         <outlet property="bleButton" destination="qJ9-Ql-yvG" id="feR-Xp-BPh"/>
-                        <outlet property="ipAddressLabel" destination="glW-EW-i3L" id="dOL-i6-r6j"/>
+                        <outlet property="ipAddressBtn" destination="JmS-Ug-1hK" id="wbJ-Jq-mq6"/>
                         <outlet property="recaliberateButton" destination="Cbl-gY-tzm" id="K2Y-kk-GUw"/>
                         <outlet property="saveWorldButton" destination="PMZ-Mo-0U5" id="6ul-YT-gl5"/>
                         <outlet property="steeringLabel" destination="XDu-A4-1Vm" id="new-dI-qcC"/>
@@ -122,6 +122,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="18.46153846153846" y="114.45497630331754"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="SKj-kz-byZ">
+            <objects>
+                <viewController storyboardIdentifier="ScanQRCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SeV-1u-qgx" customClass="ScannerViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="th7-dF-Qpg">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="1sJ-Fp-LUc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1b-Qu-gWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-33" y="836"/>
         </scene>
         <!--Select Bluetooth View Controller-->
         <scene sceneID="M3T-fE-Gh9">
