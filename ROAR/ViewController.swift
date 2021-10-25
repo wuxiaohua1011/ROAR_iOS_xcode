@@ -63,7 +63,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     }
     func setupTimers() {
         self.startWritingToBLE()
-//        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
         self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)

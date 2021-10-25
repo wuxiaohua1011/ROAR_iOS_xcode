@@ -82,6 +82,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             if found(code: stringValue) {
                 AppInfo.pc_address = stringValue
+                AppInfo.save()
                 dismiss(animated: true, completion: {
                             self.delegate?.onQRCodeScanFinished()
                     
