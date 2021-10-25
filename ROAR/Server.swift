@@ -10,6 +10,70 @@ import os
 import Vapor
 import Photos
 import UIKit
+import SwiftSocket
+
+
+class CustomUDPClient {
+    /*
+    This class implement a custom chunking protocol for streaming large data under UDP protocol
+    */
+    var client: UDPClient!
+    var MAX_DGRAM: Int = 9000 // for some mac, default size is 9620, make some room for header
+    init(address: String = "192.168.1.10", port:Int32=8001) {
+        client = UDPClient(address: address, port: port)
+    }
+    
+    func sendData(data: Data) -> Bool {
+        if (data.count > MAX_DGRAM) {
+            return self.chunkAndSendData(data: data)
+        } else {
+            let r = self.client.send(data: data)
+            return r.isSuccess
+        }
+    }
+    
+    func chunkAndSendData(data: Data) -> Bool {
+        data.withUnsafeBytes{(u8Ptr: UnsafePointer<UInt8>) in
+            let mutRawPointer = UnsafeMutableRawPointer(mutating: u8Ptr)
+            let uploadChunkSize = self.MAX_DGRAM
+            let totalSize = data.count
+            var offset = 0
+            var counter = Int(Float(totalSize / uploadChunkSize).rounded(.up)) + 1
+            
+            var total_sent = 0
+            while offset < totalSize {
+                var data_to_send:Data = String(counter).leftPadding(toLength: 3, withPad: "0")
+                    .data(using:.ascii)!
+                let chunkSize = offset + uploadChunkSize > totalSize ? totalSize - offset : uploadChunkSize
+                let chunk = Data(bytesNoCopy: mutRawPointer+offset, count: chunkSize, deallocator: Data.Deallocator.none)
+                data_to_send.append(chunk)
+                self.client.send(data: data_to_send)
+                total_sent += chunk.count
+                offset += chunkSize
+                counter -= 1
+            }
+            
+        }
+        return true
+    }
+    
+    func stop() {
+        self.client.close()
+    }
+    
+}
+
+class UDPDepthClient: CustomUDPClient {
+    func sendDepth(customDepth: CustomDepthData) -> Bool {
+        return sendData(data: customDepth.depth_data)
+    }
+}
+
+class UDPImageClient: CustomUDPClient {
+    func sendImage(uiImage: UIImage) -> Bool {
+        return self.sendData(data: uiImage.jpegData(compressionQuality: 0.01)!)
+    }
+}
 
 class Server {
     var ipAddr: String
@@ -29,7 +93,7 @@ class Server {
     var controlWS: WebSocketKit.WebSocket?
     
     var transformTimer: Timer?
-    var transformWS: WebSocketKit.WebSocket?
+    var vehStateWS: WebSocketKit.WebSocket?
     
     init(ipAddr: String? = nil, port: Int = 8005, controlCenter: ControlCenter) {
         self.ipAddr = ipAddr ?? findIPAddr()
@@ -37,7 +101,7 @@ class Server {
         self.controlCenter = controlCenter
         self.worldCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendWorldCam(sender:)), userInfo: nil, repeats: true)
         self.controlTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(receiveControl(sender:)), userInfo: nil, repeats: true)
-        self.transformTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendTransform(sender:)), userInfo: nil, repeats: true)
+        self.transformTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendVehState(sender:)), userInfo: nil, repeats: true)
         self.depthCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendDepth(sender:)), userInfo: nil, repeats: true)
     }
 
@@ -86,7 +150,7 @@ class Server {
         }
         if self.transformTimer != nil {
             self.transformTimer?.invalidate()
-            self.transformWS = nil
+            self.vehStateWS = nil
         }
         if self.controlTimer != nil {
             self.controlTimer?.invalidate()
@@ -99,7 +163,7 @@ class Server {
     private func configurePaths() {
         
         configureRearCam()
-        configureTransform()
+        configureVehState()
         configureControl()
         configureRearDepthCam()
 
@@ -146,18 +210,17 @@ class Server {
         }
     }
     
-    private func configureTransform() {
-        self.app!.webSocket("transform") { req, ws in
-            self.transformWS = ws
+    private func configureVehState() {
+        self.app!.webSocket("veh_state") { req, ws in
+            self.vehStateWS = ws
         }
     }
     
-    @objc private func sendTransform(sender: Timer) {
+    @objc private func sendVehState(sender: Timer) {
         if (AppInfo.sessionData.shouldCaliberate == false && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)){
-            if self.transformWS != nil && self.transformWS?.isClosed == false {
-                let ws = self.transformWS!
+            if self.vehStateWS != nil && self.vehStateWS?.isClosed == false {
+                let ws = self.vehStateWS!
                 let data = self.controlCenter.vehicleState.toData()
-                print(self.controlCenter.vehicleState.velocity)
                 ws.send(raw: data, opcode: .binary)
             }
 

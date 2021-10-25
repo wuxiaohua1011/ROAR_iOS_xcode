@@ -37,6 +37,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var bleControlCharacteristic: CBCharacteristic!
     var updateThrottleSteeringUITimer: Timer!
     
+    var debugTimer: Timer!
+    var udpbackCamClient: UDPImageClient!
     // MARK: overrides
     override func viewDidLoad() {
         AppInfo.load()
@@ -49,8 +51,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.controlCenter.start(shouldStartServer: true)
         self.startWritingToBLE()
         self.updateThrottleSteeringUI()
-        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+//        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+        
+        self.udpbackCamClient = UDPImageClient(address: "192.168.1.10", port: 8001)
+        self.debugTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(sendImage), userInfo: nil, repeats: true)
+ 
         
         // configure left edge pan gesture
         let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
@@ -59,6 +65,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(screenEdgePanGestureLeft)
         
         
+    }
+    
+    @objc func sendImage() {
+        if self.controlCenter.backCamImage.uiImage != nil {
+            self.udpbackCamClient.sendImage(uiImage: self.controlCenter.backCamImage.uiImage!)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -107,12 +119,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     @IBAction func onReCaliberateClicked(_ sender: UIButton) {
         print("Recal tapped")
-        self.restartArSession()
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
-        
+        self.restartArSession()
         self.ipAddressLabel.text = "Please Caliberate"
-
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {
         self.arSceneView.session.getCurrentWorldMap { worldMap, error in
@@ -128,6 +138,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 Loaf("Error: \(error.localizedDescription)", state: .error, sender: self).show(.short)
             }
         }
+//        if self.controlCenter.backCamImage.uiImage != nil {
+//            self.udpbackCamClient.sendImage(uiImage: self.controlCenter.backCamImage.uiImage!)
+//        }
     }
     
     func onBLEConnected() {

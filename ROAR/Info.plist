@@ -4,16 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>For connecting to Bluetooth</string>
-	<key>NSCameraUsageDescription</key>
-	<string>For AR Localization</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>For connecting to Bluetooth</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need to store images and videos</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,6 +20,14 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>For connecting to Bluetooth</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>For connecting to Bluetooth</string>
+	<key>NSCameraUsageDescription</key>
+	<string>For AR Localization</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need to store images and videos</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -60,8 +60,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

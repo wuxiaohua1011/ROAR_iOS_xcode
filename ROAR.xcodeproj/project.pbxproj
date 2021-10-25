@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A09F224246A0E2AF2FBB6D81 /* Pods_ROAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A498B2D702D7CB6768B7DD47 /* Pods_ROAR.framework */; };
 		E83E6CA126ED57BF006B1E39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */; };
 		E83E6CA326ED57BF006B1E39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */; };
 		E83E6CA526ED57BF006B1E39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA426ED57BF006B1E39 /* ViewController.swift */; };
@@ -54,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17661342EC3F52CA53CAC51B /* Pods-ROAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ROAR.debug.xcconfig"; path = "Target Support Files/Pods-ROAR/Pods-ROAR.debug.xcconfig"; sourceTree = "<group>"; };
+		A498B2D702D7CB6768B7DD47 /* Pods_ROAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ROAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA70681EA7FA776D886D4DC2 /* Pods-ROAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ROAR.release.xcconfig"; path = "Target Support Files/Pods-ROAR/Pods-ROAR.release.xcconfig"; sourceTree = "<group>"; };
 		E83E6C9D26ED57BF006B1E39 /* ROAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ROAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 				E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */,
 				E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */,
 				E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */,
+				A09F224246A0E2AF2FBB6D81 /* Pods_ROAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +119,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41BC3300D1CB2E2AA101F09A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17661342EC3F52CA53CAC51B /* Pods-ROAR.debug.xcconfig */,
+				AA70681EA7FA776D886D4DC2 /* Pods-ROAR.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4FF4785C1681E07655754356 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A498B2D702D7CB6768B7DD47 /* Pods_ROAR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E83E6C9426ED57BF006B1E39 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +144,8 @@
 				E83E6CB626ED57C4006B1E39 /* ROARTests */,
 				E83E6CC126ED57C4006B1E39 /* ROARUITests */,
 				E83E6C9E26ED57BF006B1E39 /* Products */,
+				41BC3300D1CB2E2AA101F09A /* Pods */,
+				4FF4785C1681E07655754356 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,9 +220,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "ROAR" */;
 			buildPhases = (
+				E1EA542063A4D250171F60C5 /* [CP] Check Pods Manifest.lock */,
 				E83E6C9926ED57BF006B1E39 /* Sources */,
 				E83E6C9A26ED57BF006B1E39 /* Frameworks */,
 				E83E6C9B26ED57BF006B1E39 /* Resources */,
+				89D58BFF9C7B9909A9DA6B8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,6 +353,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		89D58BFF9C7B9909A9DA6B8E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1EA542063A4D250171F60C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ROAR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E83E6C9926ED57BF006B1E39 /* Sources */ = {
@@ -521,6 +589,7 @@
 		};
 		E83E6CC826ED57C4006B1E39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17661342EC3F52CA53CAC51B /* Pods-ROAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -540,6 +609,7 @@
 		};
 		E83E6CC926ED57C4006B1E39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA70681EA7FA776D886D4DC2 /* Pods-ROAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -16,7 +16,16 @@ extension Comparable {
         return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }
-
+extension String {
+    func leftPadding(toLength: Int, withPad character: Character) -> String {
+        let newLength = self.count
+        if newLength < toLength {
+            return String(repeatElement(character, count: toLength - newLength)) + self
+        } else {
+            return self.substring(from: index(self.startIndex, offsetBy: newLength - toLength))
+        }
+    }
+}
 
 func findIPAddr() -> String {
     var address: String?
@@ -71,21 +80,43 @@ struct CustomControl {
 }
 
 class VehicleState {
-    var transform: CustomTransform = CustomTransform()
-    var velocity: SCNVector3 = SCNVector3(0,0,0)
+//    var transform: CustomTransform = CustomTransform()
+//    var velocity: SCNVector3 = SCNVector3(0,0,0)
+    var x: Float = 0
+    var y: Float = 0
+    var z: Float = 0
+    var roll: Float = 0
+    var pitch: Float = 0
+    var yaw: Float = 0
+    var vx: Float = 0
+    var vy: Float = 0
+    var vz: Float = 0
     
     init() {
         
     }
-    
+    func toString() -> String {
+        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz)"
+        return string
+    }
     func toData() -> Data {
-        let string = "\(transform.position.x), \(transform.position.y), \(transform.position.z), \(transform.eulerAngle.x), \(transform.eulerAngle.y), \(transform.eulerAngle.z), \(velocity.x),\(velocity.y),\(velocity.z)"
-        return string.data(using: String.Encoding.utf8)!
+        return self.toString().data(using: String.Encoding.utf8)!
     }
     
-    func update(transform: CustomTransform, velocity: SCNVector3) {
-        self.transform = transform
-        self.velocity = velocity
+//    func update(transform: CustomTransform, velocity: SCNVector3) {
+//        self.transform = transform
+//        self.velocity = velocity
+//    }
+    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float){
+    self.x = x
+    self.y = y
+    self.z = z
+    self.roll = roll
+    self.pitch = pitch
+    self.yaw = yaw
+    self.vx = vx
+    self.vy = vy
+    self.vz = vz
     }
 }
 

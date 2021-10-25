@@ -19,13 +19,17 @@ class ControlCenter {
     public var control: CustomControl = CustomControl()
     
     public var backCamImage: CustomImage!
-    
+    var udpbackCamClient: UDPImageClient!
+
     public var worldCamDepth: CustomDepthData!
+//    var udpDepthClient: UDPDepthClient!
     
     public var vc: UIViewController!
     
     private var prevTransformUpdateTime: TimeInterval?;
     private var gameTimeReductionTimer: Timer!
+    
+    
     
     public var server:Server!
     
@@ -34,6 +38,7 @@ class ControlCenter {
         self.backCamImage = CustomImage(compressionQuality: 0.005, ratio: .no_cut)//AppInfo.imageRatio)
         self.worldCamDepth = CustomDepthData()
         self.server = Server(controlCenter: self)
+
     }
     
     func start(shouldStartServer: Bool = true){
@@ -54,7 +59,6 @@ class ControlCenter {
     public func updateBackCam(cvpixelbuffer:CVPixelBuffer, rotationDegree:Float=90) {
         if self.backCamImage.updating == false {
             self.backCamImage.updateImage(cvPixelBuffer: cvpixelbuffer)
-//            self.backCamImage.updateIntrinsics(intrinsics: frame.camera.intrinsics)
         }
     }
     public func updateWorldCamDepth(frame: ARFrame) {
@@ -72,7 +76,7 @@ class ControlCenter {
         } else {
             
             let time_diff = Float((time-prevTransformUpdateTime!))
-            vel_x = (node.position.x - self.transform.position.x) / time_diff
+            vel_x = (node.position.x - self.transform.position.x) / time_diff // m/s
             vel_y = (node.position.y - self.transform.position.y) / time_diff
             vel_z = (node.position.z - self.transform.position.z) / time_diff
             
@@ -82,8 +86,17 @@ class ControlCenter {
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
             
             
-            self.vehicleState.update(transform: self.transform, velocity: SCNVector3(vel_x, vel_y, vel_z))
-            
+            self.vehicleState.update(x: transform.position.x,
+                                     y: transform.position.y,
+                                     z: transform.position.z,
+                                     roll: transform.position.z,
+                                     pitch: transform.eulerAngle.y,
+                                     yaw: transform.eulerAngle.x,
+                                     vx: vel_x,
+                                     vy: vel_y,
+                                     vz: vel_z)
+//            print("vx: \(vel_x) | vy: \(vel_y) | vz: \(vel_z)")
+            prevTransformUpdateTime = time
         }
     }
 }
