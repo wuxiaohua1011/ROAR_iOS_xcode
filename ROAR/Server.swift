@@ -20,6 +20,7 @@ class CustomUDPClient {
     var client: UDPClient!
     var MAX_DGRAM: Int = 9000 // for some mac, default size is 9620, make some room for header
     init(address: String = "192.168.1.10", port:Int32=8001) {
+        print("Starting broadcast to \(address) ")
         client = UDPClient(address: address, port: port)
     }
     func restart(address: String, port: Int32){

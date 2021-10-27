@@ -29,8 +29,6 @@ class ControlCenter {
     private var prevTransformUpdateTime: TimeInterval?;
     private var gameTimeReductionTimer: Timer!
     
-    
-    
     public var server:Server!
     
     init(vc: UIViewController) {
@@ -102,7 +100,7 @@ class ControlCenter {
             self.vehicleState.update(x: transform.position.x,
                                      y: transform.position.y,
                                      z: transform.position.z,
-                                     roll: transform.position.z,
+                                     roll: transform.eulerAngle.z,
                                      pitch: transform.eulerAngle.y,
                                      yaw: transform.eulerAngle.x,
                                      vx: vel_x,
