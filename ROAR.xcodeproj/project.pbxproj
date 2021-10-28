@@ -36,6 +36,10 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E8EE23182729B8F100A93340 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23172729B8F100A93340 /* NIO */; };
+		E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23192729B8F100A93340 /* NIOCore */; };
+		E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */; };
+		E8EE231E2729B8F100A93340 /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231D2729B8F100A93340 /* NIOFoundationCompat */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +101,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */,
+				E8EE231E2729B8F100A93340 /* NIOFoundationCompat in Frameworks */,
+				E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */,
+				E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */,
 				E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */,
 				E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */,
+				E8EE23182729B8F100A93340 /* NIO in Frameworks */,
 				E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */,
 				A09F224246A0E2AF2FBB6D81 /* Pods_ROAR.framework in Frameworks */,
 			);
@@ -239,6 +247,10 @@
 				E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */,
 				E83E6CE326ED6981006B1E39 /* Loaf */,
 				E83E6CE826ED7147006B1E39 /* JGProgressHUD */,
+				E8EE23172729B8F100A93340 /* NIO */,
+				E8EE23192729B8F100A93340 /* NIOCore */,
+				E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */,
+				E8EE231D2729B8F100A93340 /* NIOFoundationCompat */,
 			);
 			productName = ROAR;
 			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
@@ -316,6 +328,7 @@
 				E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */,
 				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */,
 			);
 			productRefGroup = E83E6C9E26ED57BF006B1E39 /* Products */;
 			projectDirPath = "";
@@ -789,6 +802,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.33.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -811,6 +832,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
 			productName = JGProgressHUD;
+		};
+		E8EE23172729B8F100A93340 /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		E8EE23192729B8F100A93340 /* NIOCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOCore;
+		};
+		E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOConcurrencyHelpers;
+		};
+		E8EE231D2729B8F100A93340 /* NIOFoundationCompat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOFoundationCompat;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

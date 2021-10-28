@@ -10,6 +10,7 @@ import SwiftyBeaver
 import ARKit
 import Loaf
 import CoreBluetooth
+import NIO
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
     
@@ -41,7 +42,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     var sendWorldCamTimer: Timer!
     var sendWorldDepthTimer: Timer!
     var udpbackCamClient: UDPImageClient!
-    
+
     // MARK: overrides
     override func viewDidLoad() {
         AppInfo.load()
@@ -53,6 +54,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         setupUI()
         setupTimers()
         setupGestures()
+        
     }
     
     func setupUI() {
@@ -66,8 +68,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
-        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
-        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
+        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
+        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
     }
     func setupGestures() {
         // configure left edge pan gesture
@@ -154,9 +156,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
                 Loaf("Error: \(error.localizedDescription)", state: .error, sender: self).show(.short)
             }
         }
-//        if self.controlCenter.backCamImage.uiImage != nil {
-//            self.udpbackCamClient.sendImage(uiImage: self.controlCenter.backCamImage.uiImage!)
-//        }
+
     }
     
     func onBLEConnected() {

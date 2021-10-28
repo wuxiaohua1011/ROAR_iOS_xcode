@@ -70,13 +70,23 @@ class CustomUDPClient {
 
 class UDPDepthClient: CustomUDPClient {
     func sendDepth(customDepth: CustomDepthData) -> Bool {
-        return sendData(data: customDepth.depth_data)
+        do {
+            let data = try customDepth.circular.read()
+            return sendData(data: data)
+        } catch  {
+            return false
+        }
     }
 }
 
 class UDPImageClient: CustomUDPClient {
-    func sendImage(uiImage: UIImage) -> Bool {
-        return self.sendData(data: uiImage.jpegData(compressionQuality: 0.01)!)
+    func sendImage(customImage: CustomImage) -> Bool {
+        do {
+            let uiImageData = try customImage.circular.read().jpegData(compressionQuality: 0.01)
+            return self.sendData(data: uiImageData!)
+        } catch  {
+            return false
+        }
     }
 }
 
@@ -88,11 +98,7 @@ class Server {
     var controlCenter: ControlCenter!
     var controlCheckTimer: Timer?
     
-    var worldCamTimer: Timer?
-    var worldCamWS: WebSocketKit.WebSocket?
-    
-    var depthCamTimer: Timer?
-    var depthCamWS: WebSocketKit.WebSocket?
+//    var worldCamTimer:sSocketKit.WebSocket?
     
     var controlTimer: Timer?
     var controlWS: WebSocketKit.WebSocket?
@@ -104,10 +110,10 @@ class Server {
         self.ipAddr = ipAddr ?? findIPAddr()
         self.port = port
         self.controlCenter = controlCenter
-        self.worldCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendWorldCam(sender:)), userInfo: nil, repeats: true)
+//        self.worldCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendWorldCam(sender:)), userInfo: nil, repeats: true)
         self.controlTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(receiveControl(sender:)), userInfo: nil, repeats: true)
         self.transformTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendVehState(sender:)), userInfo: nil, repeats: true)
-        self.depthCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendDepth(sender:)), userInfo: nil, repeats: true)
+//        self.depthCamTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(sendDepth(sender:)), userInfo: nil, repeats: true)
     }
 
 
@@ -144,15 +150,15 @@ class Server {
                 print("Failed to shutdown gracefully")
             }
         }
-        if self.worldCamTimer != nil {
-            self.worldCamTimer?.invalidate()
-            self.worldCamWS = nil
-        }
-        
-        if self.depthCamTimer != nil {
-            self.depthCamTimer?.invalidate()
-            self.depthCamWS = nil
-        }
+//        if self.worldCamTimer != nil {
+//            self.worldCamTimer?.invalidate()
+//            self.worldCamWS = nil
+//        }
+//
+//        if self.depthCamTimer != nil {
+//            self.depthCamTimer?.invalidate()
+//            self.depthCamWS = nil
+//        }
         if self.transformTimer != nil {
             self.transformTimer?.invalidate()
             self.vehStateWS = nil
@@ -167,53 +173,53 @@ class Server {
     
     private func configurePaths() {
         
-        configureRearCam()
+//        configureRearCam()
         configureVehState()
         configureControl()
-        configureRearDepthCam()
+//        configureRearDepthCam()
 
     }
-    private func configureRearDepthCam() {
-        self.app!.webSocket("world_cam_depth") { req, ws in
-            self.depthCamWS = ws
-        }
-    }
+//    private func configureRearDepthCam() {
+//        self.app!.webSocket("world_cam_depth") { req, ws in
+//            self.depthCamWS = ws
+//        }
+//    }
     
-    @objc private func sendDepth(sender:Timer) {
-        if (self.controlCenter.worldCamDepth.depth_data != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)) {
-            if self.depthCamWS != nil && self.depthCamWS?.isClosed == false {
-                let ws = self.depthCamWS!
-//                ws.send(raw: self.controlCenter.worldCamDepth.depth_data, opcode: .binary)
-                let d = self.controlCenter.worldCamDepth
-                
-                let data = "\(String(describing: d?.fxD ?? -1)),\(String(describing: d?.fyD ?? -1)),\(String(describing: d?.cxD ?? -1)),\(String(describing: d?.cyD ?? -1))"
-                ws.send(data)
-            }
-        }
-    }
-    private func configureRearCam() {
-        self.app!.webSocket("world_cam") { req, ws in
-            self.worldCamWS = ws
-        }
-    }
-    
-    @objc private func sendWorldCam(sender:Timer) {
-        if self.controlCenter.backCamImage.outputData != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated) {
-            if self.worldCamWS != nil && self.worldCamWS?.isClosed == false {
-//                self.worldCamWS!.send(raw: self.controlCenter.backCamImage.outputData ?? Data.init(count: 0), opcode: .binary)
-                let k = self.controlCenter.backCamImage.intrinsics
-                if k == nil {
-                    let data = "\(-1),\(-1),\(-1),\(-1)"
-                    self.worldCamWS!.send(data)
-
-                } else {
-                    let data = "\(String(describing: k?[0][0] ?? -1)),\(String(describing: k?[1][1] ?? -1)),\(String(describing: k?[2][0] ?? -1)),\(String(describing: k?[2][1] ?? -1))"
-                    self.worldCamWS!.send(data)
-
-                }
-            }
-        }
-    }
+//    @objc private func sendDepth(sender:Timer) {
+//        if (self.controlCenter.worldCamDepth.depth_data != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)) {
+//            if self.depthCamWS != nil && self.depthCamWS?.isClosed == false {
+//                let ws = self.depthCamWS!
+////                ws.send(raw: self.controlCenter.worldCamDepth.depth_data, opcode: .binary)
+//                let d = self.controlCenter.worldCamDepth
+//
+//                let data = "\(String(describing: d?.fxD ?? -1)),\(String(describing: d?.fyD ?? -1)),\(String(describing: d?.cxD ?? -1)),\(String(describing: d?.cyD ?? -1))"
+//                ws.send(data)
+//            }
+//        }
+//    }
+//    private func configureRearCam() {
+//        self.app!.webSocket("world_cam") { req, ws in
+//            self.worldCamWS = ws
+//        }
+//    }
+//
+//    @objc private func sendWorldCam(sender:Timer) {
+//        if self.controlCenter.backCamImage.outputData != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated) {
+//            if self.worldCamWS != nil && self.worldCamWS?.isClosed == false {
+////                self.worldCamWS!.send(raw: self.controlCenter.backCamImage.outputData ?? Data.init(count: 0), opcode: .binary)
+//                let k = self.controlCenter.backCamImage.intrinsics
+//                if k == nil {
+//                    let data = "\(-1),\(-1),\(-1),\(-1)"
+//                    self.worldCamWS!.send(data)
+//
+//                } else {
+//                    let data = "\(String(describing: k?[0][0] ?? -1)),\(String(describing: k?[1][1] ?? -1)),\(String(describing: k?[2][0] ?? -1)),\(String(describing: k?[2][1] ?? -1))"
+//                    self.worldCamWS!.send(data)
+//
+//                }
+//            }
+//        }
+//    }
     
     private func configureVehState() {
         self.app!.webSocket("veh_state") { req, ws in

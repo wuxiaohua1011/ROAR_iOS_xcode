@@ -118,6 +118,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     func perform_handshake(code:String) -> Bool{
         let client = TCPClient(address: code, port: 8008)
         let r = client.connect(timeout: 1)
+        client.close()
         return r.isSuccess
     }
 }

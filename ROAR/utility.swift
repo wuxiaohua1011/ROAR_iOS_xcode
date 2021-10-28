@@ -157,6 +157,9 @@ class CustomImage {
     var intrinsics: simd_float3x3!
     var buffer:Int = 200;
     var ratio: ImageRatioSettingsEnum = .no_cut
+    var circular = CircularBuffer<UIImage>(capacity: 4)
+    
+
     init() {
         self.updateCropping(x: self.x, y: self.y, width: self.width, height: self.height)
     }
@@ -206,12 +209,16 @@ class CustomImage {
             self.updateCropping(x: x, y: 0, width: width, height:  Int(size.height))
         }
     }
+    
     func updateImage(sourceImage: UIImage, rotation:Float=0.0){
+        /*
+         THIS FUNCTION IS DEPRECATED
+         */
         self.updating = true
         if self.ratio == .no_cut {
             self.uiImage = sourceImage
             self.outputData = self.uiImage?.jpegData(compressionQuality: self.compQuality)
-        } else {
+            } else {
             if self.cropRect == nil {
                 self.initializeCropRec(image: sourceImage)
             }
@@ -230,12 +237,13 @@ class CustomImage {
 
             self.outputData = self.uiImage?.jpegData(compressionQuality: self.compQuality)
         }
+        
         self.updating = false
     }
     
     func updateImage(cvPixelBuffer: CVPixelBuffer, rotation:Float=0.0) {
-        self.updateImage(sourceImage: UIImage(pixelBuffer: cvPixelBuffer)!,
-                         rotation: rotation)
+        let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
+        self.circular.overwrite(uiImage)
     }
     
     func toJPEGData() -> Data? {
@@ -277,6 +285,7 @@ class CustomDepthData {
     var fyD: Float? = nil
     var cxD: Float? = nil
     var cyD: Float? = nil
+    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 4)
     
     func update(frame: ARFrame) {
         if self.updating == false {
@@ -284,7 +293,10 @@ class CustomDepthData {
             let data = frame.sceneDepth!
             let cam = frame.camera
             self.ar_depth_data = data
-            self.depth_data = self.depthCVPixelToData(from: data.depthMap)
+            let depth_data = self.depthCVPixelToData(from: data.depthMap)
+//            self.depth_data = self.depthCVPixelToData(from: data.depthMap)
+            self.circular.overwrite(depth_data)
+            
             self.updateIntrinsics(rgb_x: Float(cam.imageResolution.height),
                                   rgb_y: Float(cam.imageResolution.width),
                                   rgb_fx: cam.intrinsics[0][0],
@@ -626,4 +638,47 @@ func validateIpAddress(ipToValidate: String) -> Bool {
 
 protocol ScanQRCodeProtocol {
     func onQRCodeScanFinished() 
+}
+
+
+class CircularBuffer<T> {
+    let capacity: Int
+    var buffer = [T]()
+    
+    init(capacity: Int) {
+        self.capacity = capacity
+    }
+    
+    func write(_ element: T) throws {
+        guard buffer.count < capacity else {
+            throw CircularBufferError.bufferFull
+        }
+        
+        buffer.append(element)
+    }
+    
+    func read() throws -> T {
+        guard !buffer.isEmpty else {
+            throw CircularBufferError.bufferEmpty
+        }
+        
+        return buffer.removeFirst()
+    }
+    
+    func clear() {
+        buffer = [T]()
+    }
+    
+    func overwrite(_ element: T) {
+        if buffer.count < capacity {
+            try? write(element)
+        } else {
+            buffer.removeFirst()
+            buffer.append(element)
+        }
+    }
+}
+enum CircularBufferError: Error {
+    case bufferEmpty
+    case bufferFull
 }

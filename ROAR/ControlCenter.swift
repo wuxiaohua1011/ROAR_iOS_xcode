@@ -73,7 +73,8 @@ class ControlCenter {
         }
     }
     public func sendWorldCamImage() -> Bool {
-        return self.udpbackCamClient.sendImage(uiImage: self.backCamImage.uiImage!)
+        return self.udpbackCamClient.sendImage(customImage: self.backCamImage)
+
     }
     public func sendDepthImage() -> Bool {
         return self.udpDepthClient.sendDepth(customDepth: self.worldCamDepth)
