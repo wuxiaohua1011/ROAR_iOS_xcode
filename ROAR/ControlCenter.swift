@@ -21,7 +21,7 @@ class ControlCenter {
     public var backCamImage: CustomImage!
     public var udpbackCamClient: UDPImageClient!
     public var udpVehStateClient: UDPVehicleStateClient!
-    public var udpControlServer: UDPControlServer!
+    public var udpControlClient: UDPControlClient!
 
     public var worldCamDepth: CustomDepthData!
     var udpDepthClient: UDPDepthClient!
@@ -40,17 +40,17 @@ class ControlCenter {
     func start(shouldStartServer: Bool = true){
         if shouldStartServer {
             
-            self.udpbackCamClient = UDPImageClient(address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
-            self.udpDepthClient = UDPDepthClient(address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
-            self.udpVehStateClient = UDPVehicleStateClient(address: AppInfo.pc_address, port: AppInfo.udp_veh_state_port)
-            self.udpControlServer = UDPControlServer(controlCenter: self , address: NWEndpoint.Host.init(AppInfo.pc_address), port: 8004)
+            self.udpbackCamClient = UDPImageClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
+            self.udpDepthClient = UDPDepthClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
+            self.udpVehStateClient = UDPVehicleStateClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_veh_state_port)
+            self.udpControlClient = UDPControlClient(controlCenter: self, address: AppInfo.pc_address, port: 8004)
         }
     }
     func stop(){
-        self.udpControlServer.stop()
         self.udpVehStateClient.stop()
         self.udpbackCamClient.stop()
         self.udpDepthClient.stop()
+        self.udpControlClient.stop()
     }
     
     
@@ -58,6 +58,7 @@ class ControlCenter {
         self.udpbackCamClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
         self.udpDepthClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
         self.udpVehStateClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_veh_state_port)
+        self.udpVehStateClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_control_port)
     }
     public func updateBackCam(frame:ARFrame) {
         if self.backCamImage.updating == false {
@@ -86,7 +87,11 @@ class ControlCenter {
         return self.udpVehStateClient.sendVehicleState(vs: self.vehicleState)
     }
     public func recvControl() -> Bool {
-        self.udpControlServer.recvControl()
+        guard let c = self.udpControlClient.recvControl() else {
+            return false
+        }
+        self.control.throttle = c.throttle
+        self.control.steering = c.steering
         return true
     }
     

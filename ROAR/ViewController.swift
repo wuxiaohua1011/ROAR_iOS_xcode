@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
         self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
         self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
-        self.recvControlTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
+        self.recvControlTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
     }
     func setupGestures() {
         // configure left edge pan gesture
@@ -93,6 +93,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     @objc func sendVehState() {
         if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
             _ = self.controlCenter.sendVehState()
+            updateThrottleSteeringUI()
         }
     }
     @objc func sendWorldCam() {

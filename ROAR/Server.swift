@@ -20,11 +20,18 @@ class CustomUDPClient {
     var client: UDPClient!
     var MAX_DGRAM: Int = 9000 // for some mac, default size is 9620, make some room for header
     var num_buffer: Int = 2
+    var controlCenter: ControlCenter!
     private var curr_buffer = 0
-    init(address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 2) {
-        print("Starting broadcast to \(address) ")
+    var address: String!
+    var port: Int32!
+    private var counter = 0
+    var receivedDataBuffer = CircularBuffer<[Byte]>(capacity: 3)
+    init(controlCenter: ControlCenter, address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 2) {
+        self.address = address
+        self.port = port
         client = UDPClient(address: address, port: port)
         self.num_buffer = num_buffer
+        self.controlCenter = controlCenter
     }
     func restart(address: String, port: Int32){
         self.stop()
@@ -60,9 +67,27 @@ class CustomUDPClient {
                 counter += 1
             }
             curr_buffer = (curr_buffer + 1) % num_buffer
-            
         }
         return true
+    }
+    
+    func recvData() {
+        self.counter += 1
+        if self.counter % 50 == 0 {
+            // reset the client every 50 counts s.t. if server side does not respond, i do not overload my recv buffer.
+            self.client.close()
+            self.client = UDPClient(address: self.address, port: self.port)
+            self.counter = 0
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            _ = self.client.send(string: "ack")
+            let content = self.client.recv(100)
+            guard let data = content.0 else {
+                return
+            }
+            self.receivedDataBuffer.overwrite(data)
+        }
     }
     
     func stop() {
@@ -131,153 +156,25 @@ class UDPVehicleStateClient: CustomUDPClient {
 }
 
 
-class UDPControlServer {
-    var connection: NWConnection!
-    var hostUDP: NWEndpoint.Host = "192.168.1.29"
-    var portUDP: NWEndpoint.Port = 8004
-    var controlCenter: ControlCenter!
-
-    
-    init(controlCenter: ControlCenter, address: NWEndpoint.Host = "192.168.1.10", port:NWEndpoint.Port=8001, num_buffer: Int = 2) {
-        self.controlCenter = controlCenter
-        self.hostUDP = address
-        self.portUDP = port
-        print("starting connection on \(self.hostUDP), \(self.portUDP)")
-        self.connection = NWConnection(host: hostUDP, port: portUDP, using: .udp)
-        
-        self.connection?.stateUpdateHandler = { (newState) in
-            if newState == .ready {
-                self.recvControl()
-            }
-        }
-
-        self.connection?.start(queue: .global())
-    }
-    
-    func sendUDP(_ content: String) {
-         let contentToSendUDP = content.data(using: String.Encoding.utf8)
-        self.connection?.send(content: contentToSendUDP, completion: NWConnection.SendCompletion.contentProcessed(({ _ in
-            
-        })))
-//         self.connection?.send(content: contentToSendUDP, completion: NWConnection.SendCompletion.contentProcessed(({ (NWError) in
-//             if (NWError == nil) {
-//                 print("Data was sent to UDP")
-//             } else {
-//                 print("ERROR! Error when data (Type: Data) sending. NWError: \n \(NWError!)")
-//             }
-//         })))
-     }
-    
-    func recvControl() -> (Float, Float)? {
-        self.sendUDP("ack")
-        self.connection?.receiveMessage { (data, context, isComplete, error) in
-            if (isComplete) {
-                if (data != nil) {
-                    let backToString = String(decoding: data!, as: UTF8.self)
-                    let arr = backToString.components(separatedBy: ",")
-                    self.controlCenter.control.throttle = Float(arr[0]) ?? 0
-                    self.controlCenter.control.steering = Float(arr[1]) ?? 0
+class UDPControlClient: CustomUDPClient {
+    func recvControl() -> (throttle: Float, steering: Float)? {
+        self.recvData()
+        if self.receivedDataBuffer.buffer.count > 0 {
+            do {
+                let bytes = try self.receivedDataBuffer.read()
+                if let string = String(bytes: bytes, encoding: .utf8) {
+                    let splitted = string.components(separatedBy: ",")
+                    let throttle = Float(splitted[0]) ?? 0
+                    let steering = Float(splitted[1]) ?? 0
+                    return (throttle, steering)
                 } else {
-                    print("Data == nil")
+                    return nil
                 }
+            } catch {
+                return nil
             }
         }
         return nil
     }
-    
-    func stop() {
-        self.connection.cancel()
-    }
 }
-
-
-
-//class Server {
-//    var ipAddr: String
-//    var port: Int
-//    var app: Application?
-//    var dispatchWorkItem: DispatchWorkItem?
-//    var controlCenter: ControlCenter!
-//    var controlCheckTimer: Timer?
-//        
-//    var controlTimer: Timer?
-//    var controlWS: WebSocketKit.WebSocket?
-//    
-//    init(ipAddr: String? = nil, port: Int = 8005, controlCenter: ControlCenter) {
-//        self.ipAddr = ipAddr ?? findIPAddr()
-//        self.port = port
-//        self.controlCenter = controlCenter
-//        self.controlTimer = Timer.scheduledTimer(timeInterval: 0.04, target: self, selector: #selector(receiveControl(sender:)), userInfo: nil, repeats: true)
-//
-//    }
-//
-//
-//    
-//    func start() {
-//        self.dispatchWorkItem = DispatchWorkItem{
-//            self.start_helper()
-//        }
-//        DispatchQueue.global(qos: .utility).async(execute: self.dispatchWorkItem!)
-//    }
-//    
-//
-//    
-//    private func start_helper() {
-//        do {
-//            self.app = try Application(.detect())
-//            self.app!.http.server.configuration.hostname = self.ipAddr
-//            self.app!.http.server.configuration.port = self.port
-//            self.app!.routes.defaultMaxBodySize = "1024mb"
-//            self.app?.logger.logLevel = .notice
-//            self.configurePaths()
-//            try self.app!.run()
-//        } catch {
-//            print("Unable to start server, find something legit to do here")
-//        }
-//    }
-//    
-//    func stop() {
-//        if self.app!.didShutdown == false {
-//            self.app!.server.shutdown()
-//            do {
-//                try self.app!.server.onShutdown.wait()
-//            } catch {
-//                print("Failed to shutdown gracefully")
-//            }
-//        }
-//        if self.controlTimer != nil {
-//            self.controlTimer?.invalidate()
-//            self.controlWS = nil
-//        }
-//
-//        self.dispatchWorkItem?.cancel()
-//    }
-//    
-//    private func configurePaths() {
-//        configureControl()
-//
-//    }
-//    
-//    private func configureControl() {
-//        self.app!.webSocket("control_rx") { req, ws in
-//            self.controlWS = ws
-//        }
-//    }
-//    
-//    
-//    @objc private func receiveControl(sender: Timer) {
-//        if self.controlWS != nil && (AppInfo.sessionData.shouldCaliberate == false && AppInfo.sessionData.isCaliberated)  {
-//            if self.controlWS != nil && self.controlWS?.isClosed == false {
-//                self.controlWS!.onText(
-//                    {ws,s in
-//                        let arr = s.components(separatedBy: ",")
-//                        self.controlCenter.control.throttle = Float(arr[0]) ?? 0
-//                        self.controlCenter.control.steering = Float(arr[1]) ?? 0
-//                    }
-//                )
-//            }
-//        }
-//    }
-//}
-
 
