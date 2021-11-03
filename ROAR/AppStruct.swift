@@ -13,6 +13,7 @@ struct AppInfo : Codable {
     static var pc_address: String = "10.0.0.2"
     static var udp_world_cam_port: Int32 = 8001
     static var udp_depth_cam_port: Int32 = 8002
+    static var udp_veh_state_port: Int32 = 8003
     static func get_ar_experience_name(name: String=AppInfo.curr_world_name) -> String{
         return "\(name)_ar_experience_data"
     }

@@ -41,7 +41,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     
     var sendWorldCamTimer: Timer!
     var sendWorldDepthTimer: Timer!
-    var udpbackCamClient: UDPImageClient!
+    var sendVehicleStateTimer: Timer!
+    var recvControlTimer: Timer!
+    
+    
 
     // MARK: overrides
     override func viewDidLoad() {
@@ -66,10 +69,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     func setupTimers() {
         self.startWritingToBLE()
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
         self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
         self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
+        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
+        self.recvControlTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
     }
     func setupGestures() {
         // configure left edge pan gesture
@@ -78,15 +83,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         screenEdgePanGestureLeft.delegate = self
         self.view.addGestureRecognizer(screenEdgePanGestureLeft)
     }
-
+    
+    @objc func recvControl() {
+        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+            _ = self.controlCenter.recvControl()
+        }
+    }
+    
+    @objc func sendVehState() {
+        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+            _ = self.controlCenter.sendVehState()
+        }
+    }
     @objc func sendWorldCam() {
         if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            self.controlCenter.sendWorldCamImage()
+            _ = self.controlCenter.sendWorldCamImage()
         }
     }
     @objc func sendDepthImage() {
         if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            self.controlCenter.sendDepthImage()
+            _ = self.controlCenter.sendDepthImage()
         }
     }
 
