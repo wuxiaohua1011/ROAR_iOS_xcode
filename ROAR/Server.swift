@@ -19,9 +19,12 @@ class CustomUDPClient {
     */
     var client: UDPClient!
     var MAX_DGRAM: Int = 9000 // for some mac, default size is 9620, make some room for header
-    init(address: String = "192.168.1.10", port:Int32=8001) {
+    var num_buffer: Int = 2
+    private var curr_buffer = 0
+    init(address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 2) {
         print("Starting broadcast to \(address) ")
         client = UDPClient(address: address, port: port)
+        self.num_buffer = num_buffer
     }
     func restart(address: String, port: Int32){
         self.stop()
@@ -29,12 +32,13 @@ class CustomUDPClient {
     }
     
     func sendData(data: Data) -> Bool {
-        if (data.count > MAX_DGRAM) {
-            return self.chunkAndSendData(data: data)
-        } else {
-            let r = self.client.send(data: data)
-            return r.isSuccess
-        }
+        return self.chunkAndSendData(data: data)
+//        if (data.count > MAX_DGRAM) {
+//            return self.chunkAndSendData(data: data)
+//        } else {
+//            let r = self.client.send(data: data)
+//            return r.isSuccess
+//        }
     }
     
     func chunkAndSendData(data: Data) -> Bool {
@@ -43,20 +47,25 @@ class CustomUDPClient {
             let uploadChunkSize = self.MAX_DGRAM
             let totalSize = data.count
             var offset = 0
-            var counter = Int(Float(totalSize / uploadChunkSize).rounded(.up)) + 1
-            
-            var total_sent = 0
+            var counter = 0 // Int(Float(totalSize / uploadChunkSize).rounded(.up)) + 1
+            var total = Int(Float(totalSize / uploadChunkSize).rounded(.up))
+//            print(totalSize, total)
             while offset < totalSize {
                 var data_to_send:Data = String(counter).leftPadding(toLength: 3, withPad: "0")
                     .data(using:.ascii)!
+                
+                data_to_send.append(String(total).leftPadding(toLength: 3, withPad: "0").data(using: .ascii)!)
+                data_to_send.append(String(curr_buffer).leftPadding(toLength: 3, withPad: "0").data(using: .ascii)!)
+                
                 let chunkSize = offset + uploadChunkSize > totalSize ? totalSize - offset : uploadChunkSize
                 let chunk = Data(bytesNoCopy: mutRawPointer+offset, count: chunkSize, deallocator: Data.Deallocator.none)
                 data_to_send.append(chunk)
                 self.client.send(data: data_to_send)
-                total_sent += chunk.count
+
                 offset += chunkSize
-                counter -= 1
+                counter += 1
             }
+            curr_buffer = (curr_buffer + 1) % num_buffer
             
         }
         return true
@@ -71,7 +80,14 @@ class CustomUDPClient {
 class UDPDepthClient: CustomUDPClient {
     func sendDepth(customDepth: CustomDepthData) -> Bool {
         do {
-            let data = try customDepth.circular.read()
+            
+            var data = Data()
+            withUnsafePointer(to: &customDepth.fxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+            withUnsafePointer(to: &customDepth.fyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+            withUnsafePointer(to: &customDepth.cxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+            withUnsafePointer(to: &customDepth.cyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+            let image_data = try customDepth.circular.read()
+            data.append(image_data)
             return sendData(data: data)
         } catch  {
             return false
@@ -82,8 +98,20 @@ class UDPDepthClient: CustomUDPClient {
 class UDPImageClient: CustomUDPClient {
     func sendImage(customImage: CustomImage) -> Bool {
         do {
-            let uiImageData = try customImage.circular.read().jpegData(compressionQuality: 0.01)
-            return self.sendData(data: uiImageData!)
+            var data = Data()
+            var fx = customImage.intrinsics[0][0]
+            var fy = customImage.intrinsics[1][1]
+            var cx = customImage.intrinsics[2][0]
+            var cy = customImage.intrinsics[2][1]
+
+            withUnsafePointer(to: &fx) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+            withUnsafePointer(to: &fy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+            withUnsafePointer(to: &cx) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+            withUnsafePointer(to: &cy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
+            let image_data = try customImage.circular.read()
+//            print(image_data.count)
+            data.append(image_data)
+            return self.sendData(data: data)
         } catch  {
             return false
         }

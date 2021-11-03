@@ -157,7 +157,8 @@ class CustomImage {
     var intrinsics: simd_float3x3!
     var buffer:Int = 200;
     var ratio: ImageRatioSettingsEnum = .no_cut
-    var circular = CircularBuffer<UIImage>(capacity: 4)
+    var circular = CircularBuffer<Data>(capacity: 4)
+    
     
 
     init() {
@@ -210,6 +211,21 @@ class CustomImage {
         }
     }
     
+    
+    func cropImage(sourceImage: UIImage) -> UIImage {
+        if self.cropRect == nil {
+            self.initializeCropRec(image: sourceImage)
+        }
+        
+        let sourceCGImage = sourceImage.cgImage!
+        let croppedCGImage = sourceCGImage.cropping(to: self.cropRect!)
+        return UIImage(
+            cgImage: croppedCGImage!,
+            scale: sourceImage.imageRendererFormat.scale,
+            orientation: sourceImage.imageOrientation
+        )
+    }
+    
     func updateImage(sourceImage: UIImage, rotation:Float=0.0){
         /*
          THIS FUNCTION IS DEPRECATED
@@ -243,12 +259,12 @@ class CustomImage {
     
     func updateImage(cvPixelBuffer: CVPixelBuffer, rotation:Float=0.0) {
         let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
-        self.circular.overwrite(uiImage)
+//        let data = Data.from(pixelBuffer: cvPixelBuffer)
+        let data = uiImage.jpegData(compressionQuality: 0.01)!
+        self.circular.overwrite(data)
     }
     
     func toJPEGData() -> Data? {
-        
-        
         if self.uiImage == nil {
             return nil
         } else {
@@ -263,6 +279,37 @@ class CustomImage {
     }
 }
 
+
+extension Data {
+    public static func from(pixelBuffer: CVPixelBuffer) -> Self {
+        CVPixelBufferLockBaseAddress(pixelBuffer, [.readOnly])
+        defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, [.readOnly]) }
+
+        // Calculate sum of planes' size
+        var totalSize = 0
+        for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+            let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+            let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+            let planeSize   = height * bytesPerRow
+            totalSize += planeSize
+        }
+
+        guard let rawFrame = malloc(totalSize) else { fatalError() }
+        var dest = rawFrame
+
+        for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+            let source      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, plane)
+            let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+            let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+            let planeSize   = height * bytesPerRow
+
+            memcpy(dest, source, planeSize)
+            dest += planeSize
+        }
+
+        return Data(bytesNoCopy: rawFrame, count: totalSize, deallocator: .free)
+    }
+}
 
 extension UIImage {
     public convenience init?(pixelBuffer: CVPixelBuffer) {
@@ -653,7 +700,6 @@ class CircularBuffer<T> {
         guard buffer.count < capacity else {
             throw CircularBufferError.bufferFull
         }
-        
         buffer.append(element)
     }
     
@@ -661,7 +707,6 @@ class CircularBuffer<T> {
         guard !buffer.isEmpty else {
             throw CircularBufferError.bufferEmpty
         }
-        
         return buffer.removeFirst()
     }
     
