@@ -42,7 +42,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     var sendWorldCamTimer: Timer!
     var sendWorldDepthTimer: Timer!
     var sendVehicleStateTimer: Timer!
-    var recvControlTimer: Timer!
+    var udpSendTimer: Timer!
     
     
 
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
 //        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
 //        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
 //        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
-        self.recvControlTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
+        self.udpSendTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
     }
     func setupGestures() {
         // configure left edge pan gesture
@@ -88,6 +88,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
 
         if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
             _ = self.controlCenter.recvControl()
+            _ = self.controlCenter.sendVehState()
+            _ = self.controlCenter.sendDepthImage()
+            _ = self.controlCenter.sendWorldCamImage()
+                
         }
     }
     

@@ -25,7 +25,7 @@ class CustomUDPClient {
     var address: String!
     var port: Int32!
     private var counter = 0
-    var receivedDataBuffer = CircularBuffer<[Byte]>(capacity: 3)
+    var receivedDataBuffer = CircularBuffer<[Byte]>(capacity: 5)
     init(controlCenter: ControlCenter, address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 1) {
         self.address = address
         self.port = port
@@ -88,6 +88,7 @@ class CustomUDPClient {
             guard let data = content.0 else {
                 return
             }
+            
             self.receivedDataBuffer.overwrite(data)
         }
     }

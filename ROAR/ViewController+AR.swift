@@ -81,15 +81,6 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         if frame.sceneDepth != nil {
             controlCenter.updateWorldCamDepth(frame:frame)
         }
-        
-        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            _ = controlCenter.sendVehState()
-            _ = controlCenter.sendDepthImage()
-            _ = controlCenter.sendWorldCamImage()
-            
-        }
-
-
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         if AppInfo.sessionData.shouldCaliberate == true || AppInfo.sessionData.isCaliberated == false{
