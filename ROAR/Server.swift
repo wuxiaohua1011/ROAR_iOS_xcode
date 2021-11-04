@@ -157,7 +157,6 @@ class Server {
             if self.transformWS != nil && self.transformWS?.isClosed == false {
                 let ws = self.transformWS!
                 let data = self.controlCenter.vehicleState.toData()
-                print(self.controlCenter.vehicleState.velocity)
                 ws.send(raw: data, opcode: .binary)
             }
 

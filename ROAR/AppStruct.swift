@@ -10,6 +10,7 @@ struct AppInfo : Codable {
     static var sessionData: SessionData = SessionData()
     static var curr_world_name: String = "berkeley"
     static var bluetootConfigurations: BluetoothConfigurations? = nil
+    static var pc_address: String = "10.0.0.2"
 
     static func get_ar_experience_name(name: String=AppInfo.curr_world_name) -> String{
         return "\(name)_ar_experience_data"
@@ -20,11 +21,17 @@ struct AppInfo : Codable {
                                         "bluetooth_name": AppInfo.bluetootConfigurations?.name ?? "",
                                         "bluetooth_uuid": AppInfo.bluetootConfigurations?.uuid?.uuidString ?? ""],
                                        forKey: "bluetooth_data")
+        UserDefaults.standard.setValue(AppInfo.pc_address, forKey: "pc_address")
+
     }
     static func load() {
         if UserDefaults.standard.value(forKey: "bluetooth_data") != nil {
             let data =  UserDefaults.standard.value(forKey: "bluetooth_data") as! Dictionary<String, String>
             AppInfo.bluetootConfigurations = BluetoothConfigurations(name: data["bluetooth_name"], uuid: UUID(uuidString: data["bluetooth_uuid"]!))            
+        }
+        if UserDefaults.standard.value(forKey: "pc_address") != nil {
+            let data = UserDefaults.standard.value(forKey: "pc_address") as! String
+            AppInfo.pc_address = data
         }
     }
 }

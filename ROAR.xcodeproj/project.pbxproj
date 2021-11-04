@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EAE6D4F37E459896EFCE293 /* Pods_ROAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 350DB989CD38C9C56BAD609E /* Pods_ROAR.framework */; };
 		E83E6CA126ED57BF006B1E39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */; };
 		E83E6CA326ED57BF006B1E39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */; };
 		E83E6CA526ED57BF006B1E39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CA426ED57BF006B1E39 /* ViewController.swift */; };
@@ -34,6 +35,8 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E8C8EC882733B88200CB2683 /* MultipartKit in Frameworks */ = {isa = PBXBuildFile; productRef = E8C8EC872733B88200CB2683 /* MultipartKit */; };
+		E8C8EC8A2733BBF500CB2683 /* ScanQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC892733BBF500CB2683 /* ScanQRCodeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		350DB989CD38C9C56BAD609E /* Pods_ROAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ROAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B471BDFD669D5BB84D2C7B8 /* Pods-ROAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ROAR.debug.xcconfig"; path = "Target Support Files/Pods-ROAR/Pods-ROAR.debug.xcconfig"; sourceTree = "<group>"; };
 		E83E6C9D26ED57BF006B1E39 /* ROAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ROAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +88,8 @@
 		E88C37A02705594800289DC1 /* ARPhoto2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARPhoto2.storyboard; sourceTree = "<group>"; };
 		E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2PopupViewController.swift; sourceTree = "<group>"; };
 		E88C37A827055BA000289DC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E8C8EC892733BBF500CB2683 /* ScanQRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRCodeViewController.swift; sourceTree = "<group>"; };
+		F33338765E6734202DCF1FC3 /* Pods-ROAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ROAR.release.xcconfig"; path = "Target Support Files/Pods-ROAR/Pods-ROAR.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +98,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */,
+				E8C8EC882733B88200CB2683 /* MultipartKit in Frameworks */,
 				E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */,
 				E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */,
 				E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */,
+				2EAE6D4F37E459896EFCE293 /* Pods_ROAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +123,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B52B4750880FDE7794FAAEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				350DB989CD38C9C56BAD609E /* Pods_ROAR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCF653397E2E9EF62FADA22C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B471BDFD669D5BB84D2C7B8 /* Pods-ROAR.debug.xcconfig */,
+				F33338765E6734202DCF1FC3 /* Pods-ROAR.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E83E6C9426ED57BF006B1E39 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +149,8 @@
 				E83E6CB626ED57C4006B1E39 /* ROARTests */,
 				E83E6CC126ED57C4006B1E39 /* ROARUITests */,
 				E83E6C9E26ED57BF006B1E39 /* Products */,
+				DCF653397E2E9EF62FADA22C /* Pods */,
+				0B52B4750880FDE7794FAAEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +167,7 @@
 		E83E6C9F26ED57BF006B1E39 /* ROAR */ = {
 			isa = PBXGroup;
 			children = (
+				E8C8EC892733BBF500CB2683 /* ScanQRCodeViewController.swift */,
 				E88C3797270558A600289DC1 /* ARPhoto */,
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,
@@ -196,9 +226,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "ROAR" */;
 			buildPhases = (
+				13665FEA0BE741CD3B7769E2 /* [CP] Check Pods Manifest.lock */,
 				E83E6C9926ED57BF006B1E39 /* Sources */,
 				E83E6C9A26ED57BF006B1E39 /* Frameworks */,
 				E83E6C9B26ED57BF006B1E39 /* Resources */,
+				C6191194F0B7085D1F6C35BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -210,6 +242,7 @@
 				E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */,
 				E83E6CE326ED6981006B1E39 /* Loaf */,
 				E83E6CE826ED7147006B1E39 /* JGProgressHUD */,
+				E8C8EC872733B88200CB2683 /* MultipartKit */,
 			);
 			productName = ROAR;
 			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
@@ -283,10 +316,11 @@
 			);
 			mainGroup = E83E6C9426ED57BF006B1E39;
 			packageReferences = (
-				E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */,
-				E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
-				E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */,
-				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor.git" */,
+				E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */,
+				E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf.git" */,
+				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD.git" */,
+				E8C8EC862733B88200CB2683 /* XCRemoteSwiftPackageReference "multipart-kit.git" */,
 			);
 			productRefGroup = E83E6C9E26ED57BF006B1E39 /* Products */;
 			projectDirPath = "";
@@ -328,6 +362,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		13665FEA0BE741CD3B7769E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ROAR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6191194F0B7085D1F6C35BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E83E6C9926ED57BF006B1E39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -347,6 +423,7 @@
 				E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */,
 				E88C37A42705594800289DC1 /* SelectContentDelegate.swift in Sources */,
 				E88C37A22705594800289DC1 /* ARPhoto2ViewController+Record.swift in Sources */,
+				E8C8EC8A2733BBF500CB2683 /* ScanQRCodeViewController.swift in Sources */,
 				E83E6CE126ED631E006B1E39 /* Server.swift in Sources */,
 				E83E6CA326ED57BF006B1E39 /* SceneDelegate.swift in Sources */,
 			);
@@ -521,6 +598,7 @@
 		};
 		E83E6CC826ED57C4006B1E39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B471BDFD669D5BB84D2C7B8 /* Pods-ROAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -540,6 +618,7 @@
 		};
 		E83E6CC926ED57C4006B1E39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F33338765E6734202DCF1FC3 /* Pods-ROAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -683,7 +762,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */ = {
+		E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vapor/vapor.git";
 			requirement = {
@@ -691,7 +770,7 @@
 				minimumVersion = 4.48.5;
 			};
 		};
-		E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+		E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -699,7 +778,7 @@
 				minimumVersion = 1.9.5;
 			};
 		};
-		E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */ = {
+		E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/schmidyy/Loaf.git";
 			requirement = {
@@ -707,7 +786,7 @@
 				minimumVersion = 0.7.0;
 			};
 		};
-		E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+		E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
 			requirement = {
@@ -715,28 +794,41 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		E8C8EC862733B88200CB2683 /* XCRemoteSwiftPackageReference "multipart-kit.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/multipart-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		E83E6CD726ED5B9E006B1E39 /* Vapor */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor" */;
+			package = E83E6CD626ED5B9E006B1E39 /* XCRemoteSwiftPackageReference "vapor.git" */;
 			productName = Vapor;
 		};
 		E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			package = E83E6CD926ED5C20006B1E39 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */;
 			productName = SwiftyBeaver;
 		};
 		E83E6CE326ED6981006B1E39 /* Loaf */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */;
+			package = E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf.git" */;
 			productName = Loaf;
 		};
 		E83E6CE826ED7147006B1E39 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD.git" */;
 			productName = JGProgressHUD;
+		};
+		E8C8EC872733B88200CB2683 /* MultipartKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8C8EC862733B88200CB2683 /* XCRemoteSwiftPackageReference "multipart-kit.git" */;
+			productName = MultipartKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -66,12 +67,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IP Address" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glW-EW-i3L">
-                                <rect key="frame" x="244" y="0.0" width="130" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlW-FX-uEn">
                                 <rect key="frame" x="20" y="28" width="84" height="30"/>
                                 <state key="normal" title="Reset World"/>
@@ -79,17 +74,28 @@
                                     <action selector="onResetWorldClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Kh-fc-Lry"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kB-Kx-9Ih">
+                                <rect key="frame" x="245" y="9" width="129" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="129" id="jzC-qy-zH6"/>
+                                    <constraint firstAttribute="height" constant="30" id="x9c-gg-dYq"/>
+                                </constraints>
+                                <state key="normal" title="IP Address"/>
+                                <connections>
+                                    <action selector="onIPAddressBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i6j-ob-PcG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="leading" secondItem="Cbl-gY-tzm" secondAttribute="leading" constant="-44" id="2b7-P2-sgk"/>
                             <constraint firstItem="rlW-FX-uEn" firstAttribute="top" secondItem="EOA-pf-btL" secondAttribute="bottom" constant="7" id="Bem-np-6II"/>
                             <constraint firstItem="Cbl-gY-tzm" firstAttribute="leading" secondItem="XDu-A4-1Vm" secondAttribute="trailing" constant="8" id="Gj5-Iz-3oE"/>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="trailing" secondItem="Cbl-gY-tzm" secondAttribute="trailing" id="KJR-3c-YZG"/>
+                            <constraint firstItem="7kB-Kx-9Ih" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="9" id="JxR-No-f83"/>
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LFa-9d-kj3"/>
                             <constraint firstItem="tzE-Iv-tRU" firstAttribute="top" secondItem="qJ9-Ql-yvG" secondAttribute="bottom" constant="6" id="MPJ-xC-spy"/>
                             <constraint firstItem="XDu-A4-1Vm" firstAttribute="bottom" secondItem="PMZ-Mo-0U5" secondAttribute="bottom" id="Mja-qy-Syx"/>
+                            <constraint firstItem="7kB-Kx-9Ih" firstAttribute="trailing" secondItem="Cbl-gY-tzm" secondAttribute="trailing" id="NMQ-d5-ja7"/>
                             <constraint firstItem="EOA-pf-btL" firstAttribute="centerX" secondItem="qJ9-Ql-yvG" secondAttribute="centerX" constant="-122.33333333333333" id="PEm-oO-e8O"/>
                             <constraint firstItem="tzE-Iv-tRU" firstAttribute="leading" secondItem="PMZ-Mo-0U5" secondAttribute="trailing" constant="8" id="SwB-ZA-dhK"/>
                             <constraint firstItem="KNz-uL-o6X" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ViX-Ke-jcn"/>
@@ -102,7 +108,6 @@
                             <constraint firstItem="qJ9-Ql-yvG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="106" id="jgA-qK-g36"/>
                             <constraint firstItem="qJ9-Ql-yvG" firstAttribute="top" secondItem="EOA-pf-btL" secondAttribute="bottom" constant="8" id="pdw-8g-D3d"/>
                             <constraint firstItem="KNz-uL-o6X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="u60-XI-dXl"/>
-                            <constraint firstItem="glW-EW-i3L" firstAttribute="baseline" secondItem="EOA-pf-btL" secondAttribute="baseline" id="uxp-Bz-y4i"/>
                             <constraint firstItem="Cbl-gY-tzm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="vV2-iZ-eW4"/>
                             <constraint firstItem="PMZ-Mo-0U5" firstAttribute="baseline" secondItem="Cbl-gY-tzm" secondAttribute="baseline" id="xEM-Yl-FTh"/>
                         </constraints>
@@ -111,7 +116,7 @@
                     <connections>
                         <outlet property="arSceneView" destination="KNz-uL-o6X" id="16Z-cZ-1zv"/>
                         <outlet property="bleButton" destination="qJ9-Ql-yvG" id="feR-Xp-BPh"/>
-                        <outlet property="ipAddressLabel" destination="glW-EW-i3L" id="dOL-i6-r6j"/>
+                        <outlet property="ipAddressBtn" destination="7kB-Kx-9Ih" id="N9j-kQ-hWV"/>
                         <outlet property="recaliberateButton" destination="Cbl-gY-tzm" id="K2Y-kk-GUw"/>
                         <outlet property="saveWorldButton" destination="PMZ-Mo-0U5" id="6ul-YT-gl5"/>
                         <outlet property="steeringLabel" destination="XDu-A4-1Vm" id="new-dI-qcC"/>
@@ -136,7 +141,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="RcP-kj-FKI">
-                                        <rect key="frame" x="0.0" y="24.333333969116211" width="358" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="358" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RcP-kj-FKI" id="pCs-wY-eLI">
                                             <rect key="frame" x="0.0" y="0.0" width="358" height="43.666667938232422"/>
@@ -297,6 +302,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vU2-Ql-KqQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="883" y="-567"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="T82-IE-zFO">
+            <objects>
+                <viewController storyboardIdentifier="ScanQRCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qG0-pH-bX9" customClass="ScannerViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JEv-fk-4Bw">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="GDB-cK-KsJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UDT-aI-WSa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-33" y="836"/>
         </scene>
     </scenes>
     <resources>

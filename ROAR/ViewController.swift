@@ -11,11 +11,12 @@ import ARKit
 import Loaf
 import CoreBluetooth
 
-class ViewController: UIViewController, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
+    
     // MARK: IBOutlet
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var bleButton: UIButton!
-    @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipAddressBtn: UIButton!
     @IBOutlet weak var arSceneView: ARSCNView!
     @IBOutlet weak var throttleLabel: UILabel!
     @IBOutlet weak var steeringLabel: UILabel!
@@ -44,21 +45,37 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         self.onBLEDisconnected()
         self.startARSession(worldMap: nil, worldOriginTransform: nil)
-        self.ipAddressLabel.text = "Please Caliberate"
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.controlCenter.start(shouldStartServer: true)
+        
+        setupUI()
+        setupTimers()
+        setupGestures()
+
+        
+        
+        
+    }
+    
+    func setupUI() {
+        self.onBLEDisconnected()
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
+        self.updateThrottleSteeringUI()
+    }
+    
+    func setupTimers() {
         self.startWritingToBLE()
         self.updateThrottleSteeringUI()
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
-        
+        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+    }
+    func setupGestures() {
         // configure left edge pan gesture
         let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
         screenEdgePanGestureLeft.edges = .left
         screenEdgePanGestureLeft.delegate = self
         self.view.addGestureRecognizer(screenEdgePanGestureLeft)
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,7 +128,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
         
-        self.ipAddressLabel.text = "Please Caliberate"
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
 
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {
@@ -138,6 +156,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     func onBLEDisconnected() {
         self.bleButton.setTitleColor(.red, for: .normal)
         self.bleButton.setTitle("BLE Not Connected", for: .normal)
+    }
+    
+    @IBAction func onIPAddressBtnClicked(_ sender: UIButton) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let secondViewController = storyBoard.instantiateViewController(withIdentifier: "ScanQRCode") as! ScannerViewController
+        secondViewController.delegate = self
+        self.present(secondViewController, animated:true, completion:nil)
+    }
+    func onQRCodeScanFinished() {
+//        controlCenter.stop()
+//        controlCenter.start()
     }
 }
 
