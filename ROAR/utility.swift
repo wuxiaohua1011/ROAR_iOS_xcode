@@ -154,7 +154,7 @@ class CustomImage {
     var height: Int = 100;
     var compQuality: CGFloat = 0.1;
     var cropRect: CGRect?
-    var intrinsics: simd_float3x3!
+    var intrinsics: simd_float3x3 = simd_float3x3()
     var buffer:Int = 200;
     var ratio: ImageRatioSettingsEnum = .no_cut
     var circular = CircularBuffer<Data>(capacity: 4)
@@ -258,10 +258,13 @@ class CustomImage {
     }
     
     func updateImage(cvPixelBuffer: CVPixelBuffer, rotation:Float=0.0) {
-        let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
-//        let data = Data.from(pixelBuffer: cvPixelBuffer)
-        let data = uiImage.jpegData(compressionQuality: 0.01)!
-        self.circular.overwrite(data)
+        if self.updating == false {
+            self.updating = true
+            let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
+            let data = uiImage.jpegData(compressionQuality: 0.1)!
+            self.circular.overwrite(data)
+            self.updating = false
+        }
     }
     
     func toJPEGData() -> Data? {

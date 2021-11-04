@@ -71,9 +71,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
         self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
-        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
-        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
-        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
+//        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
+//        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
+//        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
         self.recvControlTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
     }
     func setupGestures() {
@@ -85,26 +85,29 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     }
     
     @objc func recvControl() {
+
         if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
             _ = self.controlCenter.recvControl()
         }
     }
     
     @objc func sendVehState() {
-        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            _ = self.controlCenter.sendVehState()
-            updateThrottleSteeringUI()
-        }
+        _ = self.controlCenter.sendVehState()
+
     }
     @objc func sendWorldCam() {
-        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            _ = self.controlCenter.sendWorldCamImage()
-        }
+        _ = self.controlCenter.sendWorldCamImage()
+
+//        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+//            _ = self.controlCenter.sendWorldCamImage()
+//        }
     }
     @objc func sendDepthImage() {
-        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            _ = self.controlCenter.sendDepthImage()
-        }
+        _ = self.controlCenter.sendDepthImage()
+
+//        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+//            _ = self.controlCenter.sendDepthImage()
+//        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

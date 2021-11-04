@@ -18,7 +18,7 @@ class CustomUDPClient {
     This class implement a custom chunking protocol for streaming large data under UDP protocol
     */
     var client: UDPClient!
-    var MAX_DGRAM: Int = 9000 // for some mac, default size is 9620, make some room for header
+    var MAX_DGRAM: Int = 9200 // for some mac, default size is 9620, make some room for header
     var num_buffer: Int = 2
     var controlCenter: ControlCenter!
     private var curr_buffer = 0
@@ -26,7 +26,7 @@ class CustomUDPClient {
     var port: Int32!
     private var counter = 0
     var receivedDataBuffer = CircularBuffer<[Byte]>(capacity: 3)
-    init(controlCenter: ControlCenter, address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 2) {
+    init(controlCenter: ControlCenter, address: String = "192.168.1.10", port:Int32=8001, num_buffer: Int = 1) {
         self.address = address
         self.port = port
         client = UDPClient(address: address, port: port)
@@ -39,6 +39,9 @@ class CustomUDPClient {
     }
     
     func sendData(data: Data) -> Bool {
+//        if self.counter % 1000 == 0 {
+//            self.restart(address: self.address, port: self.port)
+//        }
         return self.chunkAndSendData(data: data)
     }
     
@@ -50,7 +53,6 @@ class CustomUDPClient {
             var offset = 0
             var counter = 0 // Int(Float(totalSize / uploadChunkSize).rounded(.up)) + 1
             var total = Int(Float(totalSize / uploadChunkSize).rounded(.up))
-//            print(totalSize, total)
             while offset < totalSize {
                 var data_to_send:Data = String(counter).leftPadding(toLength: 3, withPad: "0")
                     .data(using:.ascii)!
@@ -62,7 +64,7 @@ class CustomUDPClient {
                 let chunk = Data(bytesNoCopy: mutRawPointer+offset, count: chunkSize, deallocator: Data.Deallocator.none)
                 data_to_send.append(chunk)
                 self.client.send(data: data_to_send)
-
+//                print("buf_id \(self.curr_buffer) | prefix_num = \(counter) | total_num = \(total)")
                 offset += chunkSize
                 counter += 1
             }
@@ -99,7 +101,6 @@ class CustomUDPClient {
 class UDPDepthClient: CustomUDPClient {
     func sendDepth(customDepth: CustomDepthData) -> Bool {
         do {
-            
             var data = Data()
             withUnsafePointer(to: &customDepth.fxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
             withUnsafePointer(to: &customDepth.fyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
@@ -128,7 +129,6 @@ class UDPImageClient: CustomUDPClient {
             withUnsafePointer(to: &cx) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
             withUnsafePointer(to: &cy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
             let image_data = try customImage.circular.read()
-//            print(image_data.count)
             data.append(image_data)
             return self.sendData(data: data)
         } catch  {

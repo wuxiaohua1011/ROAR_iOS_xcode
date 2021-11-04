@@ -5,49 +5,24 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
-            uuid = "1A41F2E1-75F2-4D17-A408-BAFED5574C46"
-            shouldBeEnabled = "No"
+            uuid = "357C95B9-D595-48AD-AE17-333725D0C67E"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ROAR/ControlCenter.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "start(shouldStartServer:)"
-            landmarkType = "7">
+            symbolName = "malloc_error_break"
+            moduleName = "">
             <Locations>
                <Location
-                  uuid = "1A41F2E1-75F2-4D17-A408-BAFED5574C46 - e5a9401ba42bc0b8"
-                  shouldBeEnabled = "No"
+                  uuid = "357C95B9-D595-48AD-AE17-333725D0C67E - 9d096611641b4e7c"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "default argument 0 of ROAR.ControlCenter.start(shouldStartServer: Swift.Bool) -&gt; ()"
-                  moduleName = "ROAR"
+                  symbolName = "malloc_error_break"
+                  moduleName = "libsystem_malloc.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michaelwu/Desktop/projects/intelligent_racing/ROAR/ROAR/ControlCenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  uuid = "1A41F2E1-75F2-4D17-A408-BAFED5574C46 - 25e36ea123f38dc4"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ROAR.ControlCenter.start(shouldStartServer: Swift.Bool) -&gt; ()"
-                  moduleName = "ROAR"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michaelwu/Desktop/projects/intelligent_racing/ROAR/ROAR/ControlCenter.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "46"
-                  endingLineNumber = "46"
-                  offsetFromSymbolStart = "80">
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
