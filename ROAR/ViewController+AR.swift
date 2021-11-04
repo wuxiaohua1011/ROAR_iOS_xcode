@@ -16,8 +16,11 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         configuration.worldAlignment = .gravity
         configuration.wantsHDREnvironmentTextures = false
         configuration.detectionImages = referenceImages
-        configuration.maximumNumberOfTrackedImages = 10
-        
+        configuration.maximumNumberOfTrackedImages = 1
+//        print(ARWorldTrackingConfiguration.supportedVideoFormats)
+        if let format = ARWorldTrackingConfiguration.supportedVideoFormats.last  {
+            configuration.videoFormat = format
+        }
         if worldMap != nil {
             self.logger.info("Start AR Session from previous recorded world")
             // load the map

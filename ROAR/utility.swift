@@ -335,7 +335,7 @@ class CustomDepthData {
     var fyD: Float? = nil
     var cxD: Float? = nil
     var cyD: Float? = nil
-    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 5)
+    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 3)
     
     func update(frame: ARFrame) {
         if self.updating == false {
@@ -344,7 +344,6 @@ class CustomDepthData {
             let cam = frame.camera
             self.ar_depth_data = data
             let depth_data = self.depthCVPixelToData(from: data.depthMap)
-//            self.depth_data = self.depthCVPixelToData(from: data.depthMap)
             self.circular.overwrite(depth_data)
             
             self.updateIntrinsics(rgb_x: Float(cam.imageResolution.height),

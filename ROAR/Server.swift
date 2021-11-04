@@ -101,18 +101,21 @@ class CustomUDPClient {
 
 class UDPDepthClient: CustomUDPClient {
     func sendDepth(customDepth: CustomDepthData) -> Bool {
-        do {
-            var data = Data()
-            withUnsafePointer(to: &customDepth.fxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
-            withUnsafePointer(to: &customDepth.fyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
-            withUnsafePointer(to: &customDepth.cxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
-            withUnsafePointer(to: &customDepth.cyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
-            let image_data = try customDepth.circular.read()
-            data.append(image_data)
-            return sendData(data: data)
-        } catch  {
-            return false
+        if customDepth.circular.buffer.count > 1 {
+            do {
+                var data = Data()
+                withUnsafePointer(to: &customDepth.fxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+                withUnsafePointer(to: &customDepth.fyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+                withUnsafePointer(to: &customDepth.cxD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+                withUnsafePointer(to: &customDepth.cyD) { data.append(UnsafeBufferPointer(start: $0, count: 1)) } // ok
+                let image_data = try customDepth.circular.read()
+                data.append(image_data)
+                return sendData(data: data)
+            } catch  {
+                return false
+            }
         }
+        return false
     }
 }
 

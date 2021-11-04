@@ -11,6 +11,7 @@ import ARKit
 import Loaf
 import CoreBluetooth
 import NIO
+import os
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
     
@@ -67,14 +68,24 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.updateThrottleSteeringUI()
     }
     func setupTimers() {
-        self.startWritingToBLE()
-        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+//            self.startWritingToBLE()
+//        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+//        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
 
 //        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
 //        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
 //        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
-        self.udpSendTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
+        
+        
+        DispatchQueue.global(qos: .background).async {
+            self.udpSendTimer = Timer(timeInterval: 0.05, repeats: true) { _ in
+                    self.recvControl()
+                }
+                let runLoop = RunLoop.main
+                runLoop.add(self.udpSendTimer, forMode: .default)
+                runLoop.run()
+            }
+//        self.udpSendTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
     }
     func setupGestures() {
         // configure left edge pan gesture
