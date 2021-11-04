@@ -1,13 +1,13 @@
 import AVFoundation
 import UIKit
-import SwiftSocket
 import Loaf
-
-
+import CocoaAsyncSocket
+import JGProgressHUD
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var delegate: ScanQRCodeProtocol? = nil
+    var is_connected: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,31 +80,25 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            if found(code: stringValue) {
-                AppInfo.pc_address = stringValue
-                AppInfo.save()
-                dismiss(animated: true, completion: {
-                            self.delegate?.onQRCodeScanFinished()
-                    
-                })
-            } else {
-                Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
-                    self.captureSession.startRunning()
-                })
-                
-            }
-
+            find(ip_addr: stringValue)
         }
     }
-
-    func found(code: String) -> Bool {
-        if validateIpAddress(ipToValidate: code) {
-            if perform_handshake(code: code) {
-                return true
-            }
+    
+    func find(ip_addr:String) {
+        
+        if validateIpAddress(ipToValidate: ip_addr) {
+            perform_handshake(code: ip_addr)
+//            if self.is_connected == false {
+//
+//                 Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
+//                     self.captureSession.startRunning()
+//                 })
+//
+//            }
         }
-        return false
+        
     }
+
 
     override var prefersStatusBarHidden: Bool {
         return true
@@ -115,10 +109,39 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     
-    func perform_handshake(code:String) -> Bool{
-        let client = TCPClient(address: code, port: 8008)
-        let r = client.connect(timeout: 1)
-        client.close()
-        return r.isSuccess
+    func perform_handshake(code:String){
+        
+        let mSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
+        do {
+            try mSocket.connect(toHost: code, onPort: 8008)
+            
+            let hud = JGProgressHUD()
+            hud.textLabel.text = "Connecting...."
+            hud.show(in: self.view)
+            hud.dismiss(afterDelay: 2)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    if self.is_connected == false {
+                         Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
+                             self.captureSession.startRunning()
+                         })
+                        mSocket.disconnect()
+                    } else {
+                        AppInfo.pc_address = code
+                        AppInfo.save()
+                        self.dismiss(animated: true, completion: {self.delegate?.onQRCodeScanFinished()})
+                        mSocket.disconnect()
+                    }
+            })
+            
+        } catch let error {
+            print(error)
+        }
+    }
+}
+
+extension ScannerViewController: GCDAsyncSocketDelegate {
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        is_connected = true
     }
 }

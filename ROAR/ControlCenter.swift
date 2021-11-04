@@ -19,12 +19,8 @@ class ControlCenter {
     public var control: CustomControl = CustomControl()
     
     public var backCamImage: CustomImage!
-    public var udpbackCamClient: UDPImageClient!
-    public var udpVehStateClient: UDPVehicleStateClient!
-    public var udpControlClient: UDPControlClient!
 
     public var worldCamDepth: CustomDepthData!
-    var udpDepthClient: UDPDepthClient!
     
     public var vc: UIViewController!
     
@@ -40,25 +36,15 @@ class ControlCenter {
     func start(shouldStartServer: Bool = true){
         if shouldStartServer {
             
-            self.udpbackCamClient = UDPImageClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
-            self.udpDepthClient = UDPDepthClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
-            self.udpVehStateClient = UDPVehicleStateClient(controlCenter: self,address: AppInfo.pc_address, port: AppInfo.udp_veh_state_port)
-            self.udpControlClient = UDPControlClient(controlCenter: self, address: AppInfo.pc_address, port: 8004)
         }
     }
     func stop(){
-        self.udpVehStateClient.stop()
-        self.udpbackCamClient.stop()
-        self.udpDepthClient.stop()
-        self.udpControlClient.stop()
+
     }
     
     
     func restartUDP() {
-        self.udpbackCamClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_world_cam_port)
-        self.udpDepthClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_depth_cam_port)
-        self.udpVehStateClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_veh_state_port)
-        self.udpVehStateClient.restart(address: AppInfo.pc_address, port: AppInfo.udp_control_port)
+
     }
     public func updateBackCam(frame:ARFrame) {
         if self.backCamImage.updating == false {
@@ -76,24 +62,7 @@ class ControlCenter {
             self.worldCamDepth.update(frame: frame)
         }
     }
-    public func sendWorldCamImage() -> Bool {
-        return self.udpbackCamClient.sendImage(customImage: self.backCamImage)
 
-    }
-    public func sendDepthImage() -> Bool {
-        return self.udpDepthClient.sendDepth(customDepth: self.worldCamDepth)
-    }
-    public func sendVehState() -> Bool {
-        return self.udpVehStateClient.sendVehicleState(vs: self.vehicleState)
-    }
-    public func recvControl() -> Bool {
-        guard let c = self.udpControlClient.recvControl() else {
-            return false
-        }
-        self.control.throttle = c.throttle
-        self.control.steering = c.steering
-        return true
-    }
     
     public func updateTransform(pointOfView: SCNNode) {
         let node = pointOfView

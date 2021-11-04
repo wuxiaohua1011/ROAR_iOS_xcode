@@ -1,2 +1,2 @@
 ${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks.sh
-${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework
+${BUILT_PRODUCTS_DIR}/SwiftAsyncSocket/SwiftAsyncSocket.framework

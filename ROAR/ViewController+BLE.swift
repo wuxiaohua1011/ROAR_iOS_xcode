@@ -67,7 +67,10 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     func startWritingToBLE() {
         DispatchQueue.global(qos: .background).async {
             self.bleTimer = Timer(timeInterval: 0.05, repeats: true) { _ in
-                    self.writeBLE()
+                    // TODO reconnect every 5 seconds
+                    if AppInfo.sessionData.isBLEConnected {
+                        self.writeBLE()
+                    }
                 }
                 let runLoop = RunLoop.current
                 runLoop.add(self.bleTimer, forMode: .default)

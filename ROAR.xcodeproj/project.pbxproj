@@ -36,6 +36,7 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E8C8EC8D27345D5900CB2683 /* CocoaAsyncSocket in Frameworks */ = {isa = PBXBuildFile; productRef = E8C8EC8C27345D5900CB2683 /* CocoaAsyncSocket */; };
 		E8EE23182729B8F100A93340 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23172729B8F100A93340 /* NIO */; };
 		E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23192729B8F100A93340 /* NIOCore */; };
 		E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */; };
@@ -100,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8C8EC8D27345D5900CB2683 /* CocoaAsyncSocket in Frameworks */,
 				E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */,
 				E8EE231E2729B8F100A93340 /* NIOFoundationCompat in Frameworks */,
 				E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */,
@@ -235,7 +237,6 @@
 				E83E6C9926ED57BF006B1E39 /* Sources */,
 				E83E6C9A26ED57BF006B1E39 /* Frameworks */,
 				E83E6C9B26ED57BF006B1E39 /* Resources */,
-				89D58BFF9C7B9909A9DA6B8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +252,7 @@
 				E8EE23192729B8F100A93340 /* NIOCore */,
 				E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */,
 				E8EE231D2729B8F100A93340 /* NIOFoundationCompat */,
+				E8C8EC8C27345D5900CB2683 /* CocoaAsyncSocket */,
 			);
 			productName = ROAR;
 			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
@@ -329,6 +331,7 @@
 				E83E6CE226ED6981006B1E39 /* XCRemoteSwiftPackageReference "Loaf" */,
 				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */,
+				E8C8EC8B27345D5900CB2683 /* XCRemoteSwiftPackageReference "CocoaAsyncSocket" */,
 			);
 			productRefGroup = E83E6C9E26ED57BF006B1E39 /* Products */;
 			projectDirPath = "";
@@ -371,23 +374,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		89D58BFF9C7B9909A9DA6B8E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ROAR/Pods-ROAR-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E1EA542063A4D250171F60C5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -802,6 +788,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		E8C8EC8B27345D5900CB2683 /* XCRemoteSwiftPackageReference "CocoaAsyncSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/robbiehanson/CocoaAsyncSocket";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-nio.git";
@@ -832,6 +826,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
 			productName = JGProgressHUD;
+		};
+		E8C8EC8C27345D5900CB2683 /* CocoaAsyncSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8C8EC8B27345D5900CB2683 /* XCRemoteSwiftPackageReference "CocoaAsyncSocket" */;
+			productName = CocoaAsyncSocket;
 		};
 		E8EE23172729B8F100A93340 /* NIO */ = {
 			isa = XCSwiftPackageProductDependency;

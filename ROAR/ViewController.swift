@@ -68,25 +68,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.updateThrottleSteeringUI()
     }
     func setupTimers() {
-//            self.startWritingToBLE()
-//        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-//        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
-
-//        self.sendWorldCamTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendWorldCam), userInfo: nil, repeats: true)
-//        self.sendWorldDepthTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendDepthImage), userInfo: nil, repeats: true)
-//        self.sendVehicleStateTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(sendVehState), userInfo: nil, repeats: true)
-        
-        
-        DispatchQueue.global(qos: .background).async {
-            self.udpSendTimer = Timer(timeInterval: 0.05, repeats: true) { _ in
-                    self.recvControl()
-                }
-                let runLoop = RunLoop.main
-                runLoop.add(self.udpSendTimer, forMode: .default)
-                runLoop.run()
-            }
-//        self.udpSendTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(recvControl), userInfo: nil, repeats: true)
+        self.startWritingToBLE()
+        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
     }
+    
+    
+    
     func setupGestures() {
         // configure left edge pan gesture
         let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
@@ -95,35 +83,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.view.addGestureRecognizer(screenEdgePanGestureLeft)
     }
     
-    @objc func recvControl() {
-
-        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-            _ = self.controlCenter.recvControl()
-            _ = self.controlCenter.sendVehState()
-            _ = self.controlCenter.sendDepthImage()
-            _ = self.controlCenter.sendWorldCamImage()
-                
-        }
-    }
-    
-    @objc func sendVehState() {
-        _ = self.controlCenter.sendVehState()
-
-    }
-    @objc func sendWorldCam() {
-        _ = self.controlCenter.sendWorldCamImage()
-
-//        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-//            _ = self.controlCenter.sendWorldCamImage()
-//        }
-    }
-    @objc func sendDepthImage() {
-        _ = self.controlCenter.sendDepthImage()
-
-//        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
-//            _ = self.controlCenter.sendDepthImage()
-//        }
-    }
 
     override func viewWillDisappear(_ animated: Bool) {
         self.BLEautoReconnectTimer.invalidate()
@@ -170,7 +129,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.present(alert, animated: true)
     }
     @IBAction func onReCaliberateClicked(_ sender: UIButton) {
-        print("Recal tapped")
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
         self.restartArSession()

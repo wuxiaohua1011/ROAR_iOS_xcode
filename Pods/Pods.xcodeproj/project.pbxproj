@@ -7,106 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26933DE790AD32659A054D491A443F2F /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A1D1EC547602E6EEBFF6218B7EA3178 /* yudpsocket.c */; };
-		310F4A419C7777D411976A91A8977522 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BB5CE053BFEF2F23AF9B34D658CE4 /* Result.swift */; };
-		36D0B7EDD07F959B9C27787E9BCE1684 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		45B8C09C8EF18BC0AA246AC2CDADC1C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		590F90702C1E8FFBDE2750F2EB559F6B /* SwiftSocket-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CAFEF2368464F7F6A66A3E215B283D /* SwiftSocket-dummy.m */; };
-		5BB907C502A7DEFA00C3F7ECA55CAE2B /* SwiftSocket-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E5E3A01FE1CABA7A4DCC774FC8D1E12 /* SwiftSocket-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		71719E654327DF3FE268F5B592C6221C /* ytcpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 10B8C2BE8B8A54345DE508E6DDC749C4 /* ytcpsocket.c */; };
-		86CABF16414D74E81AF00E487F59B6E7 /* UDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF656009D88110D931374EFF1B735A68 /* UDPClient.swift */; };
-		9F9C4D89B9E4648A85BA2AD7E2C4911F /* TCPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE1077B5234D5E6BA5C6692F7F316AF /* TCPClient.swift */; };
-		BBE012E5395491F6EF5B45403D13C3ED /* Pods-ROAR-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 14AE62D4CFDCC225907CF9F56D765272 /* Pods-ROAR-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D303472E6599B444367CC153A4F2DFDC /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A0C37D8C261B03A7CD534DFEC667C /* Socket.swift */; };
-		F4A2CF267E7AC1DD491E49616D497231 /* Pods-ROAR-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1ED905B7DABAE1F6325BF0CB04848E /* Pods-ROAR-dummy.m */; };
+		414D399644E57177071CE26E60A70AFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8F2DC745C003E737FD36E67061CCE572 /* Pods-ROAR-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 168FC41D43642CD1B791A91A4BDD2502 /* Pods-ROAR-dummy.m */; };
+		BB56ABD1B4CA5046063477CCCC35A7AF /* Pods-ROAR-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A0450D6BA79033F1F86427C4F3BC9B /* Pods-ROAR-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FF92D3E5BAF717EB0FF4D9AB458FCAC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2098E99F31975F5C89523CC6EB58B9CC;
-			remoteInfo = SwiftSocket;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		0F2A6B759184C2497A545BA147E71506 /* Pods-ROAR.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ROAR.modulemap"; sourceTree = "<group>"; };
-		10B8C2BE8B8A54345DE508E6DDC749C4 /* ytcpsocket.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ytcpsocket.c; path = Sources/ytcpsocket.c; sourceTree = "<group>"; };
-		14AE62D4CFDCC225907CF9F56D765272 /* Pods-ROAR-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ROAR-umbrella.h"; sourceTree = "<group>"; };
-		154A0C37D8C261B03A7CD534DFEC667C /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = Sources/Socket.swift; sourceTree = "<group>"; };
-		2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods_ROAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ROAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3A59C9FE3D98CF2152E03CFA05A85BFC /* SwiftSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		40F65DCF4B974643A3DA04E598F042BE /* Pods-ROAR-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ROAR-acknowledgements.plist"; sourceTree = "<group>"; };
-		41E4E864DBCE91E0017273A7DC5D815B /* Pods-ROAR-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ROAR-frameworks.sh"; sourceTree = "<group>"; };
-		4713FE11F417ABEBE3A1887E177F254F /* Pods-ROAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ROAR.debug.xcconfig"; sourceTree = "<group>"; };
-		4A1D1EC547602E6EEBFF6218B7EA3178 /* yudpsocket.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = yudpsocket.c; path = Sources/yudpsocket.c; sourceTree = "<group>"; };
-		4A79BF420E0DF8728F9DC296F0448224 /* SwiftSocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftSocket.debug.xcconfig; sourceTree = "<group>"; };
-		5FE1077B5234D5E6BA5C6692F7F316AF /* TCPClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TCPClient.swift; path = Sources/TCPClient.swift; sourceTree = "<group>"; };
-		66CAFEF2368464F7F6A66A3E215B283D /* SwiftSocket-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftSocket-dummy.m"; sourceTree = "<group>"; };
-		6B40791AE4ABE3B2C5CBFF89255351C2 /* SwiftSocket-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftSocket-Info.plist"; sourceTree = "<group>"; };
-		6E5E3A01FE1CABA7A4DCC774FC8D1E12 /* SwiftSocket-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSocket-umbrella.h"; sourceTree = "<group>"; };
+		00C1D253BAA8A7611C40F4E67C812BD8 /* Pods-ROAR-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ROAR-Info.plist"; sourceTree = "<group>"; };
+		168FC41D43642CD1B791A91A4BDD2502 /* Pods-ROAR-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ROAR-dummy.m"; sourceTree = "<group>"; };
+		2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods-ROAR */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-ROAR"; path = Pods_ROAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D819928EF3655395470AB867B6B8C22 /* Pods-ROAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ROAR.debug.xcconfig"; sourceTree = "<group>"; };
+		6BC176730F8042DD265CF88AAF474865 /* Pods-ROAR.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-ROAR.modulemap"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7A4380B441E4569B88AF81432588C4B2 /* SwiftSocket-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftSocket-prefix.pch"; sourceTree = "<group>"; };
-		7BD9D6E56B33ED0336DF4208A5186006 /* SwiftSocket.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftSocket.modulemap; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A4556B71790F632AAAD695E0BD826F4B /* Pods-ROAR-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ROAR-acknowledgements.markdown"; sourceTree = "<group>"; };
-		BFF4462DE2D586B8915D4BA1AD88054D /* Pods-ROAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ROAR.release.xcconfig"; sourceTree = "<group>"; };
-		C405CF3608784A365CF622547FBFED82 /* Pods-ROAR-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ROAR-Info.plist"; sourceTree = "<group>"; };
-		EC78B90EF3228FCEF00E1C114F851940 /* SwiftSocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftSocket.release.xcconfig; sourceTree = "<group>"; };
-		EF1ED905B7DABAE1F6325BF0CB04848E /* Pods-ROAR-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ROAR-dummy.m"; sourceTree = "<group>"; };
-		FB9BB5CE053BFEF2F23AF9B34D658CE4 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/Result.swift; sourceTree = "<group>"; };
-		FF656009D88110D931374EFF1B735A68 /* UDPClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UDPClient.swift; path = Sources/UDPClient.swift; sourceTree = "<group>"; };
+		86B040F340E7E5C6C1D438FC9E925740 /* Pods-ROAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ROAR.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A3A0450D6BA79033F1F86427C4F3BC9B /* Pods-ROAR-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ROAR-umbrella.h"; sourceTree = "<group>"; };
+		E351F4989F878E67FDAAEF4982736952 /* Pods-ROAR-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ROAR-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E8174A84C4A71476F4FF66A079518138 /* Pods-ROAR-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ROAR-acknowledgements.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6207A291FB7F97FEED7FB837CB541ABA /* Frameworks */ = {
+		44F6B6E733F3FB1A7DE1A43DE528F34D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36D0B7EDD07F959B9C27787E9BCE1684 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D82B170EE0A2607D243CB0D248D4BB49 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45B8C09C8EF18BC0AA246AC2CDADC1C3 /* Foundation.framework in Frameworks */,
+				414D399644E57177071CE26E60A70AFA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		15980DC702F570B7F4E8A3AF43538456 /* SwiftSocket */ = {
+		0930E83B7975E57FDAC05DCE037A7166 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FB9BB5CE053BFEF2F23AF9B34D658CE4 /* Result.swift */,
-				154A0C37D8C261B03A7CD534DFEC667C /* Socket.swift */,
-				5FE1077B5234D5E6BA5C6692F7F316AF /* TCPClient.swift */,
-				FF656009D88110D931374EFF1B735A68 /* UDPClient.swift */,
-				10B8C2BE8B8A54345DE508E6DDC749C4 /* ytcpsocket.c */,
-				4A1D1EC547602E6EEBFF6218B7EA3178 /* yudpsocket.c */,
-				47FD8418DE699C87FF4E7FCC9B518530 /* Support Files */,
+				F2E2253BE86536AD35A1E17A4844893D /* Pods-ROAR */,
 			);
-			path = SwiftSocket;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		47FD8418DE699C87FF4E7FCC9B518530 /* Support Files */ = {
+		12671DBC2760CE3B48071C0A8B507054 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BD9D6E56B33ED0336DF4208A5186006 /* SwiftSocket.modulemap */,
-				66CAFEF2368464F7F6A66A3E215B283D /* SwiftSocket-dummy.m */,
-				6B40791AE4ABE3B2C5CBFF89255351C2 /* SwiftSocket-Info.plist */,
-				7A4380B441E4569B88AF81432588C4B2 /* SwiftSocket-prefix.pch */,
-				6E5E3A01FE1CABA7A4DCC774FC8D1E12 /* SwiftSocket-umbrella.h */,
-				4A79BF420E0DF8728F9DC296F0448224 /* SwiftSocket.debug.xcconfig */,
-				EC78B90EF3228FCEF00E1C114F851940 /* SwiftSocket.release.xcconfig */,
+				2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods-ROAR */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftSocket";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
@@ -117,39 +62,13 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		6E014A81655475796DAA1627D3E8B68F /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9E429FA456D78D520040FD5C5FDA8CBF /* Pods-ROAR */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		9E429FA456D78D520040FD5C5FDA8CBF /* Pods-ROAR */ = {
-			isa = PBXGroup;
-			children = (
-				0F2A6B759184C2497A545BA147E71506 /* Pods-ROAR.modulemap */,
-				A4556B71790F632AAAD695E0BD826F4B /* Pods-ROAR-acknowledgements.markdown */,
-				40F65DCF4B974643A3DA04E598F042BE /* Pods-ROAR-acknowledgements.plist */,
-				EF1ED905B7DABAE1F6325BF0CB04848E /* Pods-ROAR-dummy.m */,
-				41E4E864DBCE91E0017273A7DC5D815B /* Pods-ROAR-frameworks.sh */,
-				C405CF3608784A365CF622547FBFED82 /* Pods-ROAR-Info.plist */,
-				14AE62D4CFDCC225907CF9F56D765272 /* Pods-ROAR-umbrella.h */,
-				4713FE11F417ABEBE3A1887E177F254F /* Pods-ROAR.debug.xcconfig */,
-				BFF4462DE2D586B8915D4BA1AD88054D /* Pods-ROAR.release.xcconfig */,
-			);
-			name = "Pods-ROAR";
-			path = "Target Support Files/Pods-ROAR";
-			sourceTree = "<group>";
-		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				D5EC352109CA1F9CC0CB3BCA4B89FE57 /* Pods */,
-				DD2AE4B20086DFEFC508E8F37BAB9341 /* Products */,
-				6E014A81655475796DAA1627D3E8B68F /* Targets Support Files */,
+				12671DBC2760CE3B48071C0A8B507054 /* Products */,
+				0930E83B7975E57FDAC05DCE037A7166 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,39 +80,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D5EC352109CA1F9CC0CB3BCA4B89FE57 /* Pods */ = {
+		F2E2253BE86536AD35A1E17A4844893D /* Pods-ROAR */ = {
 			isa = PBXGroup;
 			children = (
-				15980DC702F570B7F4E8A3AF43538456 /* SwiftSocket */,
+				6BC176730F8042DD265CF88AAF474865 /* Pods-ROAR.modulemap */,
+				E351F4989F878E67FDAAEF4982736952 /* Pods-ROAR-acknowledgements.markdown */,
+				E8174A84C4A71476F4FF66A079518138 /* Pods-ROAR-acknowledgements.plist */,
+				168FC41D43642CD1B791A91A4BDD2502 /* Pods-ROAR-dummy.m */,
+				00C1D253BAA8A7611C40F4E67C812BD8 /* Pods-ROAR-Info.plist */,
+				A3A0450D6BA79033F1F86427C4F3BC9B /* Pods-ROAR-umbrella.h */,
+				2D819928EF3655395470AB867B6B8C22 /* Pods-ROAR.debug.xcconfig */,
+				86B040F340E7E5C6C1D438FC9E925740 /* Pods-ROAR.release.xcconfig */,
 			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		DD2AE4B20086DFEFC508E8F37BAB9341 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods_ROAR.framework */,
-				3A59C9FE3D98CF2152E03CFA05A85BFC /* SwiftSocket.framework */,
-			);
-			name = Products;
+			name = "Pods-ROAR";
+			path = "Target Support Files/Pods-ROAR";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		C9C65A67FB07F72D3EC021ECB6143817 /* Headers */ = {
+		E0D3E92D16FB8568A7F0C14FD15021FE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBE012E5395491F6EF5B45403D13C3ED /* Pods-ROAR-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DC3106B504678C60365EA746F2704214 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5BB907C502A7DEFA00C3F7ECA55CAE2B /* SwiftSocket-umbrella.h in Headers */,
+				BB56ABD1B4CA5046063477CCCC35A7AF /* Pods-ROAR-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,39 +112,20 @@
 /* Begin PBXNativeTarget section */
 		116FD2C091C5A305EDD68EF70CE006DA /* Pods-ROAR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C64B3FDA32473B059A7E4307C8829336 /* Build configuration list for PBXNativeTarget "Pods-ROAR" */;
+			buildConfigurationList = 8EB56C5953DD9D76C8E1A3723A570B9E /* Build configuration list for PBXNativeTarget "Pods-ROAR" */;
 			buildPhases = (
-				C9C65A67FB07F72D3EC021ECB6143817 /* Headers */,
-				4524E21A9F08B76B914DB4D0BC90B288 /* Sources */,
-				D82B170EE0A2607D243CB0D248D4BB49 /* Frameworks */,
-				C419C4BF548D893CB906CC982728AA87 /* Resources */,
+				E0D3E92D16FB8568A7F0C14FD15021FE /* Headers */,
+				502E9E40D8A37809BAEB87669063EA69 /* Sources */,
+				44F6B6E733F3FB1A7DE1A43DE528F34D /* Frameworks */,
+				5D29856CDE735B88863B1A307AF800B4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8D66B93A0328A1AB4F1ADACD9453045E /* PBXTargetDependency */,
 			);
 			name = "Pods-ROAR";
-			productName = "Pods-ROAR";
-			productReference = 2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods_ROAR.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		2098E99F31975F5C89523CC6EB58B9CC /* SwiftSocket */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 227044261F7ABB997524D6854C4DA01A /* Build configuration list for PBXNativeTarget "SwiftSocket" */;
-			buildPhases = (
-				DC3106B504678C60365EA746F2704214 /* Headers */,
-				13487976253A0F787DA56797114477E5 /* Sources */,
-				6207A291FB7F97FEED7FB837CB541ABA /* Frameworks */,
-				99652FCBC8D3FDD8F6EA0DC26B0734B5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftSocket;
-			productName = SwiftSocket;
-			productReference = 3A59C9FE3D98CF2152E03CFA05A85BFC /* SwiftSocket.framework */;
+			productName = Pods_ROAR;
+			productReference = 2B85C1D6D7EF0C28A44B9F56B7A9501F /* Pods-ROAR */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -243,37 +134,29 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = DD2AE4B20086DFEFC508E8F37BAB9341 /* Products */;
+			productRefGroup = 12671DBC2760CE3B48071C0A8B507054 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				116FD2C091C5A305EDD68EF70CE006DA /* Pods-ROAR */,
-				2098E99F31975F5C89523CC6EB58B9CC /* SwiftSocket */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		99652FCBC8D3FDD8F6EA0DC26B0734B5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C419C4BF548D893CB906CC982728AA87 /* Resources */ = {
+		5D29856CDE735B88863B1A307AF800B4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,115 +166,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		13487976253A0F787DA56797114477E5 /* Sources */ = {
+		502E9E40D8A37809BAEB87669063EA69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310F4A419C7777D411976A91A8977522 /* Result.swift in Sources */,
-				D303472E6599B444367CC153A4F2DFDC /* Socket.swift in Sources */,
-				590F90702C1E8FFBDE2750F2EB559F6B /* SwiftSocket-dummy.m in Sources */,
-				9F9C4D89B9E4648A85BA2AD7E2C4911F /* TCPClient.swift in Sources */,
-				86CABF16414D74E81AF00E487F59B6E7 /* UDPClient.swift in Sources */,
-				71719E654327DF3FE268F5B592C6221C /* ytcpsocket.c in Sources */,
-				26933DE790AD32659A054D491A443F2F /* yudpsocket.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4524E21A9F08B76B914DB4D0BC90B288 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F4A2CF267E7AC1DD491E49616D497231 /* Pods-ROAR-dummy.m in Sources */,
+				8F2DC745C003E737FD36E67061CCE572 /* Pods-ROAR-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		8D66B93A0328A1AB4F1ADACD9453045E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftSocket;
-			target = 2098E99F31975F5C89523CC6EB58B9CC /* SwiftSocket */;
-			targetProxy = FF92D3E5BAF717EB0FF4D9AB458FCAC3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		16231D95F55E6F53EEA9561AF853ACC5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFF4462DE2D586B8915D4BA1AD88054D /* Pods-ROAR.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3B2F0E2B93BF7B98028197082DA05052 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4713FE11F417ABEBE3A1887E177F254F /* Pods-ROAR.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		593F10BFFA94DAC7D6E17FB8A7F32D72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -453,6 +238,43 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
+		};
+		8C4CED4A72E1685861698DA87D8980BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D819928EF3655395470AB867B6B8C22 /* Pods-ROAR.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		A0374B8CF9A7D6A45F6D116D698D1C19 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -520,10 +342,12 @@
 			};
 			name = Debug;
 		};
-		BACB763720334F3F2AF4F91389B3F0DB /* Debug */ = {
+		E9B946456816AE580E5ADE0361CCD502 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A79BF420E0DF8728F9DC296F0448224 /* SwiftSocket.debug.xcconfig */;
+			baseConfigurationReference = 86B040F340E7E5C6C1D438FC9E925740 /* Pods-ROAR.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -532,56 +356,23 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftSocket/SwiftSocket-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftSocket/SwiftSocket-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/SwiftSocket/SwiftSocket.modulemap";
-				PRODUCT_MODULE_NAME = SwiftSocket;
-				PRODUCT_NAME = SwiftSocket;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ROAR/Pods-ROAR.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C315FEDE635B41E88B211229782841E1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC78B90EF3228FCEF00E1C114F851940 /* SwiftSocket.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftSocket/SwiftSocket-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftSocket/SwiftSocket-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/SwiftSocket/SwiftSocket.modulemap";
-				PRODUCT_MODULE_NAME = SwiftSocket;
-				PRODUCT_NAME = SwiftSocket;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -592,15 +383,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		227044261F7ABB997524D6854C4DA01A /* Build configuration list for PBXNativeTarget "SwiftSocket" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BACB763720334F3F2AF4F91389B3F0DB /* Debug */,
-				C315FEDE635B41E88B211229782841E1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -610,11 +392,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C64B3FDA32473B059A7E4307C8829336 /* Build configuration list for PBXNativeTarget "Pods-ROAR" */ = {
+		8EB56C5953DD9D76C8E1A3723A570B9E /* Build configuration list for PBXNativeTarget "Pods-ROAR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3B2F0E2B93BF7B98028197082DA05052 /* Debug */,
-				16231D95F55E6F53EEA9561AF853ACC5 /* Release */,
+				8C4CED4A72E1685861698DA87D8980BE /* Debug */,
+				E9B946456816AE580E5ADE0361CCD502 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
