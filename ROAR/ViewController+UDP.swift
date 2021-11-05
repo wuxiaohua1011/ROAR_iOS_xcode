@@ -37,17 +37,13 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         switch sock {
         case self.vehicleStateSocket:
-            print("vehicleStateSocket")
             self.chunkAndSendData(data: self.controlCenter.vehicleState.toData(), sock: sock, address: address)
         case self.worldCamSocket:
-            print("worldCamSocket")
             self.sendImage(customImage: self.controlCenter.backCamImage, sock: sock, address: address)
         case self.depthCamSocket:
-            print("depthCamSocket")
 
             self.sendDepth(customDepth: self.controlCenter.worldCamDepth, sock: sock, address: address)
         case self.controlSocket:
-            print("controlSocket")
 
             if let string = String(data: data, encoding: .utf8) {
                 let splitted = string.components(separatedBy: ",")
