@@ -157,7 +157,7 @@ class CustomImage {
     var intrinsics: simd_float3x3 = simd_float3x3()
     var buffer:Int = 200;
     var ratio: ImageRatioSettingsEnum = .no_cut
-    var circular = CircularBuffer<Data>(capacity: 3)
+    var circular = CircularBuffer<Data>(capacity: 5)
     
     
 
@@ -335,7 +335,7 @@ class CustomDepthData {
     var fyD: Float? = nil
     var cxD: Float? = nil
     var cyD: Float? = nil
-    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 3)
+    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 5)
     
     func update(frame: ARFrame) {
         if self.updating == false {

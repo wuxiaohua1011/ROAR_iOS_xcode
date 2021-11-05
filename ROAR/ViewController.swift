@@ -12,6 +12,7 @@ import Loaf
 import CoreBluetooth
 import NIO
 import os
+import CocoaAsyncSocket
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
     
@@ -40,12 +41,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     var bleControlCharacteristic: CBCharacteristic!
     var updateThrottleSteeringUITimer: Timer!
     
-    var sendWorldCamTimer: Timer!
-    var sendWorldDepthTimer: Timer!
-    var sendVehicleStateTimer: Timer!
-    var udpSendTimer: Timer!
     
-    
+    var vehicleStateSocket: GCDAsyncUdpSocket!
+    var worldCamSocket: GCDAsyncUdpSocket!
+    var depthCamSocket: GCDAsyncUdpSocket!
+    var controlSocket: GCDAsyncUdpSocket!
 
     // MARK: overrides
     override func viewDidLoad() {
@@ -58,6 +58,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         setupUI()
         setupTimers()
         setupGestures()
+        
+        self.setupSocket()
         
     }
     

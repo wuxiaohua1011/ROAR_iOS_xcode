@@ -22,12 +22,12 @@ class ControlCenter {
 
     public var worldCamDepth: CustomDepthData!
     
-    public var vc: UIViewController!
+    public var vc: ViewController!
     
     private var prevTransformUpdateTime: TimeInterval?;
     
     
-    init(vc: UIViewController) {
+    init(vc: ViewController) {
         self.vc = vc
         self.backCamImage = CustomImage(compressionQuality: 0.005, ratio: .no_cut)//AppInfo.imageRatio)
         self.worldCamDepth = CustomDepthData()

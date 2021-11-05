@@ -37,6 +37,7 @@
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
 		E8C8EC8D27345D5900CB2683 /* CocoaAsyncSocket in Frameworks */ = {isa = PBXBuildFile; productRef = E8C8EC8C27345D5900CB2683 /* CocoaAsyncSocket */; };
+		E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */; };
 		E8EE23182729B8F100A93340 /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23172729B8F100A93340 /* NIO */; };
 		E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23192729B8F100A93340 /* NIOCore */; };
 		E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */; };
@@ -94,6 +95,7 @@
 		E88C37A02705594800289DC1 /* ARPhoto2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARPhoto2.storyboard; sourceTree = "<group>"; };
 		E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2PopupViewController.swift; sourceTree = "<group>"; };
 		E88C37A827055BA000289DC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UDP.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,
 				E83E6CA426ED57BF006B1E39 /* ViewController.swift */,
+				E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */,
 				E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */,
 				E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */,
 				E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */,
@@ -415,6 +418,7 @@
 				E83E6CA526ED57BF006B1E39 /* ViewController.swift in Sources */,
 				E83E6CA126ED57BF006B1E39 /* AppDelegate.swift in Sources */,
 				E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */,
+				E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */,
 				E88C37A42705594800289DC1 /* SelectContentDelegate.swift in Sources */,
 				E88C37A22705594800289DC1 /* ARPhoto2ViewController+Record.swift in Sources */,
 				E821AECB27274AF1009F49D2 /* ScanQRCodeViewController.swift in Sources */,
