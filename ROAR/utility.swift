@@ -91,12 +91,15 @@ class VehicleState {
     var vx: Float = 0
     var vy: Float = 0
     var vz: Float = 0
+    var ax: Float = 0
+    var ay: Float = 0
+    var az: Float = 0
     
     init() {
         
     }
     func toString() -> String {
-        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz)"
+        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az)"
         return string
     }
     func toData() -> Data {
@@ -107,7 +110,7 @@ class VehicleState {
 //        self.transform = transform
 //        self.velocity = velocity
 //    }
-    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float){
+    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float, ax:Float, ay:Float, az:Float){
     self.x = x
     self.y = y
     self.z = z
@@ -117,6 +120,9 @@ class VehicleState {
     self.vx = vx
     self.vy = vy
     self.vz = vz
+    self.ax = ax
+    self.ay = ay
+    self.az = az
     }
 }
 

@@ -9,6 +9,7 @@ import Foundation
 import ARKit
 import os
 import Network
+import CoreMotion
 
 class ControlCenter {
     public var vehicleState: VehicleState = VehicleState()
@@ -25,12 +26,16 @@ class ControlCenter {
     public var vc: ViewController!
     
     private var prevTransformUpdateTime: TimeInterval?;
-    
+    let motion = CMMotionManager()
     
     init(vc: ViewController) {
         self.vc = vc
         self.backCamImage = CustomImage(compressionQuality: 0.005, ratio: .no_cut)//AppInfo.imageRatio)
         self.worldCamDepth = CustomDepthData()
+        if self.motion.isAccelerometerAvailable {
+              self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
+              self.motion.startAccelerometerUpdates()
+        }
     }
     
     func start(shouldStartServer: Bool = true){
@@ -72,25 +77,36 @@ class ControlCenter {
         } else {
             
             let time_diff = Float((time-prevTransformUpdateTime!))
-            vel_x = (node.position.x - self.transform.position.x) / time_diff // m/s
-            vel_y = (node.position.y - self.transform.position.y) / time_diff
-            vel_z = (node.position.z - self.transform.position.z) / time_diff
+            
+            vel_x = (self.transform.position.x - node.position.x) / time_diff // m/s
+            vel_y = (self.transform.position.y - node.position.y) / time_diff
+            vel_z = (self.transform.position.z - node.position.z) / time_diff
             
             self.transform.position = (node.position + self.transform.position) / 2
             
             // yaw, roll, pitch DO NOT CHANGE THIS!
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
             
+            if let data = self.motion.accelerometerData {
+                let ax = Float(data.acceleration.x)
+                let ay = Float(data.acceleration.y)
+                let az = Float(data.acceleration.z)
+                self.vehicleState.update(x: transform.position.x,
+                                         y: transform.position.y,
+                                         z: transform.position.z,
+                                         roll: transform.eulerAngle.z,
+                                         pitch: transform.eulerAngle.y,
+                                         yaw: transform.eulerAngle.x,
+                                         vx: vel_x, //self.vehicleState.ax * time_diff,
+                                         vy: vel_z,//self.vehicleState.ay * time_diff,
+                                         vz: vel_y, //self.vehicleState.az * time_diff,
+                                         ax: ax,
+                                         ay: ay,
+                                         az: az
+                )
+            }
             
-            self.vehicleState.update(x: transform.position.x,
-                                     y: transform.position.y,
-                                     z: transform.position.z,
-                                     roll: transform.eulerAngle.z,
-                                     pitch: transform.eulerAngle.y,
-                                     yaw: transform.eulerAngle.x,
-                                     vx: vel_x,
-                                     vy: vel_y,
-                                     vz: vel_z)
+           
 //            print("vx: \(vel_x) | vy: \(vel_y) | vz: \(vel_z)")
             prevTransformUpdateTime = time
         }
