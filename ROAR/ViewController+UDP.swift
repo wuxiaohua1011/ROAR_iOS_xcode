@@ -35,26 +35,29 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
         print("connected")
     }
     func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
-        switch sock {
-        case self.vehicleStateSocket:
-            self.chunkAndSendData(data: self.controlCenter.vehicleState.toData(), sock: sock, address: address)
-        case self.worldCamSocket:
-            self.sendImage(customImage: self.controlCenter.backCamImage, sock: sock, address: address)
-        case self.depthCamSocket:
+        if AppInfo.sessionData.isCaliberated && AppInfo.sessionData.shouldCaliberate == false {
+            switch sock {
+                case self.vehicleStateSocket:
+                    self.chunkAndSendData(data: self.controlCenter.vehicleState.toData(), sock: sock, address: address)
+                case self.worldCamSocket:
+                    self.sendImage(customImage: self.controlCenter.backCamImage, sock: sock, address: address)
+                case self.depthCamSocket:
 
-            self.sendDepth(customDepth: self.controlCenter.worldCamDepth, sock: sock, address: address)
-        case self.controlSocket:
+                    self.sendDepth(customDepth: self.controlCenter.worldCamDepth, sock: sock, address: address)
+                case self.controlSocket:
 
-            if let string = String(data: data, encoding: .utf8) {
-                let splitted = string.components(separatedBy: ",")
-                let throttle = Float(splitted[0]) ?? 0
-                let steering = Float(splitted[1]) ?? 0
-                self.controlCenter.control.throttle = throttle
-                self.controlCenter.control.steering = steering
+                    if let string = String(data: data, encoding: .utf8) {
+                        let splitted = string.components(separatedBy: ",")
+                        let throttle = Float(splitted[0]) ?? 0
+                        let steering = Float(splitted[1]) ?? 0
+                        self.controlCenter.control.throttle = throttle
+                        self.controlCenter.control.steering = steering
+                    }
+                default:
+                    print("data received on unknown socket: \(String(describing: String(data: data, encoding: .utf8)))")
             }
-        default:
-            print("data received on unknown socket: \(String(describing: String(data: data, encoding: .utf8)))")
         }
+        
     }
     func udpSocketDidClose(_ sock: GCDAsyncUdpSocket, withError error: Error?) {
         print("socket is closed")

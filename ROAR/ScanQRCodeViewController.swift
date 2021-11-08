@@ -88,13 +88,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         if validateIpAddress(ipToValidate: ip_addr) {
             perform_handshake(code: ip_addr)
-//            if self.is_connected == false {
-//
-//                 Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
-//                     self.captureSession.startRunning()
-//                 })
-//
-//            }
         }
         
     }

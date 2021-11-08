@@ -106,7 +106,6 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     func sendMessage(peripheral: CBPeripheral, message: String) {
         if bleControlCharacteristic != nil {
             peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: .withoutResponse)
-//            peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: CBCharacteristicWriteType.withResponse)
         }
         
     }
