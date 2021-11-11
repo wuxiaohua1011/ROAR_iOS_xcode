@@ -52,7 +52,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         AppInfo.load()
         super.viewDidLoad()
         self.controlCenter = ControlCenter(vc: self)
-        self.startARSession(worldMap: nil, worldOriginTransform: nil)
+        
+        if let mapData = UserDefaults.standard.value(forKey: AppInfo.get_ar_experience_name()) as? Data {
+            if let map = loadMap(data: mapData) {
+                self.startARSession(worldMap: map, worldOriginTransform: nil)
+            } else {
+                self.startARSession(worldMap: nil, worldOriginTransform: nil)
+            }
+        } else {
+            self.startARSession(worldMap: nil, worldOriginTransform: nil)
+        }
+
+        
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.controlCenter.start(shouldStartServer: true)
         setupUI()
@@ -60,9 +71,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         setupGestures()
         
         self.setupSocket()
-        
     }
     
+    func loadMap(data:Data) -> ARWorldMap? {
+        do {
+            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) else { return nil }
+            return worldMap
+        } catch {
+            return nil
+        }
+    }
     func setupUI() {
         self.onBLEDisconnected()
         self.ipAddressBtn.isEnabled = false
@@ -98,11 +116,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     
     @objc func didPanningScreenLeft(_ recognizer: UIScreenEdgePanGestureRecognizer)  {
         if recognizer.state == .ended {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
-            vc.modalPresentationStyle = .fullScreen
-            vc.modalTransitionStyle = .crossDissolve
-            self.present(vc, animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
+//            vc.modalPresentationStyle = .fullScreen
+//            vc.modalTransitionStyle = .crossDissolve
+//            self.present(vc, animated: true, completion: nil)
             
         }
     }
@@ -133,18 +151,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     @IBAction func onReCaliberateClicked(_ sender: UIButton) {
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
-        self.restartArSession()
         self.ipAddressBtn.isEnabled = false
         self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {
         self.arSceneView.session.getCurrentWorldMap { worldMap, error in
             guard let map = worldMap
-            else { Loaf("Can't get current world map", state: .error, sender: self).show(.short); return}
+            else { Loaf("Can't get current world map, try moving around slowly and save again.", state: .error, sender: self).show(.short); return}
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                 //make cache name function
                 UserDefaults.standard.setValue(data, forKey: AppInfo.get_ar_experience_name())
+
                 //This will emit the data in UserDefaults for AppInfo.get_ar_experience_name()
                 Loaf("World Saved", state: .success, sender: self).show(.short)
             } catch {

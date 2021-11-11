@@ -36,6 +36,10 @@ class ControlCenter {
               self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
               self.motion.startAccelerometerUpdates()
         }
+        if self.motion.isGyroAvailable {
+            self.motion.gyroUpdateInterval = 1.0 / 60.0
+            self.motion.startGyroUpdates()
+        }
     }
     
     func start(shouldStartServer: Bool = true){
@@ -78,19 +82,22 @@ class ControlCenter {
             
             let time_diff = Float((time-prevTransformUpdateTime!))
             
-            vel_x = (self.transform.position.x - node.position.x) / time_diff // m/s
-            vel_y = (self.transform.position.y - node.position.y) / time_diff
-            vel_z = (self.transform.position.z - node.position.z) / time_diff
+            vel_x = (node.position.x-self.transform.position.x) / time_diff // m/s
+            vel_y = (node.position.y-self.transform.position.y) / time_diff
+            vel_z = (node.position.z-self.transform.position.z) / time_diff
             
             self.transform.position = (node.position + self.transform.position) / 2
             
             // yaw, roll, pitch DO NOT CHANGE THIS!
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
             
-            if let data = self.motion.accelerometerData {
-                let ax = Float(data.acceleration.x)
-                let ay = Float(data.acceleration.y)
-                let az = Float(data.acceleration.z)
+            if let accData = self.motion.accelerometerData, let gyroData = self.motion.gyroData {
+                let ax = Float(accData.acceleration.x)
+                let ay = Float(accData.acceleration.y)
+                let az = Float(accData.acceleration.z)
+                let gx = Float(gyroData.rotationRate.x)
+                let gy = Float(gyroData.rotationRate.y)
+                let gz = Float(gyroData.rotationRate.z)
                 self.vehicleState.update(x: transform.position.x,
                                          y: transform.position.y,
                                          z: transform.position.z,
@@ -98,11 +105,15 @@ class ControlCenter {
                                          pitch: transform.eulerAngle.y,
                                          yaw: transform.eulerAngle.x,
                                          vx: vel_x, //self.vehicleState.ax * time_diff,
-                                         vy: vel_z,//self.vehicleState.ay * time_diff,
-                                         vz: vel_y, //self.vehicleState.az * time_diff,
+                                         vy: vel_y,//self.vehicleState.ay * time_diff,
+                                         vz: vel_z, //self.vehicleState.az * time_diff,
                                          ax: ax,
-                                         ay: ay,
-                                         az: az
+                                         ay: az,
+                                         az: ay,
+                                         gx: gx,
+                                         gy: gz,
+                                         gz: gy
+                                         
                 )
             }
             

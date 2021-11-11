@@ -126,7 +126,7 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
        withUnsafePointer(to: &cx) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
        withUnsafePointer(to: &cy) { data.append(UnsafeBufferPointer(start: $0, count: 1)) }
         
-        let image_data = UIImage(pixelBuffer: current_frame.capturedImage)?.jpegData(compressionQuality: 0.01)
+        let image_data = UIImage(pixelBuffer: current_frame.capturedImage)?.jpegData(compressionQuality: 0.1)
         data.append(image_data!)
         self.chunkAndSendData(data: data, sock: sock, address: address)
 
