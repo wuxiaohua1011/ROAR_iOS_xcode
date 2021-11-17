@@ -97,12 +97,13 @@ class VehicleState {
     var gx: Float = 0
     var gy: Float = 0
     var gz: Float = 0
+    var recv_time: Float = 0
     
     init() {
         
     }
     func toString() -> String {
-        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az),\(self.gx),\(self.gy),\(self.gz)"
+        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az),\(self.gx),\(self.gy),\(self.gz),\(self.recv_time)"
         return string
     }
     func toData() -> Data {
@@ -113,7 +114,7 @@ class VehicleState {
 //        self.transform = transform
 //        self.velocity = velocity
 //    }
-    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float, ax:Float, ay:Float, az:Float, gx:Float,gy:Float, gz:Float){
+    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float, ax:Float, ay:Float, az:Float, gx:Float,gy:Float, gz:Float, recv_time: TimeInterval){
     self.x = x
     self.y = y
     self.z = z
@@ -129,6 +130,7 @@ class VehicleState {
     self.gx = gx
     self.gy = gy
     self.gz = gz
+    self.recv_time = Float(recv_time)
     }
 }
 

@@ -86,7 +86,7 @@ class ControlCenter {
             vel_y = (node.position.y-self.transform.position.y) / time_diff
             vel_z = (node.position.z-self.transform.position.z) / time_diff
             
-            self.transform.position = (node.position + self.transform.position) / 2
+            self.transform.position = node.position
             
             // yaw, roll, pitch DO NOT CHANGE THIS!
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
@@ -105,14 +105,15 @@ class ControlCenter {
                                          pitch: transform.eulerAngle.y,
                                          yaw: transform.eulerAngle.x,
                                          vx: vel_x, //self.vehicleState.ax * time_diff,
-                                         vy: vel_y,//self.vehicleState.ay * time_diff,
+                                         vy: vel_y, //self.vehicleState.ay * time_diff,
                                          vz: vel_z, //self.vehicleState.az * time_diff,
                                          ax: ax,
                                          ay: az,
                                          az: ay,
                                          gx: gx,
                                          gy: gz,
-                                         gz: gy
+                                         gz: gy,
+                                         recv_time:time
                                          
                 )
             }
