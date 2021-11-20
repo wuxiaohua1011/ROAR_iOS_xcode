@@ -3,11 +3,17 @@ import UIKit
 import Loaf
 import CocoaAsyncSocket
 import JGProgressHUD
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+
+import Network
+
+class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, GCDAsyncUdpSocketDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var delegate: ScanQRCodeProtocol? = nil
     var is_connected: Bool = false
+    var connection: NWConnection?
+    var pc_ip_addr: String? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,8 +94,28 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         if validateIpAddress(ipToValidate: ip_addr) {
             perform_handshake(code: ip_addr)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                if self.is_connected == false {
+                    Loaf.init("No Response from \(ip_addr)", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.average, completionHandler: {
+                        _ in
+                        self.captureSession.startRunning()
+                    })
+                    if self.connection != nil {
+                        self.connection?.cancel()
+                    }
+                    self.pc_ip_addr = nil
+                } else {
+                    AppInfo.pc_address = self.pc_ip_addr!
+                    AppInfo.save()
+                    self.dismiss(animated: true, completion: {
+                        self.delegate?.onQRCodeScanFinished()
+                        self.connection?.cancel()
+                    }
+                    )
+                }
+            })
         }
-        
     }
 
 
@@ -103,38 +129,49 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     
     func perform_handshake(code:String){
+        self.pc_ip_addr = code
+        let hostUDP: NWEndpoint.Host = NWEndpoint.Host.init(code)
+        self.connection = NWConnection(host: hostUDP, port: 8008, using: .udp)
         
-        let mSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
-        do {
-            try mSocket.connect(toHost: code, onPort: 8008)
-            
-            let hud = JGProgressHUD()
-            hud.textLabel.text = "Connecting...."
-            hud.show(in: self.view)
-            hud.dismiss(afterDelay: 2)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    if self.is_connected == false {
-                         Loaf.init("No Response", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
-                             self.captureSession.startRunning()
-                         })
-                        mSocket.disconnect()
-                    } else {
-                        AppInfo.pc_address = code
-                        AppInfo.save()
-                        self.dismiss(animated: true, completion: {self.delegate?.onQRCodeScanFinished()})
-                        mSocket.disconnect()
+        self.connection?.stateUpdateHandler = { (newState) in
+                    switch (newState) {
+                        case .ready:
+                            for _ in 0...9 {
+                                print("sending handshake...")
+                                self.sendUDP("hi")
+                            }
+                            self.receiveUDP()
+                        case .setup:
+                            print("State: Setup\n")
+                        case .cancelled:
+                            print("State: Cancelled\n")
+                        case .preparing:
+                            print("State: Preparing\n")
+                        default:
+                            print("ERROR! State not defined!\n")
                     }
-            })
-            
-        } catch let error {
-            print(error)
+                }
+
+        self.connection?.start(queue: .main)
+        
+    }
+    
+    func sendUDP(_ content: String) {
+        let contentToSendUDP = content.data(using: String.Encoding.utf8)
+        self.connection?.send(content: contentToSendUDP, completion: NWConnection.SendCompletion.contentProcessed(({ (NWError) in
+            if (NWError != nil) {
+                print("ERROR! Error when data (Type: Data) sending. NWError: \n \(NWError!)")
+            }
+        })))
+    }
+
+    func receiveUDP() {
+        self.connection?.receiveMessage { (data, context, isComplete, error) in
+            if (isComplete) {
+                self.is_connected = true
+                
+            }
         }
     }
 }
 
-extension ScannerViewController: GCDAsyncSocketDelegate {
-    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
-        is_connected = true
-    }
-}
