@@ -16,8 +16,11 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         configuration.worldAlignment = .gravity
         configuration.wantsHDREnvironmentTextures = false
         configuration.detectionImages = referenceImages
-        configuration.maximumNumberOfTrackedImages = 10
-        
+        configuration.maximumNumberOfTrackedImages = 1
+//        print(ARWorldTrackingConfiguration.supportedVideoFormats)
+        if let format = ARWorldTrackingConfiguration.supportedVideoFormats.last  {
+            configuration.videoFormat = format
+        }
         if worldMap != nil {
             self.logger.info("Start AR Session from previous recorded world")
             // load the map
@@ -83,14 +86,16 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         }
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        if AppInfo.sessionData.shouldCaliberate {
+        if AppInfo.sessionData.shouldCaliberate == true || AppInfo.sessionData.isCaliberated == false{
             for anchor in anchors {
                 guard let imageAnchor = anchor as? ARImageAnchor else { continue }
+//                ARReferenceImage(imageAnchor, orientation: <#T##CGImagePropertyOrientation#>, physicalWidth: <#T##CGFloat#>)
                 if imageAnchor.name == "BerkeleyLogo" {
                     session.setWorldOrigin(relativeTransform: imageAnchor.transform)
                     AppInfo.sessionData.isCaliberated = true
                     AppInfo.sessionData.shouldCaliberate = false
-                    self.ipAddressLabel.text = findIPAddr()
+                    self.ipAddressBtn.isEnabled = true
+                    self.ipAddressBtn.setTitle(findIPAddr(), for: .normal)
                 }
             }
         }

@@ -89,7 +89,6 @@ extension SelectBluetoothViewController: CBCentralManagerDelegate, CBPeripheralD
             // Reject if the signal strength is too low to be close enough (Close is around -22dB)
             return
         }
-        
         if advertisementData["kCBAdvDataLocalName"] != nil {
             self.logger.info("Detected device \(advertisementData["kCBAdvDataLocalName"] as! String)")
             detectedDevices[advertisementData["kCBAdvDataLocalName"] as! String] = peripheral.identifier

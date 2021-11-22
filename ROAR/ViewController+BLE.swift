@@ -67,7 +67,10 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     func startWritingToBLE() {
         DispatchQueue.global(qos: .background).async {
             self.bleTimer = Timer(timeInterval: 0.05, repeats: true) { _ in
-                    self.writeBLE()
+                    // TODO reconnect every 5 seconds
+                    if AppInfo.sessionData.isBLEConnected {
+                        self.writeBLE()
+                    }
                 }
                 let runLoop = RunLoop.current
                 runLoop.add(self.bleTimer, forMode: .default)
@@ -83,6 +86,7 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func writeBLE() {
         if self.bluetoothPeripheral != nil && self.bluetoothPeripheral.state == .connected {
+
             self.writeToBluetoothDevice(throttle: CGFloat(controlCenter.control.throttle), steering: CGFloat(controlCenter.control.steering))
         }
     }
@@ -94,7 +98,6 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
         
         
         let message: String = "(" + String(Int(currThrottleRPM)) + "," + String(Int(currSteeringRPM)) + ")"
-        print(self.bluetoothPeripheral)
         if self.bluetoothPeripheral != nil {
             sendMessage(peripheral: self.bluetoothPeripheral, message: message)
         }
@@ -102,9 +105,7 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func sendMessage(peripheral: CBPeripheral, message: String) {
         if bleControlCharacteristic != nil {
-            print(message)
             peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: .withoutResponse)
-//            peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: CBCharacteristicWriteType.withResponse)
         }
         
     }

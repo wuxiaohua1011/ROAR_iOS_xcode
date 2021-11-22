@@ -16,7 +16,16 @@ extension Comparable {
         return min(max(self, limits.lowerBound), limits.upperBound)
     }
 }
-
+extension String {
+    func leftPadding(toLength: Int, withPad character: Character) -> String {
+        let newLength = self.count
+        if newLength < toLength {
+            return String(repeatElement(character, count: toLength - newLength)) + self
+        } else {
+            return self.substring(from: index(self.startIndex, offsetBy: newLength - toLength))
+        }
+    }
+}
 
 func findIPAddr() -> String {
     var address: String?
@@ -69,6 +78,62 @@ struct CustomControl {
         return self.description.data(using: .utf8)!
     }
 }
+
+class VehicleState {
+//    var transform: CustomTransform = CustomTransform()
+//    var velocity: SCNVector3 = SCNVector3(0,0,0)
+    var x: Float = 0
+    var y: Float = 0
+    var z: Float = 0
+    var roll: Float = 0
+    var pitch: Float = 0
+    var yaw: Float = 0
+    var vx: Float = 0
+    var vy: Float = 0
+    var vz: Float = 0
+    var ax: Float = 0
+    var ay: Float = 0
+    var az: Float = 0
+    var gx: Float = 0
+    var gy: Float = 0
+    var gz: Float = 0
+    var recv_time: Float = 0
+    
+    init() {
+        
+    }
+    func toString() -> String {
+        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az),\(self.gx),\(self.gy),\(self.gz),\(self.recv_time)"
+        return string
+    }
+    func toData() -> Data {
+        return self.toString().data(using: String.Encoding.utf8)!
+    }
+    
+//    func update(transform: CustomTransform, velocity: SCNVector3) {
+//        self.transform = transform
+//        self.velocity = velocity
+//    }
+    func update(x:Float, y:Float, z:Float,roll:Float,pitch:Float, yaw:Float, vx:Float, vy:Float, vz:Float, ax:Float, ay:Float, az:Float, gx:Float,gy:Float, gz:Float, recv_time: TimeInterval){
+    self.x = x
+    self.y = y
+    self.z = z
+    self.roll = roll
+    self.pitch = pitch
+    self.yaw = yaw
+    self.vx = vx
+    self.vy = vy
+    self.vz = vz
+    self.ax = ax
+    self.ay = ay
+    self.az = az
+    self.gx = gx
+    self.gy = gy
+    self.gz = gz
+    self.recv_time = Float(recv_time)
+    }
+}
+
 class CustomTransform {
     var position: SCNVector3 = SCNVector3(0, 0, 0)
     var eulerAngle: SCNVector3 = SCNVector3(0,0,0)
@@ -103,9 +168,13 @@ class CustomImage {
     var height: Int = 100;
     var compQuality: CGFloat = 0.1;
     var cropRect: CGRect?
-    var intrinsics: simd_float3x3!
+    var intrinsics: simd_float3x3 = simd_float3x3()
     var buffer:Int = 200;
     var ratio: ImageRatioSettingsEnum = .no_cut
+    var circular = CircularBuffer<Data>(capacity: 5)
+    
+    
+
     init() {
         self.updateCropping(x: self.x, y: self.y, width: self.width, height: self.height)
     }
@@ -155,12 +224,31 @@ class CustomImage {
             self.updateCropping(x: x, y: 0, width: width, height:  Int(size.height))
         }
     }
+    
+    
+    func cropImage(sourceImage: UIImage) -> UIImage {
+        if self.cropRect == nil {
+            self.initializeCropRec(image: sourceImage)
+        }
+        
+        let sourceCGImage = sourceImage.cgImage!
+        let croppedCGImage = sourceCGImage.cropping(to: self.cropRect!)
+        return UIImage(
+            cgImage: croppedCGImage!,
+            scale: sourceImage.imageRendererFormat.scale,
+            orientation: sourceImage.imageOrientation
+        )
+    }
+    
     func updateImage(sourceImage: UIImage, rotation:Float=0.0){
+        /*
+         THIS FUNCTION IS DEPRECATED
+         */
         self.updating = true
         if self.ratio == .no_cut {
             self.uiImage = sourceImage
             self.outputData = self.uiImage?.jpegData(compressionQuality: self.compQuality)
-        } else {
+            } else {
             if self.cropRect == nil {
                 self.initializeCropRec(image: sourceImage)
             }
@@ -179,17 +267,21 @@ class CustomImage {
 
             self.outputData = self.uiImage?.jpegData(compressionQuality: self.compQuality)
         }
+        
         self.updating = false
     }
     
     func updateImage(cvPixelBuffer: CVPixelBuffer, rotation:Float=0.0) {
-        self.updateImage(sourceImage: UIImage(pixelBuffer: cvPixelBuffer)!,
-                         rotation: rotation)
+        if self.updating == false {
+            self.updating = true
+            let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
+            let data = uiImage.jpegData(compressionQuality: 0.1)!
+            self.circular.overwrite(data)
+            self.updating = false
+        }
     }
     
     func toJPEGData() -> Data? {
-        
-        
         if self.uiImage == nil {
             return nil
         } else {
@@ -204,6 +296,37 @@ class CustomImage {
     }
 }
 
+
+extension Data {
+    public static func from(pixelBuffer: CVPixelBuffer) -> Self {
+        CVPixelBufferLockBaseAddress(pixelBuffer, [.readOnly])
+        defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, [.readOnly]) }
+
+        // Calculate sum of planes' size
+        var totalSize = 0
+        for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+            let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+            let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+            let planeSize   = height * bytesPerRow
+            totalSize += planeSize
+        }
+
+        guard let rawFrame = malloc(totalSize) else { fatalError() }
+        var dest = rawFrame
+
+        for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+            let source      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, plane)
+            let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+            let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+            let planeSize   = height * bytesPerRow
+
+            memcpy(dest, source, planeSize)
+            dest += planeSize
+        }
+
+        return Data(bytesNoCopy: rawFrame, count: totalSize, deallocator: .free)
+    }
+}
 
 extension UIImage {
     public convenience init?(pixelBuffer: CVPixelBuffer) {
@@ -226,6 +349,7 @@ class CustomDepthData {
     var fyD: Float? = nil
     var cxD: Float? = nil
     var cyD: Float? = nil
+    var circular: CircularBuffer = CircularBuffer<Data>(capacity: 5)
     
     func update(frame: ARFrame) {
         if self.updating == false {
@@ -233,7 +357,9 @@ class CustomDepthData {
             let data = frame.sceneDepth!
             let cam = frame.camera
             self.ar_depth_data = data
-            self.depth_data = self.depthCVPixelToData(from: data.depthMap)
+            let depth_data = self.depthCVPixelToData(from: data.depthMap)
+            self.circular.overwrite(depth_data)
+            
             self.updateIntrinsics(rgb_x: Float(cam.imageResolution.height),
                                   rgb_y: Float(cam.imageResolution.width),
                                   rgb_fx: cam.intrinsics[0][0],
@@ -554,3 +680,81 @@ extension CGPoint {
         return sqrt(x * x + y * y)
     }
 }
+
+func validateIpAddress(ipToValidate: String) -> Bool {
+
+    var sin = sockaddr_in()
+    var sin6 = sockaddr_in6()
+
+    if ipToValidate.withCString({ cstring in inet_pton(AF_INET6, cstring, &sin6.sin6_addr) }) == 1 {
+        // IPv6 peer.
+        return true
+    }
+    else if ipToValidate.withCString({ cstring in inet_pton(AF_INET, cstring, &sin.sin_addr) }) == 1 {
+        // IPv4 peer.
+        return true
+    }
+
+    return false;
+}
+
+
+protocol ScanQRCodeProtocol {
+    func onQRCodeScanFinished() 
+}
+
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+
+class CircularBuffer<T> {
+    let capacity: Int
+    var buffer = [T]()
+    
+    init(capacity: Int) {
+        self.capacity = capacity
+    }
+    
+    func write(_ element: T) throws {
+        guard buffer.count < capacity else {
+            throw CircularBufferError.bufferFull
+        }
+        buffer.append(element)
+    }
+    
+    func read() throws -> T {
+        guard !buffer.isEmpty else {
+            throw CircularBufferError.bufferEmpty
+        }
+        return buffer.removeFirst()
+    }
+    
+    func clear() {
+        buffer = [T]()
+    }
+    
+    func overwrite(_ element: T) {
+        if buffer.count < capacity {
+            try? write(element)
+        } else {
+            _ = buffer.removeLast()
+            buffer.append(element)
+        }
+    }
+}
+enum CircularBufferError: Error {
+    case bufferEmpty
+    case bufferFull
+}
+
+

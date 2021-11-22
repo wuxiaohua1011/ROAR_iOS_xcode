@@ -10,12 +10,16 @@ import SwiftyBeaver
 import ARKit
 import Loaf
 import CoreBluetooth
+import NIO
+import os
+import CocoaAsyncSocket
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
+    
     // MARK: IBOutlet
     @IBOutlet weak var systemStatusLabel: UILabel!
     @IBOutlet weak var bleButton: UIButton!
-    @IBOutlet weak var ipAddressLabel: UILabel!
+    @IBOutlet weak var ipAddressBtn: UIButton!
     @IBOutlet weak var arSceneView: ARSCNView!
     @IBOutlet weak var throttleLabel: UILabel!
     @IBOutlet weak var steeringLabel: UILabel!
@@ -37,23 +41,71 @@ class ViewController: UIViewController {
     var bleControlCharacteristic: CBCharacteristic!
     var updateThrottleSteeringUITimer: Timer!
     
+    
+    var vehicleStateSocket: GCDAsyncUdpSocket!
+    var worldCamSocket: GCDAsyncUdpSocket!
+    var depthCamSocket: GCDAsyncUdpSocket!
+    var controlSocket: GCDAsyncUdpSocket!
+
     // MARK: overrides
     override func viewDidLoad() {
         AppInfo.load()
-        self.controlCenter = ControlCenter(vc: self)
         super.viewDidLoad()
-        self.onBLEDisconnected()
-        self.startARSession(worldMap: nil, worldOriginTransform: nil)
-        self.ipAddressLabel.text = "Please Caliberate"
+        self.controlCenter = ControlCenter(vc: self)
+        
+        if let mapData = UserDefaults.standard.value(forKey: AppInfo.get_ar_experience_name()) as? Data {
+            if let map = loadMap(data: mapData) {
+                self.startARSession(worldMap: map, worldOriginTransform: nil)
+            } else {
+                self.startARSession(worldMap: nil, worldOriginTransform: nil)
+            }
+        } else {
+            self.startARSession(worldMap: nil, worldOriginTransform: nil)
+        }
+
+        
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         self.controlCenter.start(shouldStartServer: true)
-        self.startWritingToBLE()
-        self.updateThrottleSteeringUI()
-        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
-        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+        setupUI()
+        setupTimers()
+        setupGestures()
+        
+        self.setupSocket()
     }
     
+    func loadMap(data:Data) -> ARWorldMap? {
+        do {
+            guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) else { return nil }
+            return worldMap
+        } catch {
+            return nil
+        }
+    }
+    func setupUI() {
+        self.onBLEDisconnected()
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
+        self.updateThrottleSteeringUI()
+    }
+    func setupTimers() {
+        self.startWritingToBLE()
+        self.BLEautoReconnectTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(autoReconnectBLE), userInfo: nil, repeats: true)
+        self.updateThrottleSteeringUITimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateThrottleSteeringUI), userInfo: nil, repeats: true)
+    }
+    
+    
+    
+    func setupGestures() {
+        // configure left edge pan gesture
+        let screenEdgePanGestureLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(self.didPanningScreenLeft(_:)))
+        screenEdgePanGestureLeft.edges = .left
+        screenEdgePanGestureLeft.delegate = self
+        self.view.addGestureRecognizer(screenEdgePanGestureLeft)
+    }
+    
+
     override func viewWillDisappear(_ animated: Bool) {
+        self.BLEautoReconnectTimer.invalidate()
         self.disconnectBluetooth()
         self.controlCenter.stop()
         super.viewWillDisappear(animated)
@@ -61,6 +113,17 @@ class ViewController: UIViewController {
     
     
     // MARK: objc functions
+    
+    @objc func didPanningScreenLeft(_ recognizer: UIScreenEdgePanGestureRecognizer)  {
+        if recognizer.state == .ended {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
+//            vc.modalPresentationStyle = .fullScreen
+//            vc.modalTransitionStyle = .crossDissolve
+//            self.present(vc, animated: true, completion: nil)
+            
+        }
+    }
     
     @objc func updateThrottleSteeringUI() {
         self.throttleLabel.text = String(format: "Throttle: %.2f", self.controlCenter.control.throttle)
@@ -88,24 +151,25 @@ class ViewController: UIViewController {
     @IBAction func onReCaliberateClicked(_ sender: UIButton) {
         AppInfo.sessionData.shouldCaliberate = true
         AppInfo.sessionData.isCaliberated = false
-        self.restartArSession()
-        self.ipAddressLabel.text = "Please Caliberate"
-
+        self.ipAddressBtn.isEnabled = false
+        self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {
         self.arSceneView.session.getCurrentWorldMap { worldMap, error in
             guard let map = worldMap
-            else { Loaf("Can't get current world map", state: .error, sender: self).show(.short); return}
+            else { Loaf("Can't get current world map, try moving around slowly and save again.", state: .error, sender: self).show(.short); return}
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                 //make cache name function
                 UserDefaults.standard.setValue(data, forKey: AppInfo.get_ar_experience_name())
+
                 //This will emit the data in UserDefaults for AppInfo.get_ar_experience_name()
                 Loaf("World Saved", state: .success, sender: self).show(.short)
             } catch {
                 Loaf("Error: \(error.localizedDescription)", state: .error, sender: self).show(.short)
             }
         }
+
     }
     
     func onBLEConnected() {
@@ -116,6 +180,17 @@ class ViewController: UIViewController {
     func onBLEDisconnected() {
         self.bleButton.setTitleColor(.red, for: .normal)
         self.bleButton.setTitle("BLE Not Connected", for: .normal)
+    }
+    @IBAction func onIPAddressBtnClicked(_ sender: UIButton) {
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let secondViewController = storyBoard.instantiateViewController(withIdentifier: "ScanQRCode") as! ScannerViewController
+        secondViewController.delegate = self
+        self.present(secondViewController, animated:true, completion:nil)
+    }
+    
+    func onQRCodeScanFinished() {
+        controlCenter.restartUDP()
     }
 }
 
