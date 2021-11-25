@@ -96,7 +96,7 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
         let x = Float(height)
         let fxD = x / rgb_x * rgb_fx
         let fyD = y / rgb_y * rgb_fy
-        let cxD = x / rgb_y * rgb_cx
+        let cxD = x / rgb_x * rgb_cx
         let cyD = y / rgb_y * rgb_cy
         return (fxD, fyD, cxD, cyD)
     }

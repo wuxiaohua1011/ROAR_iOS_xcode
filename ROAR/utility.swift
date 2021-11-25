@@ -359,7 +359,6 @@ class CustomDepthData {
             self.ar_depth_data = data
             let depth_data = self.depthCVPixelToData(from: data.depthMap)
             self.circular.overwrite(depth_data)
-            
             self.updateIntrinsics(rgb_x: Float(cam.imageResolution.height),
                                   rgb_y: Float(cam.imageResolution.width),
                                   rgb_fx: cam.intrinsics[0][0],
@@ -376,8 +375,12 @@ class CustomDepthData {
         let x = Float(self.height)
         self.fxD = x / rgb_x * rgb_fx
         self.fyD = y / rgb_y * rgb_fy
-        self.cxD = x / rgb_y * rgb_cx
+        self.cxD = x / rgb_x * rgb_cx
         self.cyD = y / rgb_y * rgb_cy
+//        self.fxD = rgb_fx
+//        self.fyD = rgb_fy
+//        self.cxD = rgb_cx
+//        self.cyD = rgb_cy
     }
     
     func depthCVPixelToData(from pixelBuffer: CVPixelBuffer) -> Data {
