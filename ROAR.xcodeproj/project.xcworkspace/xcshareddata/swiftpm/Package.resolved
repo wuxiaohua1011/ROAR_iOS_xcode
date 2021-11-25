@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "CocoaAsyncSocket",
-        "repositoryURL": "https://github.com/robbiehanson/CocoaAsyncSocket",
-        "state": {
-          "branch": "master",
-          "revision": "5ddba5e72f38e56010dbfac08b44478ee5000c0c",
-          "version": null
-        }
-      },
-      {
         "package": "console-kit",
         "repositoryURL": "https://github.com/vapor/console-kit.git",
         "state": {
@@ -114,8 +105,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "addf69cfe60376c325397c8926589415576b1dd1",
-          "version": "2.34.0"
+          "revision": "f2705f9655ede35399b12040e892cf653126de98",
+          "version": "2.32.2"
         }
       },
       {
