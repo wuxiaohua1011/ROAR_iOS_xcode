@@ -131,7 +131,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     func perform_handshake(code:String){
         self.pc_ip_addr = code
         let hostUDP: NWEndpoint.Host = NWEndpoint.Host.init(code)
-        self.connection = NWConnection(host: hostUDP, port: 8008, using: .udp)
+        self.connection = NWConnection(host: hostUDP, port: 8890, using: .udp)
         
         self.connection?.stateUpdateHandler = { (newState) in
                     switch (newState) {

@@ -48,10 +48,14 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
 
                     if let string = String(data: data, encoding: .utf8) {
                         let splitted = string.components(separatedBy: ",")
-                        let throttle = Float(splitted[0]) ?? 0
-                        let steering = Float(splitted[1]) ?? 0
-                        self.controlCenter.control.throttle = throttle
-                        self.controlCenter.control.steering = steering
+                        let throttle = Float(splitted[0])
+                        let steering = Float(splitted[1])
+                        print(string, throttle, steering)
+
+                        if throttle != nil && steering != nil {
+                            self.controlCenter.control.throttle = throttle!
+                            self.controlCenter.control.steering = steering!
+                        }
                     }
                 default:
                     print("data received on unknown socket: \(String(describing: String(data: data, encoding: .utf8)))")
