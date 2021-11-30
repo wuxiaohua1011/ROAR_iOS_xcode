@@ -89,8 +89,7 @@ extension ViewController:  ARSCNViewDelegate, ARSessionDelegate, ARSessionObserv
         if AppInfo.sessionData.shouldCaliberate == true || AppInfo.sessionData.isCaliberated == false{
             for anchor in anchors {
                 guard let imageAnchor = anchor as? ARImageAnchor else { continue }
-//                ARReferenceImage(imageAnchor, orientation: <#T##CGImagePropertyOrientation#>, physicalWidth: <#T##CGFloat#>)
-                if imageAnchor.name == "BerkeleyLogo" {
+                if imageAnchor.name == "BerkeleyLogo" || imageAnchor.name == "roar_car" {
                     session.setWorldOrigin(relativeTransform: imageAnchor.transform)
                     AppInfo.sessionData.isCaliberated = true
                     AppInfo.sessionData.shouldCaliberate = false

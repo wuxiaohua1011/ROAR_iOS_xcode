@@ -155,7 +155,6 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
                 let chunk = Data(bytesNoCopy: mutRawPointer+offset, count: chunkSize, deallocator: Data.Deallocator.none)
                 data_to_send.append(chunk)
                 sock.send(data_to_send, toAddress: address, withTimeout: 0.1, tag: -1)
-//                print("buf_id \(self.curr_buffer) | prefix_num = \(counter) | total_num = \(total)")
                 offset += chunkSize
                 counter += 1
             }

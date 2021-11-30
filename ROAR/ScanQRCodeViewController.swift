@@ -80,16 +80,33 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            find(ip_addr: stringValue)
+            find(raw_string: stringValue)
         }
     }
     
-    func find(ip_addr:String) {
+    func find(raw_string: String) {
         
-        if validateIpAddress(ipToValidate: ip_addr) {
-            perform_handshake(code: ip_addr)
+        guard let result = split_raw_string(raw_string: raw_string) else {
+            Loaf.init("Unable to parse result \(raw_string)", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short, completionHandler: {_ in
+                self.captureSession.startRunning()
+            })
+            return
         }
         
+        if validateIpAddress(ipToValidate: result.ip_address) {
+            perform_handshake(ip_address: result.ip_address, port: result.port)
+        }
+    }
+    
+    func split_raw_string(raw_string: String) -> (ip_address: String, port: UInt16)? {
+        let result = raw_string.components(separatedBy: ",")
+        if result.count < 2 {
+            return nil
+        } else {
+            let ip_addr = result[0]
+            guard let port = UInt16(result[1]) else {return nil}
+            return (ip_addr, port)
+        }
     }
 
 
@@ -102,11 +119,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     
     
-    func perform_handshake(code:String){
+    func perform_handshake(ip_address:String, port: UInt16){
         
         let mSocket = GCDAsyncSocket(delegate: self, delegateQueue: DispatchQueue.main)
         do {
-            try mSocket.connect(toHost: code, onPort: 8890)
+            try mSocket.connect(toHost: ip_address, onPort: port)
             
             let hud = JGProgressHUD()
             hud.textLabel.text = "Connecting...."
@@ -120,7 +137,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                          })
                         mSocket.disconnect()
                     } else {
-                        AppInfo.pc_address = code
+                        AppInfo.pc_address = ip_address
                         AppInfo.save()
                         self.dismiss(animated: true, completion: {self.delegate?.onQRCodeScanFinished()})
                         mSocket.disconnect()
