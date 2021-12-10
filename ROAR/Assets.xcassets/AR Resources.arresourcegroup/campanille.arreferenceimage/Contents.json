@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "roar_car.jpeg",
+      "filename" : "campanille.jpeg",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,7 @@
     "version" : 1
   },
   "properties" : {
-    "width" : 10
+    "unit" : "centimeters",
+    "width" : 20.600000000000001
   }
 }
