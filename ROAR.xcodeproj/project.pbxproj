@@ -37,6 +37,7 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E89950722772592E00B05132 /* ViewController+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89950712772592E00B05132 /* ViewController+REST.swift */; };
 		E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */; };
 		E8C8EC922737A5F300CB2683 /* ChooseBLE.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */; };
 		E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */; };
@@ -99,6 +100,7 @@
 		E88C37A02705594800289DC1 /* ARPhoto2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARPhoto2.storyboard; sourceTree = "<group>"; };
 		E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2PopupViewController.swift; sourceTree = "<group>"; };
 		E88C37A827055BA000289DC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E89950712772592E00B05132 /* ViewController+REST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+REST.swift"; sourceTree = "<group>"; };
 		E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UDP.swift"; sourceTree = "<group>"; };
 		E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChooseBLE.storyboard; sourceTree = "<group>"; };
 		E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseBLEViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,
 				E83E6CA426ED57BF006B1E39 /* ViewController.swift */,
+				E89950712772592E00B05132 /* ViewController+REST.swift */,
 				E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */,
 				E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */,
 				E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */,
@@ -429,6 +432,7 @@
 				E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */,
 				E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */,
 				E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */,
+				E89950722772592E00B05132 /* ViewController+REST.swift in Sources */,
 				E83E6CD126ED5A84006B1E39 /* ViewController+BLE.swift in Sources */,
 				E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */,
 				E88C37A52705594800289DC1 /* ARPhoto2ViewController+ARKit.swift in Sources */,
@@ -622,7 +626,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,7 +649,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

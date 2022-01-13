@@ -27,7 +27,8 @@ class ARPhoto2PopupViewController: UIViewController {
             ["sniper","models.scnassets/sniper.usdz"],
             ["parade","models.scnassets/The_Parade_Armour_of_King_Erik_XIV_of_Sweden.usdz"],
             ["tiger","models.scnassets/tiger.usdz"],
-            ["airplane","models.scnassets/turtlebot.usdz"]
+            ["airplane","models.scnassets/turtlebot.usdz"],
+            ["Lunar_Rover", "models.scnassets/Lunar_Rover.usdz"]
         ]
     }
     

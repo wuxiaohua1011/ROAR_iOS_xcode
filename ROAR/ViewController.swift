@@ -13,6 +13,7 @@ import CoreBluetooth
 import NIO
 import os
 import CocoaAsyncSocket
+import Vapor
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeProtocol {
     
@@ -41,11 +42,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     var bleControlCharacteristic: CBCharacteristic!
     var updateThrottleSteeringUITimer: Timer!
     
-    
+    // UDP sockets
     var vehicleStateSocket: GCDAsyncUdpSocket!
     var worldCamSocket: GCDAsyncUdpSocket!
     var depthCamSocket: GCDAsyncUdpSocket!
     var controlSocket: GCDAsyncUdpSocket!
+    
+    // Vapor Server
+    var app: Application!
+    var dispatchWorkItem: DispatchWorkItem?
+
 
     // MARK: overrides
     override func viewDidLoad() {
@@ -69,7 +75,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         setupUI()
         setupTimers()
         setupGestures()
-        
+        self.startVaporServer()
         self.setupSocket()
     }
     
@@ -155,21 +161,49 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         self.ipAddressBtn.setTitle("Please Caliberate", for: .disabled)
     }
     @IBAction func onSaveWorldClicked(_ sender: UIButton) {
+        
         self.arSceneView.session.getCurrentWorldMap { worldMap, error in
-            guard let map = worldMap
-            else { Loaf("Can't get current world map, try moving around slowly and save again.", state: .error, sender: self).show(.short); return}
+            guard let map = worldMap else {
+                Loaf("Can't get current world map, try moving around slowly and save again.", state: .error, sender: self).show(.short);
+                return
+            }
             do {
                 let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
                 //make cache name function
                 UserDefaults.standard.setValue(data, forKey: AppInfo.get_ar_experience_name())
-
                 //This will emit the data in UserDefaults for AppInfo.get_ar_experience_name()
                 Loaf("World Saved", state: .success, sender: self).show(.short)
             } catch {
-                Loaf("Error: \(error.localizedDescription)", state: .error, sender: self).show(.short)
+                Loaf("Error: \(error.localizedDescription)", state: .error, sender: self).show(.short);
             }
         }
+    }
+    
+    func saveWorld() -> (status: Bool, msg: String)  {
+        var status = false
+        var msg = ""
+        self.arSceneView.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap else {
+                status = false
+                msg = "Can't get current world map, try moving around slowly and save again."
+                return
+            }
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                //make cache name function
+                UserDefaults.standard.setValue(data, forKey: AppInfo.get_ar_experience_name())
+                //This will emit the data in UserDefaults for AppInfo.get_ar_experience_name()
+                Loaf("World Saved", state: .success, sender: self).show(.short)
+                status = true
+                msg = "World Saved"
+            } catch {
+                status = false
+                msg = "Error: \(error.localizedDescription)"
+            }
+        }
+        return (status, msg)
 
+        
     }
     
     func onBLEConnected() {
@@ -191,6 +225,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     
     func onQRCodeScanFinished() {
         controlCenter.restartUDP()
+        AppInfo.sessionData.isCaliberated = false;
     }
 }
 
