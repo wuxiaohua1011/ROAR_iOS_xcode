@@ -85,6 +85,7 @@ class ControlCenter {
             vel_x = (node.position.x-self.transform.position.x) / time_diff // m/s
             vel_y = (node.position.y-self.transform.position.y) / time_diff
             vel_z = (node.position.z-self.transform.position.z) / time_diff
+            let recv_time = time - TimeInterval(round(time / 1000) * 1000)
             
             self.transform.position = node.position
             
@@ -113,7 +114,8 @@ class ControlCenter {
                                          gx: gx,
                                          gy: gz,
                                          gz: gy,
-                                         recv_time:time
+                                         recv_time: recv_time
+//                                         recv_time:time
                                          
                 )
             }
