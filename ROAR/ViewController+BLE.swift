@@ -70,12 +70,19 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
                     // TODO reconnect every 5 seconds
                     if AppInfo.sessionData.isBLEConnected {
                         self.writeBLE()
+                        self.readFromBLE()
                     }
                 }
                 let runLoop = RunLoop.current
                 runLoop.add(self.bleTimer, forMode: .default)
                 runLoop.run()
             }
+    }
+    
+    func readFromBLE() {
+        if velocityCharacteristic != nil {
+            self.bluetoothPeripheral.readValue(for: self.velocityCharacteristic)
+        }
     }
     func disconnectBluetooth() {
         self.bleTimer.invalidate()
@@ -86,7 +93,6 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func writeBLE() {
         if self.bluetoothPeripheral != nil && self.bluetoothPeripheral.state == .connected {
-
             self.writeToBluetoothDevice(throttle: CGFloat(controlCenter.control.throttle), steering: CGFloat(controlCenter.control.steering))
         }
     }
@@ -116,7 +122,22 @@ extension ViewController:CBCentralManagerDelegate, CBPeripheralDelegate {
                 if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1214" {
                     bleControlCharacteristic = char
                 }
+                if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1215" {
+                    velocityCharacteristic = char
+                }
             }
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let e = error {
+                print("ERROR didUpdateValue \(e)")
+                return
+            }
+        if characteristic == velocityCharacteristic {
+            guard let data = characteristic.value else { return }
+            let velocity = data.withUnsafeBytes { $0.load(as: Float.self) }
+            self.controlCenter.vehicleState.hall_effect_sensor_velocity = velocity
         }
     }
     
