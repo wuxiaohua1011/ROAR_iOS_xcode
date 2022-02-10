@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import CoreBluetooth
 import SwiftyBeaver
 import ARKit
 import Loaf
-import CoreBluetooth
 import NIO
 import os
 import CocoaAsyncSocket
@@ -123,11 +123,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     
     @objc func didPanningScreenLeft(_ recognizer: UIScreenEdgePanGestureRecognizer)  {
         if recognizer.state == .ended {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
-//            vc.modalPresentationStyle = .fullScreen
-//            vc.modalTransitionStyle = .crossDissolve
-//            self.present(vc, animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MainUIViewController") as UIViewController
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            self.present(vc, animated: true, completion: nil)
+            
             
         }
     }
