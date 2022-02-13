@@ -28,7 +28,7 @@
 		E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE326ED6981006B1E39 /* Loaf */; };
 		E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */; };
 		E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE826ED7147006B1E39 /* JGProgressHUD */; };
-		E87D8FFB2737A9F60078F31F /* ChooseBLEViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE.swift */; };
+		E87D8FFB2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift */; };
 		E88C3796270557F800289DC1 /* models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = E88C3795270557F800289DC1 /* models.scnassets */; };
 		E88C37A22705594800289DC1 /* ARPhoto2ViewController+Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C379C2705594800289DC1 /* ARPhoto2ViewController+Record.swift */; };
 		E88C37A32705594800289DC1 /* ARPhoto2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C379D2705594800289DC1 /* ARPhoto2ViewController.swift */; };
@@ -90,7 +90,7 @@
 		E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E83E6CE026ED631E006B1E39 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBluetoothViewController.swift; sourceTree = "<group>"; };
-		E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseBLEViewController+BLE.swift"; sourceTree = "<group>"; };
+		E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseBLEViewController+BLE_original.swift"; sourceTree = "<group>"; };
 		E88C3795270557F800289DC1 /* models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = models.scnassets; sourceTree = "<group>"; };
 		E88C379C2705594800289DC1 /* ARPhoto2ViewController+Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARPhoto2ViewController+Record.swift"; sourceTree = "<group>"; };
 		E88C379D2705594800289DC1 /* ARPhoto2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2ViewController.swift; sourceTree = "<group>"; };
@@ -241,7 +241,7 @@
 			children = (
 				E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */,
 				E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */,
-				E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE.swift */,
+				E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift */,
 			);
 			path = ChooseBLE;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 				E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */,
 				E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */,
 				E88C37A42705594800289DC1 /* SelectContentDelegate.swift in Sources */,
-				E87D8FFB2737A9F60078F31F /* ChooseBLEViewController+BLE.swift in Sources */,
+				E87D8FFB2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift in Sources */,
 				E88C37A22705594800289DC1 /* ARPhoto2ViewController+Record.swift in Sources */,
 				E821AECB27274AF1009F49D2 /* ScanQRCodeViewController.swift in Sources */,
 				E83E6CE126ED631E006B1E39 /* Server.swift in Sources */,
