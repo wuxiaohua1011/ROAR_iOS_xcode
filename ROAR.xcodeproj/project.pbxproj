@@ -24,7 +24,6 @@
 		E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */; };
 		E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */; };
 		E83E6CDF26ED623E006B1E39 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */; };
-		E83E6CE126ED631E006B1E39 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CE026ED631E006B1E39 /* Server.swift */; };
 		E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE326ED6981006B1E39 /* Loaf */; };
 		E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */; };
 		E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = E83E6CE826ED7147006B1E39 /* JGProgressHUD */; };
@@ -37,6 +36,7 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E89950722772592E00B05132 /* ViewController+REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89950712772592E00B05132 /* ViewController+REST.swift */; };
 		E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */; };
 		E8C8EC922737A5F300CB2683 /* ChooseBLE.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */; };
 		E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */; };
@@ -45,6 +45,8 @@
 		E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE23192729B8F100A93340 /* NIOCore */; };
 		E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */; };
 		E8EE231E2729B8F100A93340 /* NIOFoundationCompat in Frameworks */ = {isa = PBXBuildFile; productRef = E8EE231D2729B8F100A93340 /* NIOFoundationCompat */; };
+		E8EEB83A27B4DF2C0045F7AC /* CaliberationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EEB83927B4DF2C0045F7AC /* CaliberationViewController.swift */; };
+		E8EEB83C27B4E0A80045F7AC /* CaliberationViewController+BLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EEB83B27B4E0A80045F7AC /* CaliberationViewController+BLE.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +90,6 @@
 		E83E6CD426ED5AEF006B1E39 /* AppStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStruct.swift; sourceTree = "<group>"; };
 		E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AR.swift"; sourceTree = "<group>"; };
 		E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
-		E83E6CE026ED631E006B1E39 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		E83E6CE526ED6A9A006B1E39 /* SelectBluetoothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBluetoothViewController.swift; sourceTree = "<group>"; };
 		E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooseBLEViewController+BLE_original.swift"; sourceTree = "<group>"; };
 		E88C3795270557F800289DC1 /* models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = models.scnassets; sourceTree = "<group>"; };
@@ -99,9 +100,12 @@
 		E88C37A02705594800289DC1 /* ARPhoto2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARPhoto2.storyboard; sourceTree = "<group>"; };
 		E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2PopupViewController.swift; sourceTree = "<group>"; };
 		E88C37A827055BA000289DC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E89950712772592E00B05132 /* ViewController+REST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+REST.swift"; sourceTree = "<group>"; };
 		E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UDP.swift"; sourceTree = "<group>"; };
 		E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChooseBLE.storyboard; sourceTree = "<group>"; };
 		E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseBLEViewController.swift; sourceTree = "<group>"; };
+		E8EEB83927B4DF2C0045F7AC /* CaliberationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliberationViewController.swift; sourceTree = "<group>"; };
+		E8EEB83B27B4E0A80045F7AC /* CaliberationViewController+BLE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CaliberationViewController+BLE.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,12 +186,14 @@
 		E83E6C9F26ED57BF006B1E39 /* ROAR */ = {
 			isa = PBXGroup;
 			children = (
+				E8EEB83827B4DF1C0045F7AC /* Caliberation */,
 				E8C8EC902737A5D900CB2683 /* ChooseBLE */,
 				E821AECA27274AF1009F49D2 /* ScanQRCodeViewController.swift */,
 				E88C3797270558A600289DC1 /* ARPhoto */,
 				E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */,
 				E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */,
 				E83E6CA426ED57BF006B1E39 /* ViewController.swift */,
+				E89950712772592E00B05132 /* ViewController+REST.swift */,
 				E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */,
 				E83E6CDC26ED5D4F006B1E39 /* ViewController+AR.swift */,
 				E83E6CD026ED5A84006B1E39 /* ViewController+BLE.swift */,
@@ -199,7 +205,6 @@
 				E83E6CD226ED5ADF006B1E39 /* utility.swift */,
 				E83E6CD426ED5AEF006B1E39 /* AppStruct.swift */,
 				E83E6CDE26ED623E006B1E39 /* ControlCenter.swift */,
-				E83E6CE026ED631E006B1E39 /* Server.swift */,
 				E88C37A827055BA000289DC1 /* MainViewController.swift */,
 			);
 			path = ROAR;
@@ -244,6 +249,15 @@
 				E87D8FFA2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift */,
 			);
 			path = ChooseBLE;
+			sourceTree = "<group>";
+		};
+		E8EEB83827B4DF1C0045F7AC /* Caliberation */ = {
+			isa = PBXGroup;
+			children = (
+				E8EEB83927B4DF2C0045F7AC /* CaliberationViewController.swift */,
+				E8EEB83B27B4E0A80045F7AC /* CaliberationViewController+BLE.swift */,
+			);
+			path = Caliberation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,11 +443,14 @@
 				E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */,
 				E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */,
 				E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */,
+				E89950722772592E00B05132 /* ViewController+REST.swift in Sources */,
 				E83E6CD126ED5A84006B1E39 /* ViewController+BLE.swift in Sources */,
 				E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */,
 				E88C37A52705594800289DC1 /* ARPhoto2ViewController+ARKit.swift in Sources */,
 				E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */,
 				E83E6CD326ED5ADF006B1E39 /* utility.swift in Sources */,
+				E8EEB83C27B4E0A80045F7AC /* CaliberationViewController+BLE.swift in Sources */,
+				E8EEB83A27B4DF2C0045F7AC /* CaliberationViewController.swift in Sources */,
 				E83E6CA526ED57BF006B1E39 /* ViewController.swift in Sources */,
 				E83E6CA126ED57BF006B1E39 /* AppDelegate.swift in Sources */,
 				E83E6CD526ED5AEF006B1E39 /* AppStruct.swift in Sources */,
@@ -442,7 +459,6 @@
 				E87D8FFB2737A9F60078F31F /* ChooseBLEViewController+BLE_original.swift in Sources */,
 				E88C37A22705594800289DC1 /* ARPhoto2ViewController+Record.swift in Sources */,
 				E821AECB27274AF1009F49D2 /* ScanQRCodeViewController.swift in Sources */,
-				E83E6CE126ED631E006B1E39 /* Server.swift in Sources */,
 				E83E6CA326ED57BF006B1E39 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,7 +638,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -99,11 +99,13 @@ class VehicleState {
     var gz: Float = 0
     var recv_time: Float = 0
     
+    var hall_effect_sensor_velocity: Float = 0
+    
     init() {
         
     }
     func toString() -> String {
-        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az),\(self.gx),\(self.gy),\(self.gz),\(self.recv_time)"
+        let string = "\(self.x), \(self.y), \(self.z), \(self.roll), \(self.pitch), \(self.yaw), \(self.vx),\(self.vy),\(self.vz),\(self.ax),\(self.ay),\(self.az),\(self.gx),\(self.gy),\(self.gz),\(hall_effect_sensor_velocity),\(self.recv_time)"
         return string
     }
     func toData() -> Data {
