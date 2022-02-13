@@ -48,10 +48,13 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
 
                     if let string = String(data: data, encoding: .utf8) {
                         let splitted = string.components(separatedBy: ",")
-                        let throttle = Float(splitted[0]) ?? 0
-                        let steering = Float(splitted[1]) ?? 0
-                        self.controlCenter.control.throttle = throttle
-                        self.controlCenter.control.steering = steering
+                        let throttle = Float(splitted[0])
+                        let steering = Float(splitted[1])
+
+                        if throttle != nil && steering != nil {
+                            self.controlCenter.control.throttle = throttle!
+                            self.controlCenter.control.steering = steering!
+                        }
                     }
                 default:
                     print("data received on unknown socket: \(String(describing: String(data: data, encoding: .utf8)))")
@@ -92,7 +95,7 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
         let x = Float(height)
         let fxD = x / rgb_x * rgb_fx
         let fyD = y / rgb_y * rgb_fy
-        let cxD = x / rgb_y * rgb_cx
+        let cxD = x / rgb_x * rgb_cx
         let cyD = y / rgb_y * rgb_cy
         return (fxD, fyD, cxD, cyD)
     }
@@ -152,7 +155,6 @@ extension ViewController: GCDAsyncUdpSocketDelegate {
                 let chunk = Data(bytesNoCopy: mutRawPointer+offset, count: chunkSize, deallocator: Data.Deallocator.none)
                 data_to_send.append(chunk)
                 sock.send(data_to_send, toAddress: address, withTimeout: 0.1, tag: -1)
-//                print("buf_id \(self.curr_buffer) | prefix_num = \(counter) | total_num = \(total)")
                 offset += chunkSize
                 counter += 1
             }

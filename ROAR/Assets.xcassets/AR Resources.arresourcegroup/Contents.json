@@ -6,6 +6,9 @@
   "resources" : [
     {
       "filename" : "BerkeleyLogo.arreferenceimage"
+    },
+    {
+      "filename" : "campanille.arreferenceimage"
     }
   ]
 }
