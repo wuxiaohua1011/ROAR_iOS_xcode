@@ -20,8 +20,13 @@ class ChooseBLEViewController: UIViewController {
     var logger: SwiftyBeaver.Type {return (UIApplication.shared.delegate as! AppDelegate).logger}
     var bluetoothPeripheral: CBPeripheral!
     var centralManager: CBCentralManager!
-    var bleControlCharacteristic: CBCharacteristic!
+    var bleSpeedCharacteristic: CBCharacteristic!
+    var bleSteeringCharacteristic: CBCharacteristic!
+    var newNameCharacteristic: CBCharacteristic!
+    var overrideCharacteristic: CBCharacteristic!
     var wifiMenu: UIMenu!
+    
+    
     
     @IBOutlet weak var chooseBLEButton: UIButton!
     @IBOutlet weak var throttleTextField: UITextField!
@@ -81,21 +86,43 @@ class ChooseBLEViewController: UIViewController {
             self.view.transform = newTransform
          })
     }
+    
+//    @IBAction func onSendControlBtnClicked(_ sender: UIButton) {
+//        let throttle_str = self.throttleTextField.text ?? "0"
+//        let steering_str = self.steeringTextField.text ?? "0"
+//        if self.checkControl(val: throttle_str) && self.checkControl(val: steering_str) {
+//            let throttle = Float(throttle_str)!
+//            let steering = Float(steering_str)!
+//            self.writeToBluetoothDevice(throttle: CGFloat(throttle), steering: CGFloat(steering))
+//            Loaf.init("(\(throttle), \(steering)) sent", state: .info, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short)
+//        } else {
+//            Loaf.init("Please make sure controls are in (-1, 1)", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.long, completionHandler: nil)
+//        }
+//    }
+    
     @IBAction func onSendControlBtnClicked(_ sender: UIButton) {
         let throttle_str = self.throttleTextField.text ?? "0"
         let steering_str = self.steeringTextField.text ?? "0"
         if self.checkControl(val: throttle_str) && self.checkControl(val: steering_str) {
-            let throttle = Float(throttle_str)!
-            let steering = Float(steering_str)!
-            self.writeToBluetoothDevice(throttle: CGFloat(throttle), steering: CGFloat(steering))
+            let throttle = Double(throttle_str)!
+            let steering = Double(steering_str)!
+            self.writeSpeedToBluetoothDevice(throttle: CGFloat(throttle))
+            self.writeSteeringToBluetoothDevice(steering: CGFloat(steering))
             Loaf.init("(\(throttle), \(steering)) sent", state: .info, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.short)
         } else {
             Loaf.init("Please make sure controls are in (-1, 1)", state: .error, location: .bottom, presentingDirection: .vertical, dismissingDirection: .vertical, sender: self).show(.long, completionHandler: nil)
         }
     }
+    
     @IBAction func onBLENameChangeBtn(_ sender: UIButton) {
-        
+        let blename_str = self.newBLENameTextField.text ?? "0"
+        self.sendBLENewName(peripheral: self.bluetoothPeripheral, message: blename_str)
     }
+    
+    @IBAction func override(_ sender: UIButton) {
+        self.override(peripheral: self.bluetoothPeripheral, message: "override")
+    }
+    
     @IBAction func onSSIDClicked(_ sender: UIButton) {
      
     }
