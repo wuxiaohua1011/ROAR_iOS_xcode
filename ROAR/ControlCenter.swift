@@ -90,7 +90,6 @@ class ControlCenter {
             
             // yaw, roll, pitch DO NOT CHANGE THIS!
             self.transform.eulerAngle = SCNVector3(node.eulerAngles.z, node.eulerAngles.y, node.eulerAngles.x)
-            
             if let accData = self.motion.accelerometerData, let gyroData = self.motion.gyroData {
                 let ax = Float(accData.acceleration.x)
                 let ay = Float(accData.acceleration.y)
@@ -108,14 +107,16 @@ class ControlCenter {
                                          vy: vel_y, //self.vehicleState.ay * time_diff,
                                          vz: vel_z, //self.vehicleState.az * time_diff,
                                          ax: ax,
-                                         ay: az,
-                                         az: ay,
+                                         ay: ay,
+                                         az: az,
                                          gx: gx,
-                                         gy: gz,
-                                         gz: gy,
-                                         recv_time:time
-                                         
-                )
+                                         gy: gy,
+                                         gz: gz,
+                                         recv_time:time,
+                                         ix:node.simdOrientation.vector[0],
+                                         iy:node.simdOrientation.vector[1],
+                                         iz:node.simdOrientation.vector[2],
+                                         r:node.simdOrientation.vector[3])
             }
             
            
