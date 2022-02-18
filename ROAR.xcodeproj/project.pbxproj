@@ -71,7 +71,7 @@
 		A498B2D702D7CB6768B7DD47 /* Pods_ROAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ROAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA70681EA7FA776D886D4DC2 /* Pods-ROAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ROAR.release.xcconfig"; path = "Target Support Files/Pods-ROAR/Pods-ROAR.release.xcconfig"; sourceTree = "<group>"; };
 		E821AECA27274AF1009F49D2 /* ScanQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRCodeViewController.swift; sourceTree = "<group>"; };
-		E83E6C9D26ED57BF006B1E39 /* ROAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ROAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E83E6C9D26ED57BF006B1E39 /* HardwarePID-ROAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HardwarePID-ROAR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83E6CA026ED57BF006B1E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E83E6CA226ED57BF006B1E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E83E6CA426ED57BF006B1E39 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		E83E6C9E26ED57BF006B1E39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E83E6C9D26ED57BF006B1E39 /* ROAR.app */,
+				E83E6C9D26ED57BF006B1E39 /* HardwarePID-ROAR.app */,
 				E83E6CB326ED57C4006B1E39 /* ROARTests.xctest */,
 				E83E6CBE26ED57C4006B1E39 /* ROARUITests.xctest */,
 			);
@@ -263,9 +263,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E83E6C9C26ED57BF006B1E39 /* ROAR */ = {
+		E83E6C9C26ED57BF006B1E39 /* HardwarePID-ROAR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "ROAR" */;
+			buildConfigurationList = E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "HardwarePID-ROAR" */;
 			buildPhases = (
 				E1EA542063A4D250171F60C5 /* [CP] Check Pods Manifest.lock */,
 				E83E6C9926ED57BF006B1E39 /* Sources */,
@@ -276,7 +276,7 @@
 			);
 			dependencies = (
 			);
-			name = ROAR;
+			name = "HardwarePID-ROAR";
 			packageProductDependencies = (
 				E83E6CD726ED5B9E006B1E39 /* Vapor */,
 				E83E6CDA26ED5C20006B1E39 /* SwiftyBeaver */,
@@ -289,7 +289,7 @@
 				E8EABA302737C2650009DCC1 /* CocoaAsyncSocket */,
 			);
 			productName = ROAR;
-			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
+			productReference = E83E6C9D26ED57BF006B1E39 /* HardwarePID-ROAR.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E83E6CB226ED57C4006B1E39 /* ROARTests */ = {
@@ -371,7 +371,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E83E6C9C26ED57BF006B1E39 /* ROAR */,
+				E83E6C9C26ED57BF006B1E39 /* HardwarePID-ROAR */,
 				E83E6CB226ED57C4006B1E39 /* ROARTests */,
 				E83E6CBD26ED57C4006B1E39 /* ROARUITests */,
 			);
@@ -484,12 +484,12 @@
 /* Begin PBXTargetDependency section */
 		E83E6CB526ED57C4006B1E39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E83E6C9C26ED57BF006B1E39 /* ROAR */;
+			target = E83E6C9C26ED57BF006B1E39 /* HardwarePID-ROAR */;
 			targetProxy = E83E6CB426ED57C4006B1E39 /* PBXContainerItemProxy */;
 		};
 		E83E6CC026ED57C4006B1E39 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E83E6C9C26ED57BF006B1E39 /* ROAR */;
+			target = E83E6C9C26ED57BF006B1E39 /* HardwarePID-ROAR */;
 			targetProxy = E83E6CBF26ED57C4006B1E39 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -638,7 +638,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -661,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = D9D2HSUW4S;
 				INFOPLIST_FILE = ROAR/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -772,7 +772,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "ROAR" */ = {
+		E83E6CC726ED57C4006B1E39 /* Build configuration list for PBXNativeTarget "HardwarePID-ROAR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E83E6CC826ED57C4006B1E39 /* Debug */,

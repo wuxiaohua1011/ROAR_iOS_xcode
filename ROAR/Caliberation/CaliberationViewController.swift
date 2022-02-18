@@ -16,6 +16,8 @@ class CaliberationViewController: UIViewController {
     @IBOutlet weak var bleButton: UIButton!
     @IBOutlet weak var sendControlBtn: UIButton!
     @IBOutlet weak var sendKValuesBtn: UIButton!
+    @IBOutlet weak var requestBLENameChangeButton: UIButton!
+    @IBOutlet weak var newBLENameTextField: UITextField!
     @IBOutlet weak var throttleTextField: UITextField!
     @IBOutlet weak var SteeringTextField: UITextField!
     @IBOutlet weak var KpTextField: UITextField!
@@ -27,7 +29,8 @@ class CaliberationViewController: UIViewController {
     
     var logger: SwiftyBeaver.Type {return (UIApplication.shared.delegate as! AppDelegate).logger}
 
-    var iOSControllerRange: ClosedRange<CGFloat> = CGFloat(-1.0)...CGFloat(1.0);
+    var ThrottleControllerRange: ClosedRange<CGFloat> = CGFloat(-5.0)...CGFloat(5.0);
+    var SteeringControllerRange: ClosedRange<CGFloat> = CGFloat(-1.0)...CGFloat(1.0);
     let throttle_range = CGFloat(1000)...CGFloat(2000)
     let steer_range = CGFloat(1000)...CGFloat(2000)
     var bleTimer: Timer!
@@ -35,6 +38,7 @@ class CaliberationViewController: UIViewController {
     var bleControlCharacteristic: CBCharacteristic!
     var velocityCharacteristic: CBCharacteristic!
     var configCharacteristic: CBCharacteristic!
+    var newNameCharacteristic: CBCharacteristic!
     var velocity: Float = 0
     
     var readVelocityTimer: Timer!
@@ -85,6 +89,12 @@ class CaliberationViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func onBLENameChangeBtn(_ sender: UIButton) {
+        let blename_str = self.newBLENameTextField.text ?? "0"
+        self.sendBLENewName(peripheral: self.bluetoothPeripheral, message: blename_str)
+    }
+    
     @IBAction func onSendKValuesTapped(_ sender: UIButton) {
         // First extract k values from text field and cast it into float
         var kp = Float(self.KpTextField.text ?? "1") ?? 1

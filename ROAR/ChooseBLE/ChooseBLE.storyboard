@@ -12,7 +12,7 @@
         <!--ChooseBLE View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="ChooseBLE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ChooseBLEViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChooseBLE" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ChooseBLEViewController" customModule="HardwarePID_ROAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -192,7 +192,7 @@
         <!--Select Bluetooth View Controller-->
         <scene sceneID="nmY-Uf-1bP">
             <objects>
-                <viewController id="zaY-sV-KA6" customClass="SelectBluetoothViewController" customModule="ROAR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zaY-sV-KA6" customClass="SelectBluetoothViewController" customModule="HardwarePID_ROAR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cwD-7U-MQo">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
