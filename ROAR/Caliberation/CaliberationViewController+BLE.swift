@@ -70,6 +70,12 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
             self.bluetoothPeripheral.readValue(for: self.velocityCharacteristic)
         }
     }
+    @objc
+    func readThrottle() {
+        if throtReturnCharacteristic != nil {
+            self.bluetoothPeripheral.readValue(for: self.throtReturnCharacteristic)
+        }
+    }
     func disconnectBluetooth() {
         self.bleTimer.invalidate()
         if self.bluetoothPeripheral != nil {
@@ -114,6 +120,9 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
                 if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1216" {
                     configCharacteristic = char 
                 }
+                if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1217" {
+                    throtReturnCharacteristic = char
+                }
             }
         }
     }
@@ -129,6 +138,14 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
             self.velocity = data.withUnsafeBytes { $0.load(as: Float.self) }
             DispatchQueue.main.async {
                 self.velocity_label.text = "Current Velocity: \(self.velocity)"
+            }
+        }
+        if characteristic == throtReturnCharacteristic {
+            // catch a throttle change and update the throttle label
+            guard let throt = characteristic.value else { return }
+            self.throtReturn = throt.withUnsafeBytes { $0.load(as: Float.self) }
+            DispatchQueue.main.async {
+                self.throt_return_label.text = "Current throttle: \(self.throtReturn)"
             }
         }
     }

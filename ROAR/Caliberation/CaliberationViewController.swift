@@ -24,11 +24,13 @@ class CaliberationViewController: UIViewController {
     @IBOutlet weak var KiTextField: UITextField!
     @IBOutlet weak var KdTextField: UITextField!
     @IBOutlet weak var velocity_label: UILabel!
+    @IBOutlet weak var throt_return_label: UILabel!
     var bluetoothPeripheral: CBPeripheral!
     var centralManager: CBCentralManager!
     
     var logger: SwiftyBeaver.Type {return (UIApplication.shared.delegate as! AppDelegate).logger}
 
+//    add velocity control
     var ThrottleControllerRange: ClosedRange<CGFloat> = CGFloat(-5.0)...CGFloat(5.0);
     var SteeringControllerRange: ClosedRange<CGFloat> = CGFloat(-1.0)...CGFloat(1.0);
     let throttle_range = CGFloat(1000)...CGFloat(2000)
@@ -37,11 +39,14 @@ class CaliberationViewController: UIViewController {
     var bluetoothDispatchWorkitem:DispatchWorkItem!
     var bleControlCharacteristic: CBCharacteristic!
     var velocityCharacteristic: CBCharacteristic!
+    var throtReturnCharacteristic: CBCharacteristic!
     var configCharacteristic: CBCharacteristic!
     var newNameCharacteristic: CBCharacteristic!
     var velocity: Float = 0
+    var throtReturn: Float = 0
     
     var readVelocityTimer: Timer!
+    var readThrottleTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +71,8 @@ class CaliberationViewController: UIViewController {
         self.bleButton.setTitle("BLE: \(AppInfo.bluetootConfigurations?.name ?? "No Name")", for: .normal)
         AppInfo.save()
         self.readVelocityTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.readVelocity), userInfo: nil, repeats: true)
+        self.readThrottleTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.readThrottle), userInfo: nil, repeats: true)
+        
     }
     
     func onBLEDisconnected() {
@@ -73,6 +80,9 @@ class CaliberationViewController: UIViewController {
         self.bleButton.setTitle("BLE Not Connected", for: .normal)
         if self.readVelocityTimer != nil {
             self.readVelocityTimer.invalidate()
+        }
+        if self.readThrottleTimer != nil {
+            self.readThrottleTimer.invalidate()
         }
         
     }

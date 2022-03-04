@@ -216,13 +216,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="30" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gaS-L6-dGA">
-                                <rect key="frame" x="86" y="360" width="275" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="30" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gaS-L6-dGA">
+                                <rect key="frame" x="86" y="360" width="275" height="35.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyH-ij-KPX">
-                                <rect key="frame" x="86" y="402" width="275" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="3" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyH-ij-KPX">
+                                <rect key="frame" x="86" y="403.33333333333331" width="275" height="32.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
@@ -248,16 +248,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWq-Ht-SRu">
-                                <rect key="frame" x="138" y="444" width="115" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dWq-Ht-SRu">
+                                <rect key="frame" x="138" y="444" width="114" height="47"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Send K values"/>
                                 <connections>
                                     <action selector="onSendKValuesTapped:" destination="nfP-WJ-ZRp" eventType="touchUpInside" id="QXd-XB-0RD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yph-9R-t7E">
-                                <rect key="frame" x="17" y="33" width="357" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yph-9R-t7E">
+                                <rect key="frame" x="16" y="33" width="358" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="mnh-C1-8Ss"/>
                                 </constraints>
@@ -278,16 +278,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdu-5M-tmK">
-                                <rect key="frame" x="81" y="154" width="229" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdu-5M-tmK">
+                                <rect key="frame" x="81" y="154" width="228" height="47"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Send throttle &amp; steering"/>
                                 <connections>
                                     <action selector="onSendControlBtnTapped:" destination="nfP-WJ-ZRp" eventType="touchUpInside" id="Sai-K2-TV4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khP-Y9-TUR">
-                                <rect key="frame" x="52" y="555" width="287" height="55"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khP-Y9-TUR">
+                                <rect key="frame" x="52" y="555" width="286" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="xPI-ro-uLV"/>
                                 </constraints>
@@ -305,6 +305,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Throttle: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsn-gp-Rri" userLabel="Throttle label">
+                                <rect key="frame" x="153" y="643" width="141.33333333333337" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="JEX-gR-hgS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fYx-I8-Qw6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -331,7 +340,9 @@
                             <constraint firstItem="prF-4b-LGA" firstAttribute="leading" secondItem="eeq-T8-tGy" secondAttribute="leading" id="Jft-A4-1Er"/>
                             <constraint firstItem="WxQ-pS-nQs" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="74" id="K2H-ZL-so0"/>
                             <constraint firstItem="fYx-I8-Qw6" firstAttribute="trailing" secondItem="0G7-H3-pVl" secondAttribute="trailing" constant="47" id="Kzq-iH-1Ob"/>
+                            <constraint firstItem="fsn-gp-Rri" firstAttribute="centerX" secondItem="kyH-ij-KPX" secondAttribute="centerX" id="LKG-1P-JFn"/>
                             <constraint firstItem="hdu-5M-tmK" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="81" id="N7d-kJ-vnI"/>
+                            <constraint firstItem="fsn-gp-Rri" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fYx-I8-Qw6" secondAttribute="leading" id="O17-cl-9pu"/>
                             <constraint firstItem="a2e-dt-XRz" firstAttribute="centerX" secondItem="id0-tK-Dkm" secondAttribute="centerX" id="OKh-T4-5Yq"/>
                             <constraint firstItem="prF-4b-LGA" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="38" id="P4e-xW-0Vc"/>
                             <constraint firstItem="id0-tK-Dkm" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="31" id="Pao-yq-vKP"/>
@@ -344,10 +355,13 @@
                             <constraint firstItem="dWq-Ht-SRu" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="138" id="Ydo-00-hlv"/>
                             <constraint firstItem="fYx-I8-Qw6" firstAttribute="trailing" secondItem="g83-TJ-mZd" secondAttribute="trailing" constant="29" id="bdC-zy-cCc"/>
                             <constraint firstItem="prF-4b-LGA" firstAttribute="centerY" secondItem="g83-TJ-mZd" secondAttribute="centerY" id="bki-UA-1Uf"/>
+                            <constraint firstItem="fsn-gp-Rri" firstAttribute="top" secondItem="khP-Y9-TUR" secondAttribute="bottom" constant="33" id="ciz-X0-vMU"/>
+                            <constraint firstItem="fYx-I8-Qw6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fsn-gp-Rri" secondAttribute="trailing" id="fBu-hd-fhX"/>
                             <constraint firstItem="g83-TJ-mZd" firstAttribute="leading" secondItem="prF-4b-LGA" secondAttribute="trailing" constant="27" id="fPq-fF-HU0"/>
                             <constraint firstItem="Yph-9R-t7E" firstAttribute="trailing" secondItem="nPr-PX-JPX" secondAttribute="trailingMargin" id="gJa-qh-gk5"/>
                             <constraint firstItem="a2e-dt-XRz" firstAttribute="leading" secondItem="fYx-I8-Qw6" secondAttribute="leading" constant="49" id="iq9-bT-0Dx"/>
                             <constraint firstItem="WiH-v0-ws8" firstAttribute="top" secondItem="dWq-Ht-SRu" secondAttribute="bottom" constant="22" id="jA5-nU-7BY"/>
+                            <constraint firstItem="kyH-ij-KPX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zlD-Yg-Ake" secondAttribute="trailing" constant="8" symbolic="YES" id="kBy-AA-znq"/>
                             <constraint firstItem="khP-Y9-TUR" firstAttribute="top" secondItem="WiH-v0-ws8" secondAttribute="bottom" constant="8" id="lCs-YD-k3q"/>
                             <constraint firstItem="zlD-Yg-Ake" firstAttribute="centerY" secondItem="kyH-ij-KPX" secondAttribute="centerY" id="lqL-bA-sax"/>
                             <constraint firstItem="gaS-L6-dGA" firstAttribute="top" secondItem="g83-TJ-mZd" secondAttribute="bottom" constant="8.3333333333333144" id="nuZ-ii-gEj"/>
@@ -355,6 +369,7 @@
                             <constraint firstItem="fYx-I8-Qw6" firstAttribute="bottom" secondItem="khP-Y9-TUR" secondAttribute="bottom" constant="146" id="rpP-gb-uhz"/>
                             <constraint firstItem="WMZ-u7-Fow" firstAttribute="top" secondItem="0G7-H3-pVl" secondAttribute="bottom" constant="8" id="uhY-E6-FEl"/>
                             <constraint firstItem="dWq-Ht-SRu" firstAttribute="centerX" secondItem="khP-Y9-TUR" secondAttribute="centerX" id="vXy-Dx-FSO"/>
+                            <constraint firstItem="gaS-L6-dGA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eeq-T8-tGy" secondAttribute="trailing" constant="8" symbolic="YES" id="xEY-bl-SXo"/>
                             <constraint firstItem="0G7-H3-pVl" firstAttribute="centerX" secondItem="WMZ-u7-Fow" secondAttribute="centerX" id="ySC-bQ-9lF"/>
                             <constraint firstItem="id0-tK-Dkm" firstAttribute="top" secondItem="a2e-dt-XRz" secondAttribute="bottom" constant="8" id="zXy-hM-YW6"/>
                         </constraints>
@@ -370,6 +385,7 @@
                         <outlet property="requestBLENameChangeButton" destination="khP-Y9-TUR" id="yzo-3n-pNx"/>
                         <outlet property="sendControlBtn" destination="hdu-5M-tmK" id="oDN-1z-yWk"/>
                         <outlet property="sendKValuesBtn" destination="dWq-Ht-SRu" id="6pI-d5-m8C"/>
+                        <outlet property="throt_return_label" destination="fsn-gp-Rri" id="e70-RR-y7C"/>
                         <outlet property="throttleTextField" destination="id0-tK-Dkm" id="3Ux-VZ-m4E"/>
                         <outlet property="velocity_label" destination="WxQ-pS-nQs" id="B9x-IM-3Yd"/>
                     </connections>
