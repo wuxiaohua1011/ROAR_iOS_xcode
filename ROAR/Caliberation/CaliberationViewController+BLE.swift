@@ -70,6 +70,12 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
             self.bluetoothPeripheral.readValue(for: self.velocityCharacteristic)
         }
     }
+    @objc
+    func readThrottle() {
+        if throtReturnCharacteristic != nil {
+            self.bluetoothPeripheral.readValue(for: self.throtReturnCharacteristic)
+        }
+    }
     func disconnectBluetooth() {
         self.bleTimer.invalidate()
         if self.bluetoothPeripheral != nil {
@@ -79,8 +85,8 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
     
     func writeToBluetoothDevice(throttle: CGFloat, steering: CGFloat){
         // turn CGFloat into Int, and then into a string in format of (THROTTLE, STEERING) to send it.
-        let currThrottleRPM = throttle.map(from: self.iOSControllerRange, to: self.throttle_range)
-        var currSteeringRPM = steering.map(from: self.iOSControllerRange, to: self.steer_range)
+        let currThrottleRPM = throttle.map(from: self.ThrottleControllerRange, to: self.throttle_range)
+        var currSteeringRPM = steering.map(from: self.SteeringControllerRange, to: self.steer_range)
         
         currSteeringRPM = currSteeringRPM.clamped(to: 1000...2000)
         
@@ -108,8 +114,14 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
                 if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1215" {
                     velocityCharacteristic = char
                 }
+                if char.uuid.uuidString == "19B10012-E8F2-537E-4F6C-D104768A1214" {
+                    newNameCharacteristic = char
+                }
                 if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1216" {
                     configCharacteristic = char 
+                }
+                if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1217" {
+                    throtReturnCharacteristic = char
                 }
             }
         }
@@ -127,6 +139,21 @@ extension CaliberationViewController:CBCentralManagerDelegate, CBPeripheralDeleg
             DispatchQueue.main.async {
                 self.velocity_label.text = "Current Velocity: \(self.velocity)"
             }
+        }
+        if characteristic == throtReturnCharacteristic {
+            // catch a throttle change and update the throttle label
+            guard let throt = characteristic.value else { return }
+            self.throtReturn = throt.withUnsafeBytes { $0.load(as: Float.self) }
+            DispatchQueue.main.async {
+                self.throt_return_label.text = "Current throttle: \(self.throtReturn)"
+            }
+        }
+    }
+    
+    func sendBLENewName(peripheral: CBPeripheral, message: String){
+        if newNameCharacteristic != nil {
+            peripheral.writeValue(message.data(using: .utf8)!, for: newNameCharacteristic, type: .withoutResponse)
+            //AppInfo.forget()
         }
     }
     

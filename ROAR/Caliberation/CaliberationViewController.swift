@@ -16,28 +16,37 @@ class CaliberationViewController: UIViewController {
     @IBOutlet weak var bleButton: UIButton!
     @IBOutlet weak var sendControlBtn: UIButton!
     @IBOutlet weak var sendKValuesBtn: UIButton!
+    @IBOutlet weak var requestBLENameChangeButton: UIButton!
+    @IBOutlet weak var newBLENameTextField: UITextField!
     @IBOutlet weak var throttleTextField: UITextField!
     @IBOutlet weak var SteeringTextField: UITextField!
     @IBOutlet weak var KpTextField: UITextField!
     @IBOutlet weak var KiTextField: UITextField!
     @IBOutlet weak var KdTextField: UITextField!
     @IBOutlet weak var velocity_label: UILabel!
+    @IBOutlet weak var throt_return_label: UILabel!
     var bluetoothPeripheral: CBPeripheral!
     var centralManager: CBCentralManager!
     
     var logger: SwiftyBeaver.Type {return (UIApplication.shared.delegate as! AppDelegate).logger}
 
-    var iOSControllerRange: ClosedRange<CGFloat> = CGFloat(-1.0)...CGFloat(1.0);
+//    add velocity control
+    var ThrottleControllerRange: ClosedRange<CGFloat> = CGFloat(-5.0)...CGFloat(5.0);
+    var SteeringControllerRange: ClosedRange<CGFloat> = CGFloat(-1.0)...CGFloat(1.0);
     let throttle_range = CGFloat(1000)...CGFloat(2000)
     let steer_range = CGFloat(1000)...CGFloat(2000)
     var bleTimer: Timer!
     var bluetoothDispatchWorkitem:DispatchWorkItem!
     var bleControlCharacteristic: CBCharacteristic!
     var velocityCharacteristic: CBCharacteristic!
+    var throtReturnCharacteristic: CBCharacteristic!
     var configCharacteristic: CBCharacteristic!
+    var newNameCharacteristic: CBCharacteristic!
     var velocity: Float = 0
+    var throtReturn: Float = 0
     
     var readVelocityTimer: Timer!
+    var readThrottleTimer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +71,8 @@ class CaliberationViewController: UIViewController {
         self.bleButton.setTitle("BLE: \(AppInfo.bluetootConfigurations?.name ?? "No Name")", for: .normal)
         AppInfo.save()
         self.readVelocityTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.readVelocity), userInfo: nil, repeats: true)
+        self.readThrottleTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.readThrottle), userInfo: nil, repeats: true)
+        
     }
     
     func onBLEDisconnected() {
@@ -69,6 +80,9 @@ class CaliberationViewController: UIViewController {
         self.bleButton.setTitle("BLE Not Connected", for: .normal)
         if self.readVelocityTimer != nil {
             self.readVelocityTimer.invalidate()
+        }
+        if self.readThrottleTimer != nil {
+            self.readThrottleTimer.invalidate()
         }
         
     }
@@ -85,6 +99,12 @@ class CaliberationViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func onBLENameChangeBtn(_ sender: UIButton) {
+        let blename_str = self.newBLENameTextField.text ?? "0"
+        self.sendBLENewName(peripheral: self.bluetoothPeripheral, message: blename_str)
+    }
+    
     @IBAction func onSendKValuesTapped(_ sender: UIButton) {
         // First extract k values from text field and cast it into float
         var kp = Float(self.KpTextField.text ?? "1") ?? 1

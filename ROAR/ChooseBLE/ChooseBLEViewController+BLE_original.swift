@@ -1,10 +1,8 @@
-//
 //  ChooseBLEViewController+BLE.swift
 //  ROAR
 //
 //  Created by Michael Wu on 11/6/21.
 //
-
 import Foundation
 import CoreBluetooth
 import UIKit
@@ -85,12 +83,23 @@ extension ChooseBLEViewController: CBCentralManagerDelegate, CBPeripheralDelegat
     }
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        
         if let characteristics = service.characteristics {
             for char in characteristics {
                 print("discovered characteristic with UUID: \(char.uuid)")
-                if char.uuid.uuidString == "19B10011-E8F2-537E-4F6C-D104768A1214" {
-                    bleControlCharacteristic = char
+                switch char.uuid.uuidString {
+                    case "19B10011-E8F2-537E-4F6C-D104768A1214":
+                        bleSpeedCharacteristic = char;
+                    case "19B10015-E8F2-537E-4F6C-D104768A1214":
+                        bleSteeringCharacteristic = char;
+                    case "19B10012-E8F2-537E-4F6C-D104768A1214":
+                        newNameCharacteristic = char
+                    case "19B10013-E8F2-537E-4F6C-D104768A1214":
+                        overrideCharacteristic = char
+                    default:
+                        self.logger.info("Unknown UUID discovered")
                 }
+                
             }
         }
     }
@@ -103,24 +112,57 @@ extension ChooseBLEViewController: CBCentralManagerDelegate, CBPeripheralDelegat
         }
     }
     
-    func writeToBluetoothDevice(throttle: CGFloat, steering: CGFloat){
-        let currThrottleRPM = throttle.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(1000)...CGFloat(2000))
-        var currSteeringRPM = steering.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(1000)...CGFloat(2000))
-        
-        currSteeringRPM = currSteeringRPM.clamped(to: 1000...2000)
-        
-        
-        let message: String = "(" + String(Int(currThrottleRPM)) + "," + String(Int(currSteeringRPM)) + ")"
+//    ======Original Function====
+//    func writeToBluetoothDevice(throttle: CGFloat, steering: CGFloat){
+//        let currThrottleRPM = throttle.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(1000)...CGFloat(2000))
+//        var currSteeringRPM = steering.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(1000)...CGFloat(2000))
+//
+//        currSteeringRPM = currSteeringRPM.clamped(to: 1000...2000)
+//
+//
+//        let message: String = "(" + String(Int(currThrottleRPM)) + "," + String(Int(currSteeringRPM)) + ")"
+//        if self.bluetoothPeripheral != nil {
+//            sendMessage(peripheral: self.bluetoothPeripheral, message: message)
+//        }
+//    }
+    
+    func writeSpeedToBluetoothDevice(throttle: CGFloat){
+        let currThrottle = throttle.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(-3.0)...CGFloat(5.0))
         if self.bluetoothPeripheral != nil {
-            sendMessage(peripheral: self.bluetoothPeripheral, message: message)
+            sendThrottle(peripheral: self.bluetoothPeripheral, message: Double(currThrottle))
         }
     }
     
-    func sendMessage(peripheral: CBPeripheral, message: String) {
-        if bleControlCharacteristic != nil {
-            peripheral.writeValue(message.data(using: .utf8)!, for: bleControlCharacteristic, type: .withoutResponse)
+    
+    func writeSteeringToBluetoothDevice(steering: CGFloat){
+        let currSteering = steering.map(from: CGFloat(-1.0)...CGFloat(1.0), to: CGFloat(1000)...CGFloat(2000))
+        if self.bluetoothPeripheral != nil {
+            sendSteering(peripheral: self.bluetoothPeripheral, message: Double(currSteering))
         }
-        
     }
     
+    
+    func sendThrottle(peripheral: CBPeripheral, message: Double) {
+        if bleSpeedCharacteristic != nil {
+            let double_data: Data = Data(withUnsafeBytes(of: message, Array.init))
+            peripheral.writeValue(double_data, for: bleSpeedCharacteristic, type: .withoutResponse)
+        }
+    }
+    
+    func sendSteering(peripheral: CBPeripheral, message: Double) {
+        if bleSteeringCharacteristic != nil {
+            let double_data: Data = Data(withUnsafeBytes(of: message, Array.init))
+            peripheral.writeValue(double_data, for: bleSteeringCharacteristic, type: .withoutResponse)
+        }
+    }
+    
+    func sendBLENewName(peripheral: CBPeripheral, message: String){
+        if newNameCharacteristic != nil {
+            peripheral.writeValue(message.data(using: .utf8)!, for: newNameCharacteristic, type: .withoutResponse)
+            AppInfo.forget()
+        }
+    }
+    func override(peripheral: CBPeripheral, message: String){
+        peripheral.writeValue(message.data(using: .utf8)!, for: overrideCharacteristic, type: .withoutResponse)
+    }
 }

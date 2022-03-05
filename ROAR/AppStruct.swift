@@ -6,7 +6,12 @@
 //
 
 import Foundation
+import CoreBluetooth
+
 struct AppInfo : Codable {
+    
+    
+    
     static var sessionData: SessionData = SessionData()
     static var curr_world_name: String = "berkeley"
     static var bluetootConfigurations: BluetoothConfigurations? = nil
@@ -17,6 +22,15 @@ struct AppInfo : Codable {
     static var udp_control_port: Int32 = 8004
     static func get_ar_experience_name(name: String=AppInfo.curr_world_name) -> String{
         return "\(name)_ar_experience_data"
+    }
+    
+    static func forget() {
+        UserDefaults.standard.setValue([
+                                        "bluetooth_name": "none",
+                                        "bluetooth_uuid": "none"],
+                                       forKey: "bluetooth_data")
+        
+        UserDefaults.standard.setValue(AppInfo.pc_address, forKey: "pc_address")
     }
     
     static func save() {
