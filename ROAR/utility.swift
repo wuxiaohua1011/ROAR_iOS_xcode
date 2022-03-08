@@ -287,6 +287,7 @@ class CustomImage {
         if self.updating == false {
             self.updating = true
             let uiImage = UIImage(pixelBuffer: cvPixelBuffer)!
+            self.uiImage = uiImage
             let data = uiImage.jpegData(compressionQuality: 0.1)!
             self.circular.overwrite(data)
             self.updating = false

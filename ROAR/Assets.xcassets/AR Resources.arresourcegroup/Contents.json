@@ -5,10 +5,28 @@
   },
   "resources" : [
     {
-      "filename" : "BerkeleyLogo.arreferenceimage"
+      "filename" : "alien.arreferenceimage"
     },
     {
       "filename" : "campanille.arreferenceimage"
+    },
+    {
+      "filename" : "china_scene_1.arreferenceimage"
+    },
+    {
+      "filename" : "dragon.arreferenceimage"
+    },
+    {
+      "filename" : "home.arreferenceimage"
+    },
+    {
+      "filename" : "iron_man.arreferenceimage"
+    },
+    {
+      "filename" : "prison_break.arreferenceimage"
+    },
+    {
+      "filename" : "spiderman.arreferenceimage"
     }
   ]
 }

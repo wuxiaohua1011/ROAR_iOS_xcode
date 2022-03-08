@@ -46,7 +46,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
     var worldCamSocket: GCDAsyncUdpSocket!
     var depthCamSocket: GCDAsyncUdpSocket!
     var controlSocket: GCDAsyncUdpSocket!
-
+    
+    var agent: LineFollowingAgent!
     // MARK: overrides
     override func viewDidLoad() {
         AppInfo.load()
@@ -71,6 +72,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         setupGestures()
         
         self.setupSocket()
+        
+        self.agent = LineFollowingAgent(controlCenter: self.controlCenter, vc: self)
+        self.agent.start()
     }
     
     func loadMap(data:Data) -> ARWorldMap? {

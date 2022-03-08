@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "alien.jpeg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "unit" : "inches",
+    "width" : 7.8975999999999997
+  }
+}

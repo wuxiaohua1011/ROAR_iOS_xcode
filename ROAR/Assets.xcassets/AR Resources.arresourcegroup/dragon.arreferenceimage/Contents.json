@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "BerkeleyLogo.jpeg",
+      "filename" : "dragon.jpeg",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,7 @@
     "version" : 1
   },
   "properties" : {
-    "width" : 0.20000000000000001
+    "unit" : "inches",
+    "width" : 7
   }
 }

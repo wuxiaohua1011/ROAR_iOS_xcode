@@ -37,6 +37,11 @@
 		E88C37A62705594800289DC1 /* ARPhoto2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E88C37A02705594800289DC1 /* ARPhoto2.storyboard */; };
 		E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */; };
 		E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88C37A827055BA000289DC1 /* MainViewController.swift */; };
+		E8A42E4E27D69B8A0069EA09 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A42E4D27D69B8A0069EA09 /* Agent.swift */; };
+		E8A42E5027D69BB90069EA09 /* LineFollowingAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A42E4F27D69BB80069EA09 /* LineFollowingAgent.swift */; };
+		E8A42E5327D69C3D0069EA09 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = E8A42E5227D69C3D0069EA09 /* Collections */; };
+		E8A42E5527D69C3D0069EA09 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = E8A42E5427D69C3D0069EA09 /* DequeModule */; };
+		E8A42E5727D69C3D0069EA09 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = E8A42E5627D69C3D0069EA09 /* OrderedCollections */; };
 		E8C8EC8F273466C600CB2683 /* ViewController+UDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */; };
 		E8C8EC922737A5F300CB2683 /* ChooseBLE.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */; };
 		E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */; };
@@ -99,6 +104,8 @@
 		E88C37A02705594800289DC1 /* ARPhoto2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ARPhoto2.storyboard; sourceTree = "<group>"; };
 		E88C37A12705594800289DC1 /* ARPhoto2PopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARPhoto2PopupViewController.swift; sourceTree = "<group>"; };
 		E88C37A827055BA000289DC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E8A42E4D27D69B8A0069EA09 /* Agent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agent.swift; sourceTree = "<group>"; };
+		E8A42E4F27D69BB80069EA09 /* LineFollowingAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineFollowingAgent.swift; sourceTree = "<group>"; };
 		E8C8EC8E273466C600CB2683 /* ViewController+UDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+UDP.swift"; sourceTree = "<group>"; };
 		E8C8EC912737A5F300CB2683 /* ChooseBLE.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChooseBLE.storyboard; sourceTree = "<group>"; };
 		E8C8EC932737A60700CB2683 /* ChooseBLEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseBLEViewController.swift; sourceTree = "<group>"; };
@@ -113,11 +120,14 @@
 				E83E6CE926ED7147006B1E39 /* JGProgressHUD in Frameworks */,
 				E8EE231E2729B8F100A93340 /* NIOFoundationCompat in Frameworks */,
 				E8EE231C2729B8F100A93340 /* NIOConcurrencyHelpers in Frameworks */,
+				E8A42E5327D69C3D0069EA09 /* Collections in Frameworks */,
+				E8A42E5527D69C3D0069EA09 /* DequeModule in Frameworks */,
 				E8EE231A2729B8F100A93340 /* NIOCore in Frameworks */,
 				E83E6CD826ED5B9E006B1E39 /* Vapor in Frameworks */,
 				E83E6CDB26ED5C20006B1E39 /* SwiftyBeaver in Frameworks */,
 				E8EE23182729B8F100A93340 /* NIO in Frameworks */,
 				E83E6CE426ED6981006B1E39 /* Loaf in Frameworks */,
+				E8A42E5727D69C3D0069EA09 /* OrderedCollections in Frameworks */,
 				A09F224246A0E2AF2FBB6D81 /* Pods_ROAR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +192,7 @@
 		E83E6C9F26ED57BF006B1E39 /* ROAR */ = {
 			isa = PBXGroup;
 			children = (
+				E8A42E4C27D69B750069EA09 /* Agent */,
 				E8C8EC902737A5D900CB2683 /* ChooseBLE */,
 				E821AECA27274AF1009F49D2 /* ScanQRCodeViewController.swift */,
 				E88C3797270558A600289DC1 /* ARPhoto */,
@@ -236,6 +247,15 @@
 			path = ARPhoto;
 			sourceTree = "<group>";
 		};
+		E8A42E4C27D69B750069EA09 /* Agent */ = {
+			isa = PBXGroup;
+			children = (
+				E8A42E4D27D69B8A0069EA09 /* Agent.swift */,
+				E8A42E4F27D69BB80069EA09 /* LineFollowingAgent.swift */,
+			);
+			path = Agent;
+			sourceTree = "<group>";
+		};
 		E8C8EC902737A5D900CB2683 /* ChooseBLE */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +293,9 @@
 				E8EE231B2729B8F100A93340 /* NIOConcurrencyHelpers */,
 				E8EE231D2729B8F100A93340 /* NIOFoundationCompat */,
 				E8EABA302737C2650009DCC1 /* CocoaAsyncSocket */,
+				E8A42E5227D69C3D0069EA09 /* Collections */,
+				E8A42E5427D69C3D0069EA09 /* DequeModule */,
+				E8A42E5627D69C3D0069EA09 /* OrderedCollections */,
 			);
 			productName = ROAR;
 			productReference = E83E6C9D26ED57BF006B1E39 /* ROAR.app */;
@@ -352,6 +375,7 @@
 				E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				E8EE23162729B8F100A93340 /* XCRemoteSwiftPackageReference "swift-nio" */,
 				E8EABA2F2737C2640009DCC1 /* XCRemoteSwiftPackageReference "CocoaAsyncSocket" */,
+				E8A42E5127D69C3D0069EA09 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = E83E6C9E26ED57BF006B1E39 /* Products */;
 			projectDirPath = "";
@@ -424,12 +448,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A42E4E27D69B8A0069EA09 /* Agent.swift in Sources */,
 				E83E6CDF26ED623E006B1E39 /* ControlCenter.swift in Sources */,
 				E88C37A32705594800289DC1 /* ARPhoto2ViewController.swift in Sources */,
 				E83E6CE626ED6A9A006B1E39 /* SelectBluetoothViewController.swift in Sources */,
 				E83E6CDD26ED5D4F006B1E39 /* ViewController+AR.swift in Sources */,
 				E88C37A72705594800289DC1 /* ARPhoto2PopupViewController.swift in Sources */,
 				E83E6CD126ED5A84006B1E39 /* ViewController+BLE.swift in Sources */,
+				E8A42E5027D69BB90069EA09 /* LineFollowingAgent.swift in Sources */,
 				E8C8EC942737A60700CB2683 /* ChooseBLEViewController.swift in Sources */,
 				E88C37A52705594800289DC1 /* ARPhoto2ViewController+ARKit.swift in Sources */,
 				E88C37A927055BA000289DC1 /* MainViewController.swift in Sources */,
@@ -818,6 +844,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		E8A42E5127D69C3D0069EA09 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		E8EABA2F2737C2640009DCC1 /* XCRemoteSwiftPackageReference "CocoaAsyncSocket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/robbiehanson/CocoaAsyncSocket";
@@ -856,6 +890,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E83E6CE726ED7146006B1E39 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
 			productName = JGProgressHUD;
+		};
+		E8A42E5227D69C3D0069EA09 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8A42E5127D69C3D0069EA09 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		E8A42E5427D69C3D0069EA09 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8A42E5127D69C3D0069EA09 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		E8A42E5627D69C3D0069EA09 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8A42E5127D69C3D0069EA09 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		E8EABA302737C2650009DCC1 /* CocoaAsyncSocket */ = {
 			isa = XCSwiftPackageProductDependency;
