@@ -73,8 +73,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, ScanQRCodeP
         
         self.setupSocket()
         
-        self.agent = LineFollowingAgent(controlCenter: self.controlCenter, vc: self)
-        self.agent.start()
+//        self.agent = LineFollowingAgent(controlCenter: self.controlCenter, vc: self)
+//        self.agent.start()
     }
     
     func loadMap(data:Data) -> ARWorldMap? {
